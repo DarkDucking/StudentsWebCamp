@@ -17,6 +17,13 @@ export class LoginComponent implements OnInit {
 
   email:any = null;
   password:any =null;
+
+  //authregister
+  email_register:any = null;
+  password_register: any = null;
+  name: any = null;
+  surname: any = null;
+  password_confirmation: any = null;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -45,6 +52,34 @@ export class LoginComponent implements OnInit {
       }else{
         alert("Las credenciales no coinciden con ninguna cuenta");
       }
+    })
+  }
+
+  register(){
+    if(!this.email_register || !this.name || !this.surname || !this.password_register || !this.password_confirmation){
+      alert("Asegurate de llenar todos los campos")
+      return;
+    }
+    if( this.password_register != this.password_confirmation){
+      alert("Las contraseña no coinciden")
+      return;
+    }
+    let data ={
+      email: this.email_register ,
+      name: this.name,
+      surname: this.surname,
+      password: this.password_register,
+
+
+    }
+
+
+    this.authService.register(data).subscribe((resp:any) => {
+      console.log(resp);
+      alert("Registro de usuario exitoso");
+    }, error => {
+      alert("Los datos ingresados no son correctos o ya existe una cuenta con ese correo")
+      console.log(error);
     })
   }
 

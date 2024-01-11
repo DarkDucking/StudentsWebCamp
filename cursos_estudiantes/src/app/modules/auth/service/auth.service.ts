@@ -46,7 +46,9 @@ export class AuthService {
     }
     return false;
   }
-  register(){
+  register(data:any ){
+     let URL = URL_SERVICIOS+"/auth/register";
+     return this.http.post(URL,data);
 
   }
   logout(){

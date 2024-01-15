@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Role;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -26,7 +27,7 @@ class User extends Authenticatable implements JWTSubject
         
         //login
         "avatar",
-        
+        "role_id",
         "state", //1 es activo y 2 es no activo
         "type_user", //1 es tipo de cliente y 2 es tipo adin
     ];
@@ -68,5 +69,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

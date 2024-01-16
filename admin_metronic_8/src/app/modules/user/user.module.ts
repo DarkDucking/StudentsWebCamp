@@ -10,6 +10,7 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
     UserComponent,
     UserListComponent,
     UserAddComponent,
-    UserDeleteComponent
+    UserDeleteComponent,
+    UserEditComponent
   ],
   imports: [
     CommonModule,

@@ -36,4 +36,13 @@ export class UserService {
       finalize(() =>this.isLoadingSubject.next(false))
     );
   }
+
+  update(data:any, user_id:string){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/users/"+ user_id;
+    return this.http.post(URL, data, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
 }

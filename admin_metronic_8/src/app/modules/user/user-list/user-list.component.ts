@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserAddComponent } from '../user-add/user-add.component';
 import { UserService } from '../service/user.service';
+import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
   selector: 'app-user-list',
@@ -19,6 +20,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = this.userService.isLoading$;
+
     
     this.userService.listUsers().subscribe((resp:any) => {
       console.log(resp);
@@ -28,6 +30,26 @@ export class UserListComponent implements OnInit {
 
   openModalCreateUser(){
     const modalRef = this.modalService.open(UserAddComponent,{centered:true, size: 'md'});
+ 
+    modalRef.componentInstance.UserC.subscribe((User:any) =>
+    {
+      console.log(User);
+      this.USERS.unshift(User);
+    })
+
+ 
+  }
+  editUser(USER:any){
+    const modalRef = this.modalService.open(UserEditComponent,{centered:true, size: 'md'});
+    modalRef.componentInstance.user = USER;
+
+    modalRef.componentInstance.UserE.subscribe((User:any) =>
+    {
+      console.log(User);
+      let INDEX = this.USERS.findIndex((item:any) => item.id == User.id);
+      this.USERS[INDEX] = User;
+    })
+
   }
 
 }

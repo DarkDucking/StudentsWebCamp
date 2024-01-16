@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\User\UserGResource;
+use App\Http\Resources\User\UserGCollection;
 
 class UserController extends Controller
 {
@@ -14,9 +16,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $name = $request->name;
+        $surname = $request->surname;
+        $email = $request->email;
+
+        $users = User::where("type_user", 2)->orderby("id","desc")->get();
+
+        return response()->json([
+            "users" => UserGCollection::make($users),
+            
+        ]);
     }
 
     /**
@@ -47,7 +58,7 @@ class UserController extends Controller
         }
         $user = User::create($request->all());
 
-        return response()->json(["user" => $user]);
+        return response()->json(["user" => UserGResource::make($user)]);
     }
 
     /**
@@ -94,7 +105,7 @@ class UserController extends Controller
             $request->request->add(["password" => bcrypt($request->password)]);
         }
         $user->update($request->all());
-        return response()->json(["user" => $user]);
+        return response()->json(["user" => UserGResource::make($user)]);
     }
 
     /**

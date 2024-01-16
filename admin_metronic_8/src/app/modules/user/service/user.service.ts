@@ -19,13 +19,19 @@ export class UserService {
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
+  listUsers(){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/users";
+    return this.http.get(URL, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
   register(data:any){
     this.isLoadingSubject.next(true);
     let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
-
-
     let URL = URL_SERVICIOS+"/users";
-
     return this.http.post(URL, data, {headers: hearders}).pipe(
       finalize(() =>this.isLoadingSubject.next(false))
     );

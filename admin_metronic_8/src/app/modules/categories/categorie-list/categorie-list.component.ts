@@ -38,7 +38,8 @@ export class CategorieListComponent implements OnInit {
 
   openModalCreateCategorie(){
     const modalRef = this.modalService.open(CategorieAddComponent,{centered:true, size: 'md'});
- 
+    modalRef.componentInstance.CATEGORIES = this.CATEGORIES;
+
     modalRef.componentInstance.CategorieC.subscribe((categorie:any) =>
     {
       console.log(categorie);
@@ -47,9 +48,9 @@ export class CategorieListComponent implements OnInit {
 
  
   }
-  editCategorie(CATEGORIES:any){
+  editCategorie(CATEGORIE:any){
     const modalRef = this.modalService.open(CategorieEditComponent,{centered:true, size: 'md'});
-    modalRef.componentInstance.categorie = CATEGORIES;
+    modalRef.componentInstance.categorie = CATEGORIE.filter((categorie:any) => !categorie.categorie_id);
 
     modalRef.componentInstance.CategorieE.subscribe((categorie:any) =>
     {

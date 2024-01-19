@@ -15,10 +15,10 @@ class ActualizarTablaCategories extends Migration
     {
         Schema::table('categories', function (Blueprint $table) {
             // Agrega la nueva columna 'state'
-            $table->tinyInteger('state')->unsigned()->default(1)->after('categorie_id');
+            $table->TinyInteger('state')->unsigned()->default(1)->after('categorie_id');
 
             // Modifica la columna 'state' según tus requerimientos
-            $table->tinyInteger('state')->unsigned()->default(1)
+            $table->T('state')->unsigned()->default(1)
                   ->comment('1 es activo y 2 es no activo')
                   ->change();
         });
@@ -34,7 +34,7 @@ class ActualizarTablaCategories extends Migration
         Schema::table('categories', function (Blueprint $table) {
             // Revierte los cambios realizados en el método up
             $table->dropColumn('state');
-            $table->tinyInteger('state')->unsigned()->default(1)->change();
+            $table->T('state')->unsigned()->default(1)->change();
         });
     }
 }

@@ -139,7 +139,7 @@
 																		<!--begin::Label-->
 																		<label class="required fw-bold fs-6 mb-5">Role</label>
 																		<!--end::Label-->
-																		<!--begin::Roles-->
+																		<!--begin::Roles--> 
 																		<!--begin::Input row-->
 																		<div class="d-flex fv-row">
 																			<!--begin::Radio-->
@@ -160,6 +160,38 @@
 																		<div class='separator separator-dashed my-5'></div>
 																		<!--begin::Input row-->
 																		
+
+																		<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="mb-7">
+																		
+																		
+																		<label class="form-label">¿Es instructor?</label>
+																		
+																		<div class="form-check form-check-custom form-check-solid mb-2">
+																				
+																				<input class="form-check-input" type="checkbox" value="1" [checked]="is_instructor" (click)="isInstructor()">
+																				<label class="form-check-label">si </label> 
+																			
+																			</div>
+																		
+																	
+																		<div class="text-muted fs-7">Habilitar usuario como instructor </div>
+																		<!--begin::Input row-->
+																		
+																	</div>
+
+																	<div class="mb-7" *ngIf="is_instructor">
+																		<label class="required fw-bold fs-6 mb-2">Profesión</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Desarrollador web" [(ngModel)]="profesion" />
+																	</div>
+															
+																		<div class="mb-7" *ngIf="is_instructor">
+																		<label class="required fw-bold fs-6 mb-2">Descripción</label>
+																		<textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Detalles sobr el usuario" [(ngModel)]="description" cols="30" rows="5"></textarea>
+																		
 																	</div>
 																	<!--end::Input group-->
 																</div>
@@ -177,10 +209,10 @@
 																	</button>
 																</div>
 																<!--end::Actions-->
-															</form>
+															
 															<!--end::Form-->
 														</div>
 														<!--end::Modal body-->
-													</div>
+													
 													<!--end::Modal content-->
 											

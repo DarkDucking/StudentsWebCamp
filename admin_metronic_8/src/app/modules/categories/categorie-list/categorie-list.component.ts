@@ -38,25 +38,26 @@ export class CategorieListComponent implements OnInit {
 
   openModalCreateCategorie(){
     const modalRef = this.modalService.open(CategorieAddComponent,{centered:true, size: 'md'});
-    modalRef.componentInstance.CATEGORIES = this.CATEGORIES;
+    modalRef.componentInstance.CATEGORIES = this.CATEGORIES.filter((categorie:any) => !categorie.categorie_id)
 
-    modalRef.componentInstance.CategorieC.subscribe((categorie:any) =>
+    modalRef.componentInstance.CategorieC.subscribe((Categorie:any) =>
     {
-      console.log(categorie);
-      this.CATEGORIES.unshift(categorie);
+      console.log(Categorie);
+      this.CATEGORIES.unshift(Categorie);
     })
 
  
   }
   editCategorie(CATEGORIE:any){
     const modalRef = this.modalService.open(CategorieEditComponent,{centered:true, size: 'md'});
-    modalRef.componentInstance.categorie = CATEGORIE.filter((categorie:any) => !categorie.categorie_id);
+    modalRef.componentInstance.categorie = CATEGORIE;
+    modalRef.componentInstance.CATEGORIES = this.CATEGORIES.filter((categorie:any) => !categorie.categorie_id)
 
-    modalRef.componentInstance.CategorieE.subscribe((categorie:any) =>
+    modalRef.componentInstance.CategorieE.subscribe((Categorie:any) =>
     {
-      console.log(categorie);
-      let INDEX = this.CATEGORIES.findIndex((item:any) => item.id == categorie.id);
-      this.CATEGORIES[INDEX] = categorie;
+      console.log(Categorie);
+      let INDEX = this.CATEGORIES.findIndex((item:any) => item.id == Categorie.id);
+      this.CATEGORIES[INDEX] = Categorie;
     })
 
   }

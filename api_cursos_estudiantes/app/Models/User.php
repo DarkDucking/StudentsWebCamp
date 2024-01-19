@@ -30,6 +30,10 @@ class User extends Authenticatable implements JWTSubject
         "role_id",
         "state", //1 es activo y 2 es no activo
         "type_user", //1 es tipo de cliente y 2 es tipo adin
+
+        "is_instructor",
+        "profesion",
+        "description"
     ];
 
     /**

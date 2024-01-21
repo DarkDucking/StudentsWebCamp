@@ -19,13 +19,13 @@ class Course extends Model
         "slug",
         "imagen",
         "categorie_id",
-        "sub_categoria_id",
+        "sub_categorie_id",
         "user_id",
         "level",
         "idioma",
         "description",
         "requirements",
-        "who_is _it _for",
+        "who_is_it_for",
         "state",
     ];
 

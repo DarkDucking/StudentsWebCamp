@@ -15,7 +15,32 @@ class CourseGResource extends JsonResource
     public function toArray($request)
     {
         return [
-            
+            "title" => $this->resource->title,
+            "subtitle" => $this->resource->subtitle,
+            "slug" => $this->resource->slug,
+            "imagen" => env("APP_URL")."storage/".$this->resource->imagen,
+            "categorie_id" => $this->resource->categorie_id,
+            "categorie" => [
+                "id" => $this->resource->categorie->id,
+                "name" => $this->resource->categorie->name,
+            ],
+            "sub_categorie_id" => $this->resource->sub_categorie_id,
+            "sub_categorie" => [
+                "id" => $this->resource->sub_categorie->id,
+                "name" => $this->resource->sub_categorie->name,
+            ],
+            "user_id" => $this->resource->user_id,
+            "user" => [
+                "id" => $this->resource->user->id,
+                "full_name" => $this->resource->user->name.' '.$this->resource->user->surname,
+                "email" => $this->resource->user->email,
+            ],
+            "level" => $this->resource->level,
+            "idioma" => $this->resource->idioma,
+            "description" => $this->resource->description,
+            "requirements" => json_decode($this->resource->requirements),
+            "who_is_it_for" => json_decode($this->resource->who_is_it_for),
+            "state" => $this->resource->state,
         ];
     }
 }

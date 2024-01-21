@@ -12,4 +12,13 @@ export class CourseAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  save(){
+
+  }
+
+  processFile($event:any){
+
+
+  }
 }

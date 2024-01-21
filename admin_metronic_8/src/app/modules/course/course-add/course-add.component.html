@@ -1,1 +1,251 @@
-<p>course-add works!</p>
+<div class="card">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title fs-3 fw-bolder">Registrar Nuevo curso</div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <form id="kt_project_settings_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+           
+            <div class="row mb-8">
+                <div class="col-5">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Título del curso</label>
+                    <input type="text" class="form-control form-control-solid" name="title" placeholder="Ej. Python" >
+                  </div>
+        
+        <div class="col-7">        <!--begin::Col-->
+                    <label class="fs-6 fw-bold mt-2 mb-3">Subtítulo del curso</label>
+                    <input type="text" class="form-control form-control-solid" name="subtitle" placeholder="Ej. aprendiendo el entorno" >
+              
+            </div>
+        </div>
+
+        <!-- precios de cursos deshabilitados para el proyecto -->
+        <!-- <div class="row mb-8">
+            <div class="col-5">
+                <label class="fs-6 fw-bold mt-2 mb-3">Título del curso</label>
+                <input type="number" class="form-control form-control-solid" name="title" placeholder="Ej. Python" >
+              </div>
+     -->
+    <!-- <div class="col-7">        begin::Col
+                <label class="fs-6 fw-bold mt-2 mb-3">Subtítulo del curso</label>
+                <input type="number" class="form-control form-control-solid" name="subtitle" placeholder="Ej. aprendiendo el entorno" >
+          
+        </div>
+    </div> -->
+    <div class="row mb-8">
+        <div class="col-4">
+            <label class="fs-6 fw-bold mt-2 mb-3">select. Categoria:</label>
+            
+                <select
+                class="form-control form-select-solid fw-bolder"
+                name="categorie"
+                placeholder="Selec. Categoria">
+                <option value="">Todos</option>
+                </select>
+
+            
+        </div>
+        <div class="col-4">
+            <label class="fs-6 fw-bold mt-2 mb-3">Selec. Subcategoria</label>
+            <select
+            class="form-control form-select-solid fw-bolder"
+            name="Subcategorie"
+            placeholder="Selec. Subcategoria">
+            <option value="">Todos</option>
+            </select>
+
+        </div>
+        <div class="col-3">
+            <label class="fs-6 fw-bold mt-2 mb-3">Nivel</label>
+            <select
+            class="form-control form-select-solid fw-bolder"
+            name="nivel"
+            placeholder="Selec. Nivel">
+            <option value="1">1er semestre</option>
+            <option value="2">2do semestre</option>
+            <option value="3">3er semestre</option>
+            <option value="4">4to semestre</option>
+            <option value="5">5to semestre</option>
+            <option value="6">6to semestre</option>
+            <option value="7">7mo semestre</option>
+            <option value="8">8vo semestre</option>
+                
+        </select>
+
+        </div>
+        
+    </div>
+
+    <div class="row mb-8">
+        <div class="col-6">
+            
+   <label class="form-label fs-6 fw-bold mt-2 mb-3">Subir portada: *</label>
+    <div class="custom-file">
+    <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
+    <label class="custom-file-label" for="customFile">Elije una portada</label>
+    </div>
+        </div>
+        <div class="col-3">
+            <label class="fs-6 fw-bold mt-2 mb-3">Idioma</label>
+            <select
+            class="form-control form-select-solid fw-bolder"
+            name="idioma"
+            placeholder="Selec. Idioma">
+            <option value="Español">Español</option>
+            <option value="Ingles">Inglés</option>
+                 
+        </select>
+
+        </div>
+        <div class="col-3">
+            <label class="fs-6 fw-bold mt-2 mb-3">Instructor</label>
+            <select
+            class="form-control form-select-solid fw-bolder"
+            name="user"
+            placeholder="Selec. Instructor">
+            <option value="Español">Lucía Figueroa</option>
+                 
+        </select>
+
+        </div>
+
+    </div>
+        
+            <!--end::Row-->
+            <!--begin::Row-->
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-bold mt-2 mb-3">Descripción </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                    <ckeditor data="<p>Hello, world!</p>"></ckeditor>
+
+                </div>
+                <!--begin::Col-->
+            </div>
+
+            <div class="row mb-8">
+                <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <label class="fs-6 fw-bold mt-2 mb-3">Requisitos</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control form-control-solid" name="requerimiento" placeholder="Python básico" >
+                            <button class="btn btn-sm btn-primary mx-5">+</button>
+                       
+                        </div>
+                        </div>
+                    <div class="col-12">
+                        <div class="card-body py-3">
+                            <!--begin::Table container-->
+                            <div class="table-responsive">
+                                <!--begin::Table-->
+                                <table class="table align-middle gs-0 gy-3">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                        <tr>
+                                            <th class="p-0 "></th>
+                                            <th class="p-0 "></th>
+                                                      </tr>
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Python básico</a>
+                                            </td>
+                                            <td class="text-end text-muted fw-bold">
+                                                <button class="btn btn-sm btn-danger">X
+
+                                                </button>
+
+                                            </td>
+                                            </tr>
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                            <!--end::Table container-->
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="fs-6 fw-bold mt-2 mb-3">Público al que se dirige </label>
+                           <div class="d-flex">
+                            <input type="text" class="form-control form-control-solid" name="what_is_for" placeholder="Ingeniería Informática" >
+                            <button class="btn btn-sm btn-primary mx-5">+
+                            </button>
+                        
+                        </div>
+                            
+                        </div>
+                        <div class="col-12">
+                            <div class="card-body py-3">
+                                <!--begin::Table container-->
+                                <div class="table-responsive">
+                                    <!--begin::Table-->
+                                    <table class="table align-middle gs-0 gy-3">
+                                        <!--begin::Table head-->
+                                        <thead>
+                                            <tr>
+                                                <th class="p-0 "></th>
+                                                <th class="p-0 "></th>
+                                                          </tr>
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Ingeniero informatico</a>
+                                                </td>
+                                                <td class="text-end text-muted fw-bold">
+                                                    <button class="btn btn-sm btn-danger">X
+    
+                                                    </button>
+    
+                                                </td>
+                                                </tr>
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                    <!--end::Table-->
+                                </div>
+                                <!--end::Table container-->
+                            </div>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+            </div>           
+            <!--end::Row-->
+            <!--begin::Row-->
+            <!--end::Row-->
+            <!--begin::Row-->
+            <!--end::Row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <button type="button" (click) = "save()" class="btn btn-primary" id="kt_project_settings_submit">Guardar Curso</button>
+        </div>
+        <!--end::Card footer-->
+    <input type="hidden"><div></div></form>
+    <!--end:Form-->
+</div>

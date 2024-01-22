@@ -29,7 +29,7 @@ class CourseGController extends Controller
 
         return response()->json([
             "courses" => CourseGCollection::make($courses),
-            
+
         ]);
     }
 
@@ -69,18 +69,26 @@ class CourseGController extends Controller
      */
     public function store(Request $request)
     {
+
+        $is_exits = Course::where("title",$request->title)->first();
+        if($is_exits){
+            return response()->json(["message" => 403, "message_text" => "Ya existe un curso con ese título"]);
+        }
+
         if($request->hasFile("portada")){
             $path = Storage::putFile("courses",$request->file("portada"));
             $request->request->add(["imagen" => $path]);
 
         }
         $request->request->add(["slug" => Str::slug($request->title)]);
-        $request->request->add(["requirements" => Str::json_encode($request->requirements)]);
-        $request->request->add(["who_is_it_for" => Str::json_encode($request->who_is_it_for)]);
+        $request->request->add(["requirements" => json_encode(explode(",",$request->requirements))]);
+        $request->request->add(["who_is_it_for" => json_encode(explode(",",$request->who_is_it_for))]);
         $course = Course::create($request->all());
-        
-        
-        return response()->json(["course" => CourseGResource::make($course)]);
+
+
+
+
+        return response()->json(["message" => 200]);
     }
 
     /**
@@ -114,6 +122,12 @@ class CourseGController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $is_exits = Course::where("id","<>",$id)->where("title",$request->title)->first();
+        if($is_exits){
+            return response()->json(["message" => 403, "message_text" => "Ya existe un curso con ese título"]);
+        }
+
         $course = Course::findOrFail($id);
         if($request->hasFile("portada")){
             if($course->imagen){
@@ -124,8 +138,8 @@ class CourseGController extends Controller
 
         }
         $request->request->add(["slug" => Str::slug($request->title)]);
-        $request->request->add(["requirements" => Str::json_encode($request->requirements)]);
-        $request->request->add(["who_is_it_for" => Str::json_encode($request->who_is_it_for)]);
+        // $request->request->add(["requirements" => json_encode($request->requirements)]);
+        // $request->request->add(["who_is_it_for" => json_encode($request->who_is_it_for)]);
         $course->update($request->all());
         return response()->json(["course" => CourseGResource::make($course)]);
     }

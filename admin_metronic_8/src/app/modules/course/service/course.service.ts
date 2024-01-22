@@ -20,6 +20,22 @@ export class CourseService {
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
+  listCourse(search:any,state:any){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let LINK = "?T=";
+    if(search){
+      LINK += "&search="+search;
+    }
+    if(state){
+      LINK += "&state="+state;
+    }
+    let URL = URL_SERVICIOS+"/course"+LINK;
+    return this.http.get(URL, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
   lisConfig(){
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
     let URL = URL_SERVICIOS+"/course/config";
@@ -28,4 +44,31 @@ export class CourseService {
       finalize(() =>this.isLoadingSubject.next(false))
     );
   }
+  registerCourses(data:any){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/course";
+    return this.http.post(URL, data, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
+  updateCourses(data:any, course_id:string){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/course/"+ course_id;
+    return this.http.post(URL, data, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
+  deleteCourses(course_id:any){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/course/"+ course_id;
+    return this.http.delete(URL, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
 }

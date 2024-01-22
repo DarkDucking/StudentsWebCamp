@@ -15,12 +15,12 @@
             <div class="row mb-8">
                 <div class="col-5">
                     <label class="fs-6 fw-bold mt-2 mb-3">Título del curso</label>
-                    <input type="text" class="form-control form-control-solid" name="title" placeholder="Ej. Python" >
+                    <input type="text" class="form-control form-control-solid" [(ngModel)]="title" name="title" placeholder="Ej. Python" >
                   </div>
         
         <div class="col-7">        <!--begin::Col-->
                     <label class="fs-6 fw-bold mt-2 mb-3">Subtítulo del curso</label>
-                    <input type="text" class="form-control form-control-solid" name="subtitle" placeholder="Ej. aprendiendo el entorno" >
+                    <input type="text" class="form-control form-control-solid" [(ngModel)]="subtitle" name="subtitle" placeholder="Ej. aprendiendo el entorno" >
               
             </div>
         </div>
@@ -46,7 +46,9 @@
                     class="form-control form-select-solid fw-bolder"
                     name="categorie"
                     placeholder="Selec. Categoria"
-                    (change)="selectCategorie($event)">
+                    (change)="selectCategorie($event)"
+                    [(ngModel)]="categorie_id">
+
                     <ng-container *ngFor="let categorie of categories">
                         <option [value]="categorie.id">{{ categorie.name }}</option>
                     </ng-container>
@@ -59,7 +61,8 @@
             <select
                 class="form-control form-select-solid fw-bolder"
                 name="Subcategorie"
-                placeholder="Selec. Subcategoria">
+                placeholder="Selec. Subcategoria"
+                [(ngModel)]="sub_categorie_id">
                 <ng-container *ngFor="let subcategorie of subcategories_back">
                     <option [value]="subcategorie.id">{{ subcategorie.name }}</option>
                 </ng-container>
@@ -71,7 +74,8 @@
             <select
             class="form-control form-select-solid fw-bolder"
             name="nivel"
-            placeholder="Selec. Nivel">
+            placeholder="Selec. Nivel"
+            [(ngModel)]="level">
             <option value="1">1er semestre</option>
             <option value="2">2do semestre</option>
             <option value="3">3er semestre</option>
@@ -93,15 +97,20 @@
    <label class="form-label fs-6 fw-bold mt-2 mb-3">Subir portada: *</label>
     <div class="custom-file">
     <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
-    <label class="custom-file-label" for="customFile">Elije una portada</label>
+    <label class="custom-file-label" for="customFile">Choose File</label>
     </div>
+        <div class="py-3"*ngIf="IMAGEN_PREVISUALIZA">
+            <img [src] = "IMAGEN_PREVISUALIZA" width="250">
+
+        </div>
         </div>
         <div class="col-3">
             <label class="fs-6 fw-bold mt-2 mb-3">Idioma</label>
             <select
             class="form-control form-select-solid fw-bolder"
             name="idioma"
-            placeholder="Selec. Idioma">
+            placeholder="Selec. Idioma"
+            [(ngModel)]="idioma">
             <option value="Español">Español</option>
             <option value="Ingles">Inglés</option>
                  
@@ -113,7 +122,8 @@
             <select
             class="form-control form-select-solid fw-bolder"
             name="user"
-            placeholder="Selec. Instructor">
+            placeholder="Selec. Instructor"
+            [(ngModel)]="user_id">
             <ng-container *ngFor="let instructor of instructores">
                 <option [value]="instructor.id">{{ instructor.full_name }}</option>
             </ng-container>
@@ -136,7 +146,7 @@
                 <!--end::Col-->
                 <!--begin::Col-->
                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                    <ckeditor data="<p>Hello, world!</p>"></ckeditor>
+                    <ckeditor [data]="description" (change)="onChange($event)"></ckeditor>
 
                 </div>
                 <!--begin::Col-->
@@ -148,8 +158,8 @@
                     <div class="col-12">
                         <label class="fs-6 fw-bold mt-2 mb-3">Requisitos</label>
                         <div class="d-flex">
-                            <input type="text" class="form-control form-control-solid" name="requerimiento" placeholder="Python básico" >
-                            <button class="btn btn-sm btn-primary mx-5">+</button>
+                            <input type="text" class="form-control form-control-solid" (keyup.enter)="addRequirements()" [(ngModel)]= "text_requirements" name="requirements" placeholder="Python básico" >
+                            <button class="btn btn-sm btn-primary mx-5" (click)="addRequirements()">+</button>
                        
                         </div>
                         </div>
@@ -169,12 +179,12 @@
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let requirement of requirements; let i=index">
                                             <td>
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Python básico</a>
+                                                <a href="#" onclick= "return false;" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ requirement }}</a>
                                             </td>
                                             <td class="text-end text-muted fw-bold">
-                                                <button class="btn btn-sm btn-danger">X
+                                                <button class="btn btn-sm btn-danger" (click)="removeRequirement(i)">X
 
                                                 </button>
 
@@ -195,8 +205,8 @@
                         <div class="col-12">
                             <label class="fs-6 fw-bold mt-2 mb-3">Público al que se dirige </label>
                            <div class="d-flex">
-                            <input type="text" class="form-control form-control-solid" name="what_is_for" placeholder="Ingeniería Informática" >
-                            <button class="btn btn-sm btn-primary mx-5">+
+                            <input type="text" class="form-control form-control-solid" (keyup.enter)="addWhatIsFor()" [(ngModel)]="text_what_is_for"  name="what_is_for" placeholder="Ingeniería Informática" >
+                            <button class="btn btn-sm btn-primary mx-5" (click)="addWhatIsFor()">+
                             </button>
                         
                         </div>
@@ -218,17 +228,18 @@
                                         <!--end::Table head-->
                                         <!--begin::Table body-->
                                         <tbody>
-                                            <tr>
+                                            <tr *ngFor="let what_is_for of what_is_fors; let i=index">
                                                 <td>
-                                                    <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">Ingeniero informatico</a>
+                                                    <a href="#" onclick= "return false;" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ what_is_for }}</a>
                                                 </td>
                                                 <td class="text-end text-muted fw-bold">
-                                                    <button class="btn btn-sm btn-danger">X
+                                                    <button class="btn btn-sm btn-danger" (click)="removeWhatIsFor(i)">X
     
                                                     </button>
     
                                                 </td>
                                                 </tr>
+                                         
                                         </tbody>
                                         <!--end::Table body-->
                                     </table>

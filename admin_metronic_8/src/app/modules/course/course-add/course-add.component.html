@@ -9,6 +9,7 @@
     <!--begin::Form-->
     <form id="kt_project_settings_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
         <!--begin::Card body-->
+        <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf=" isLoading | async"></span>
         <div class="card-body p-9">
            
             <div class="row mb-8">
@@ -42,10 +43,13 @@
             <label class="fs-6 fw-bold mt-2 mb-3">select. Categoria:</label>
             
                 <select
-                class="form-control form-select-solid fw-bolder"
-                name="categorie"
-                placeholder="Selec. Categoria">
-                <option value="">Todos</option>
+                    class="form-control form-select-solid fw-bolder"
+                    name="categorie"
+                    placeholder="Selec. Categoria"
+                    (change)="selectCategorie($event)">
+                    <ng-container *ngFor="let categorie of categories">
+                        <option [value]="categorie.id">{{ categorie.name }}</option>
+                    </ng-container>
                 </select>
 
             
@@ -53,10 +57,12 @@
         <div class="col-4">
             <label class="fs-6 fw-bold mt-2 mb-3">Selec. Subcategoria</label>
             <select
-            class="form-control form-select-solid fw-bolder"
-            name="Subcategorie"
-            placeholder="Selec. Subcategoria">
-            <option value="">Todos</option>
+                class="form-control form-select-solid fw-bolder"
+                name="Subcategorie"
+                placeholder="Selec. Subcategoria">
+                <ng-container *ngFor="let subcategorie of subcategories_back">
+                    <option [value]="subcategorie.id">{{ subcategorie.name }}</option>
+                </ng-container>
             </select>
 
         </div>
@@ -108,7 +114,9 @@
             class="form-control form-select-solid fw-bolder"
             name="user"
             placeholder="Selec. Instructor">
-            <option value="Español">Lucía Figueroa</option>
+            <ng-container *ngFor="let instructor of instructores">
+                <option [value]="instructor.id">{{ instructor.full_name }}</option>
+            </ng-container>
                  
         </select>
 

@@ -85,9 +85,6 @@ class CourseGController extends Controller
         $request->request->add(["who_is_it_for" => json_encode(explode(",",$request->who_is_it_for))]);
         $course = Course::create($request->all());
 
-
-
-
         return response()->json(["message" => 200]);
     }
 
@@ -99,7 +96,11 @@ class CourseGController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        return response()->json([
+            "course" => CourseGResource::make($course),
+        ]);
     }
 
     /**
@@ -138,8 +139,8 @@ class CourseGController extends Controller
 
         }
         $request->request->add(["slug" => Str::slug($request->title)]);
-        // $request->request->add(["requirements" => json_encode($request->requirements)]);
-        // $request->request->add(["who_is_it_for" => json_encode($request->who_is_it_for)]);
+        $request->request->add(["requirements" => json_encode(explode(",",$request->requirements))]);
+        $request->request->add(["who_is_it_for" => json_encode(explode(",",$request->who_is_it_for))]);
         $course->update($request->all());
         return response()->json(["course" => CourseGResource::make($course)]);
     }

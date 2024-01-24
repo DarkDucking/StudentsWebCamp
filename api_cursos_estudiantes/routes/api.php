@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\Admin\Course\CourseGController;
+use App\Http\Controllers\Admin\Course\SeccionGController;
 use App\Http\Controllers\Admin\Course\CategorieController;
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,6 @@ Route::group([
   Route::get('/course/config',[CourseGController::class, "config"]);
   Route::resource('/course',CourseGController::class);
   Route::post('/course/{id}',[CourseGController::class, "update"]);
+
+  Route::resource('/course-section',SeccionGController::class);
 });

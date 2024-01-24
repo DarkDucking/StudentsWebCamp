@@ -23,7 +23,7 @@
                     <input type="text" class="form-control form-control-solid" [(ngModel)]="subtitle" name="subtitle" placeholder="Ej. aprendiendo el entorno" >
               
             </div>
-        </div>
+            </div>
 
         <!-- precios de cursos deshabilitados para el proyecto -->
         <!-- <div class="row mb-8">
@@ -32,112 +32,108 @@
                 <input type="number" class="form-control form-control-solid" name="title" placeholder="Ej. Python" >
               </div>
      -->
-    <!-- <div class="col-7">        begin::Col
+        <!-- <div class="col-7">        begin::Col
                 <label class="fs-6 fw-bold mt-2 mb-3">Subtítulo del curso</label>
                 <input type="number" class="form-control form-control-solid" name="subtitle" placeholder="Ej. aprendiendo el entorno" >
           
-        </div>
-    </div> -->
-    <div class="row mb-8">
-        <div class="col-4">
-            <label class="fs-6 fw-bold mt-2 mb-3">select. Categoria:</label>
-            
-                <select
-                    class="form-control form-select-solid fw-bolder"
-                    name="categorie"
-                    placeholder="Selec. Categoria"
-                    (change)="selectCategorie($event)"
-                    [(ngModel)]="categorie_id">
+            </div>
+        </div> -->
+            <div class="row mb-8">
+                <div class="col-4">
+                    <label class="fs-6 fw-bold mt-2 mb-3">select. Categoria:</label>
+                    
+                        <select
+                            class="form-control form-select-solid fw-bolder"
+                            name="categorie"
+                            placeholder="Selec. Categoria"
+                            (change)="selectCategorie($event)"
+                            [(ngModel)]="categorie_id">
 
-                    <ng-container *ngFor="let categorie of categories">
-                        <option [value]="categorie.id">{{ categorie.name }}</option>
-                    </ng-container>
+                            <ng-container *ngFor="let categorie of categories">
+                                <option [value]="categorie.id">{{ categorie.name }}</option>
+                            </ng-container>
+                        </select>
+
+                    
+                </div>
+                <div class="col-4">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Selec. Subcategoria</label>
+                    <select
+                        class="form-control form-select-solid fw-bolder"
+                        name="Subcategorie"
+                        placeholder="Selec. Subcategoria"
+                        [(ngModel)]="sub_categorie_id">
+                        <ng-container *ngFor="let subcategorie of subcategories_back">
+                            <option [value]="subcategorie.id">{{ subcategorie.name }}</option>
+                        </ng-container>
+                    </select>
+
+                </div>
+                <div class="col-3">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Nivel</label>
+                    <select
+                    class="form-control form-select-solid fw-bolder"
+                    name="nivel"
+                    placeholder="Selec. Nivel"
+                    [(ngModel)]="level">
+                    <option value="1">1er semestre</option>
+                    <option value="2">2do semestre</option>
+                    <option value="3">3er semestre</option>
+                    <option value="4">4to semestre</option>
+                    <option value="5">5to semestre</option>
+                    <option value="6">6to semestre</option>
+                    <option value="7">7mo semestre</option>
+                    <option value="8">8vo semestre</option>
+                        
                 </select>
 
-            
-        </div>
-        <div class="col-4">
-            <label class="fs-6 fw-bold mt-2 mb-3">Selec. Subcategoria</label>
-            <select
-                class="form-control form-select-solid fw-bolder"
-                name="Subcategorie"
-                placeholder="Selec. Subcategoria"
-                [(ngModel)]="sub_categorie_id">
-                <ng-container *ngFor="let subcategorie of subcategories_back">
-                    <option [value]="subcategorie.id">{{ subcategorie.name }}</option>
-                </ng-container>
-            </select>
-
-        </div>
-        <div class="col-3">
-            <label class="fs-6 fw-bold mt-2 mb-3">Nivel</label>
-            <select
-            class="form-control form-select-solid fw-bolder"
-            name="nivel"
-            placeholder="Selec. Nivel"
-            [(ngModel)]="level">
-            <option value="1">1er semestre</option>
-            <option value="2">2do semestre</option>
-            <option value="3">3er semestre</option>
-            <option value="4">4to semestre</option>
-            <option value="5">5to semestre</option>
-            <option value="6">6to semestre</option>
-            <option value="7">7mo semestre</option>
-            <option value="8">8vo semestre</option>
+                </div>
                 
-        </select>
+            </div>
 
-        </div>
+            <div class="row mb-8">
+                <div class="col-6">
+                    
+        <label class="form-label fs-6 fw-bold mt-2 mb-3">Subir portada: *</label>
+            <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
+            <label class="custom-file-label" for="customFile">Choose File</label>
+            </div>
+                <div class="py-3"*ngIf="IMAGEN_PREVISUALIZA">
+                    <img [src] = "IMAGEN_PREVISUALIZA" width="250">
+
+                </div>
+                </div>
+                <div class="col-3">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Idioma</label>
+                    <select
+                    class="form-control form-select-solid fw-bolder"
+                    name="idioma"
+                    placeholder="Selec. Idioma"
+                    [(ngModel)]="idioma">
+                    <option value="Español">Español</option>
+                    <option value="Ingles">Inglés</option>
+                        
+                </select>
+
+                </div>
+                <div class="col-3">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Instructor</label>
+                    <select
+                    class="form-control form-select-solid fw-bolder"
+                    name="user"
+                    placeholder="Selec. Instructor"
+                    [(ngModel)]="user_id">
+                    <ng-container *ngFor="let instructor of instructores">
+                        <option [value]="instructor.id">{{ instructor.full_name }}</option>
+                    </ng-container>
+                        
+                </select>
+
+                </div>
+
+            </div>
         
-    </div>
-
-    <div class="row mb-8">
-        <div class="col-6">
-            
-   <label class="form-label fs-6 fw-bold mt-2 mb-3">Subir portada: *</label>
-    <div class="custom-file">
-    <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
-    <label class="custom-file-label" for="customFile">Choose File</label>
-    </div>
-        <div class="py-3"*ngIf="IMAGEN_PREVISUALIZA">
-            <img [src] = "IMAGEN_PREVISUALIZA" width="250">
-
-        </div>
-        </div>
-        <div class="col-3">
-            <label class="fs-6 fw-bold mt-2 mb-3">Idioma</label>
-            <select
-            class="form-control form-select-solid fw-bolder"
-            name="idioma"
-            placeholder="Selec. Idioma"
-            [(ngModel)]="idioma">
-            <option value="Español">Español</option>
-            <option value="Ingles">Inglés</option>
-                 
-        </select>
-
-        </div>
-        <div class="col-3">
-            <label class="fs-6 fw-bold mt-2 mb-3">Instructor</label>
-            <select
-            class="form-control form-select-solid fw-bolder"
-            name="user"
-            placeholder="Selec. Instructor"
-            [(ngModel)]="user_id">
-            <ng-container *ngFor="let instructor of instructores">
-                <option [value]="instructor.id">{{ instructor.full_name }}</option>
-            </ng-container>
-                 
-        </select>
-
-        </div>
-
-    </div>
-        
-            <!--end::Row-->
-            <!--begin::Row-->
-            <!--end::Row-->
-            <!--begin::Row-->
             <div class="row mb-8">
                 <!--begin::Col-->
                 <div class="col-xl-3">
@@ -253,11 +249,7 @@
                     </div>
                     
             </div>           
-            <!--end::Row-->
-            <!--begin::Row-->
-            <!--end::Row-->
-            <!--begin::Row-->
-            <!--end::Row-->
+
         </div>
         <!--end::Card body-->
         <!--begin::Card footer-->

@@ -12,6 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { CKEditor4, CKEditorModule } from 'ckeditor4-angular';
+import { SectionAddComponent } from './section/section-add/section-add.component';
+import { SectionEditComponent } from './section/section-edit/section-edit.component';
+import { SectionDeleteComponent } from './section/section-delete/section-delete.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { CKEditor4, CKEditorModule } from 'ckeditor4-angular';
     CourseAddComponent,
     CourseEditComponent,
     CourseDeleteComponent,
-    CourseListComponent
+    CourseListComponent,
+    SectionAddComponent,
+    SectionEditComponent,
+    SectionDeleteComponent
   ],
   imports: [
     CommonModule,

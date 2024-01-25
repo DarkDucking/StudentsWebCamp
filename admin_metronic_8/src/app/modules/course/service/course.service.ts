@@ -81,4 +81,39 @@ export class CourseService {
     );
   }
 
+  lisSections(){
+    let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
+    let URL = URL_SERVICIOS+"/course-section";
+    this.isLoadingSubject.next(true);
+    return this.http.get(URL,{headers: headers}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+  registerSection(data:any){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/course-section";
+    return this.http.post(URL, data, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+  updateSection(data:any, section_id:string){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/course-section/"+section_id;
+    return this.http.put(URL, data, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
+  deleteSection(section_id:any){
+    this.isLoadingSubject.next(true);
+    let hearders = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token})
+    let URL = URL_SERVICIOS+"/course-section/"+section_id;
+    return this.http.delete(URL, {headers: hearders}).pipe(
+      finalize(() =>this.isLoadingSubject.next(false))
+    );
+  }
+
+
 }

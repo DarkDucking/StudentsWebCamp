@@ -19,11 +19,11 @@ const routes: Routes = [{
       component: CourseListComponent
     },
     {
-      path: 'editar/:id',
+      path: 'list/editar/:id',
       component: CourseEditComponent
     },
     {
-      path: 'secciones/:id',
+      path: 'list/secciones/:id',
       component: SectionAddComponent,
     }
   ]

@@ -52,4 +52,9 @@ Route::group([
   Route::post('/course/{id}',[CourseGController::class, "update"]);
 
   Route::resource('/course-section',SeccionGController::class);
+  
+  Route::resource('/course-clases',ClaseGController::class);
+  Route::post('/course-clases-file',[ClaseGController::class, "addFiles"]);
+  Route::delete('/course-clases-file/{id}',[ClaseGController::class, "removeFiles"]);
+  Route::post('/course-clases/upload_video/{id}',[ClaseGController::class, "upload_video"]);
 });

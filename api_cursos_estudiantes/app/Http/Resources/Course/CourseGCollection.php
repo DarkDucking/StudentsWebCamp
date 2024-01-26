@@ -14,7 +14,7 @@ class CourseGCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return[
+        return [
             "data" => CourseGResource::collection($this->collection),
         ];
     }

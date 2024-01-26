@@ -1,10 +1,11 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CourseComponent } from './course.component';
 import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
-import { CourseListComponent } from './course-list/course-list.component';
+import { CourseLitsComponent } from './course-lits/course-lits.component';
 import { SectionAddComponent } from './section/section-add/section-add.component';
+import { ClaseAddComponent } from './section/clases/clase-add/clase-add.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,16 +17,23 @@ const routes: Routes = [{
     },
     {
       path: 'list',
-      component: CourseListComponent
+      component: CourseLitsComponent
     },
     {
-      path: 'editar/:id',
-      component: CourseEditComponent
+      path: 'list/editar/:id',
+      component: CourseEditComponent,
     },
+
     {
-      path: 'secciones/:id',
+      path: 'list/secciones/:id',
       component: SectionAddComponent,
-    }
+    },
+    
+    {
+      path: 'list/secciones/clases/:id',
+      component: ClaseAddComponent,
+    },
+
   ]
 }];
 

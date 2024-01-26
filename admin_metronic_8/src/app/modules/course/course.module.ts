@@ -6,15 +6,19 @@ import { CourseComponent } from './course.component';
 import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
 import { CourseDeleteComponent } from './course-delete/course-delete.component';
-import { CourseListComponent } from './course-list/course-list.component';
+import { CourseLitsComponent } from './course-lits/course-lits.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
-import { CKEditor4, CKEditorModule } from 'ckeditor4-angular';
+import { CKEditorModule } from 'ckeditor4-angular';
 import { SectionAddComponent } from './section/section-add/section-add.component';
 import { SectionEditComponent } from './section/section-edit/section-edit.component';
 import { SectionDeleteComponent } from './section/section-delete/section-delete.component';
+import { ClaseAddComponent } from './section/clases/clase-add/clase-add.component';
+import { ClaseEditComponent } from './section/clases/clase-edit/clase-edit.component';
+import { ClaseDeleteComponent } from './section/clases/clase-delete/clase-delete.component';
+import { ClaseFileDeleteComponent } from './section/clases/clase-file-delete/clase-file-delete.component';
 
 
 @NgModule({
@@ -23,15 +27,19 @@ import { SectionDeleteComponent } from './section/section-delete/section-delete.
     CourseAddComponent,
     CourseEditComponent,
     CourseDeleteComponent,
-    CourseListComponent,
+    CourseLitsComponent,
     SectionAddComponent,
     SectionEditComponent,
-    SectionDeleteComponent
+    SectionDeleteComponent,
+    ClaseAddComponent,
+    ClaseEditComponent,
+    ClaseDeleteComponent,
+    ClaseFileDeleteComponent
   ],
   imports: [
     CommonModule,
     CourseRoutingModule,
-    // admin *.module.ts
+
     HttpClientModule,
     FormsModule,
     NgbModule,
@@ -39,8 +47,7 @@ import { SectionDeleteComponent } from './section/section-delete/section-delete.
     InlineSVGModule,
     NgbModalModule,
 
-    CKEditorModule,
-
+    CKEditorModule
   ]
 })
 export class CourseModule { }

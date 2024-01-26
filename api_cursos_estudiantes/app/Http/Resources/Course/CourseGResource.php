@@ -30,8 +30,6 @@ class CourseGResource extends JsonResource
                 "id" => $this->resource->sub_categorie->id,
                 "name" => $this->resource->sub_categorie->name
             ],
-            "precio_usd" => $this->resource->precio_usd,
-            "precio_pen" => $this->resource->precio_pen,
             "user_id" => $this->resource->user_id,
             "user" => [
                 "id" => $this->resource->instructor->id,
@@ -40,8 +38,6 @@ class CourseGResource extends JsonResource
             ],
             "level" => $this->resource->level,
             "idioma" => $this->resource->idioma,
-            "vimeo_id" => $this->resource->vimeo_id,//
-            "time" => $this->resource->time,
             "description" => $this->resource->description,
             "requirements" => json_decode($this->resource->requirements),
             "who_is_it_for" => json_decode($this->resource->who_is_it_for),

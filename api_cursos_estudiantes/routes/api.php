@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\UserController;
 
+use App\Http\Controllers\Admin\Course\ClaseGController;
 use App\Http\Controllers\Admin\Course\CourseGController;
 use App\Http\Controllers\Admin\Course\SeccionGController;
 use App\Http\Controllers\Admin\Course\CategorieController;

@@ -117,7 +117,6 @@ export class CourseService {
     );
   }
 
-
   lisClases(course_section_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
     let URL = URL_SERVICIOS+"/course-clases?course_section_id="+course_section_id;
@@ -180,4 +179,5 @@ export class CourseService {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+
 }

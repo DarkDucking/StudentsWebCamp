@@ -24,14 +24,6 @@
             </div>
 
             <div class="row mb-8">
-                <div class="col-2">
-                    <label class="fs-6 fw-bold mt-2 mb-3">Precio en SOLES: </label>
-                    <input type="number" class="form-control form-control-solid" name="pen" [(ngModel)]="precio_pen" placeholder="30">
-                </div>
-                <div class="col-2">
-                    <label class="fs-6 fw-bold mt-2 mb-3">Precio en DOLARES: </label>
-                    <input type="number" class="form-control form-control-solid" name="usd" [(ngModel)]="precio_usd" placeholder="50">
-                </div>
                 <div class="col-4">
                     <label class="fs-6 fw-bold mt-2 mb-3">Selec. Categoria: </label>
                     <select
@@ -83,10 +75,14 @@
                         placeholder="Selec. Nivel"
                         [(ngModel)]="level"
                     >
-                        <option value="Basico">Basico</option>
-                        <option value="Intermedio">Intermedio</option>
-                        <option value="Avanzado">Avanzado</option>
-                    </select>
+                    <option value="1">1 semestre</option>
+                    <option value="2">2 semestre</option>
+                    <option value="3">3 semestre</option>
+                    <option value="4">4 semestre</option>
+                    <option value="5">5 semestre</option>
+                    <option value="6">6 semestre</option>
+            
+                </select>
                 </div>
                 <div class="col-2">
                     <label class="fs-6 fw-bold mt-2 mb-3">Idioma: </label>

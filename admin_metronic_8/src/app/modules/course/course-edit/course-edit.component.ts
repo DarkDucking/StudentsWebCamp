@@ -27,8 +27,6 @@ export class CourseEditComponent implements OnInit {
 
   title:string = '';
   subtitle:string = '';
-  precio_usd:number = 0;
-  precio_pen:number = 0;
   description:any = "<p>Hello, world!</p>";
   categorie_id:any = null;
   sub_categorie_id:any = null;
@@ -119,8 +117,6 @@ export class CourseEditComponent implements OnInit {
   save(){
     if(!this.title ||
       !this.subtitle || 
-      !this.precio_usd || 
-      !this.precio_pen ||
       !this.categorie_id ||
       !this.sub_categorie_id){
         this.toaster.open({text: "NECESITAS LLENAR TODOS LOS CAMPOS DEL FORMULARIO",caption: 'VALIDACION',type: 'danger'});
@@ -129,8 +125,6 @@ export class CourseEditComponent implements OnInit {
     let formData = new FormData();
     formData.append("title",this.title);
     formData.append("subtitle",this.subtitle);
-    formData.append("precio_usd",this.precio_usd+"");
-    formData.append("precio_pen",this.precio_pen+"");
     formData.append("categorie_id",this.categorie_id);
     formData.append("sub_categorie_id",this.sub_categorie_id);
     formData.append("description",this.description);
@@ -150,7 +144,7 @@ export class CourseEditComponent implements OnInit {
         this.toaster.open({text: resp.message_text,caption: 'VALIDACION',type: 'danger'});
         return;
       }else{
-        this.toaster.open({text: "EL CURSOS SE HA MODIFICADO CON EXITO",caption: 'SUCCESS',type: 'primary'});
+        this.toaster.open({text: "EL CURSO SE HA MODIFICADO CON EXITO",caption: 'SUCCESS',type: 'primary'});
         // this.title = '';
         // this.subtitle = '';
         // this.precio_usd = 0;

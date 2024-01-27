@@ -19,8 +19,6 @@ class CourseClaseResource extends JsonResource
             "course_section_id" => $this->resource->course_section_id,
             "name" => $this->resource->name,
             "description" => $this->resource->description,
-            "vimeo_id" => $this->resource->vimeo_id ? "https://player.vimeo.com/video/".$this->resource->vimeo_id : NULL,
-            "time" => $this->resource->time,
             "state" => $this->resource->state,
             "files" => $this->resource->files->map(function($file){
                 return [

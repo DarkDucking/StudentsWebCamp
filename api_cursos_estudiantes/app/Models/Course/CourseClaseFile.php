@@ -10,26 +10,34 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class CourseClaseFile extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $fillable = [
-        "course_classe_id",
+        "course_clase_id",
         "name_file",
-        "size",
+        "size",//12222333
         "time",
         "resolution",
         "file",
-        "type",
+        "type"
     ];
 
-    public function setCreateAttribute($value) {
-
-        date_default_timezone_set("America/Mexico");
+    public function setCreatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Lima");
         $this->attributes["created_at"] = Carbon::now();
     }
 
-    public function setUpdateAttribute($value) {
+    public function setUpdatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Lima");
+        $this->attributes["updated_at"] = Carbon::now();
+    }
 
-        date_default_timezone_set("America/Mexico");
-        $this->attributes["update_at"] = Carbon::now();
+    public function getSizeAttribute($size)
+    {
+        $size = (int) $size;
+        $base = log($size) / log(1024);//0.5 // 2.2 // 1.5
+        $suffixes = array(' bytes', ' KB', ' MB', ' GB', ' TB');
+        return round(pow(1024, $base - floor($base)), 2) . $suffixes[floor($base)];
     }
 }

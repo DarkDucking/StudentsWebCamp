@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CourseService } from '../../../service/course.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Toaster } from 'ngx-toast-notifications';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ClaseFileDeleteComponent } from '../clase-file-delete/clase-file-delete.component';
 
 @Component({
@@ -122,5 +122,32 @@ export class ClaseEditComponent implements OnInit {
       let INDEX = this.FILES_CLASE.findIndex((item:any) => item.id == FILE.id);
       this.FILES_CLASE.splice(INDEX,1);
     });
+  }
+
+  generateYouTubeEmbedUrl(videoLink: string): SafeResourceUrl {
+    // Formato de enlace embebido de YouTube
+    const embedUrl = `https://www.youtube.com/embed/${this.getYouTubeVideoId(videoLink)}`;
+
+    // Sanitiza la URL antes de devolverla
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  // Función para obtener el ID del video de YouTube
+  private getYouTubeVideoId(videoLink: string): string | null {
+    // Patrones de enlace de YouTube
+    const youtubePatterns = [
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /^([a-zA-Z0-9_-]{11})$/
+    ];
+
+    // Comprueba cada patrón
+    for (const pattern of youtubePatterns) {
+      const match = videoLink.match(pattern);
+      if (match) {
+        return match[1];  // Devuelve el ID del video si hay coincidencia
+      }
+    }
+
+    return null;  // Devuelve null si no se encuentra un ID válido
   }
 }

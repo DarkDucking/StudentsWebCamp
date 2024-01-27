@@ -5,6 +5,7 @@ import { Toaster } from 'ngx-toast-notifications';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClaseEditComponent } from '../clase-edit/clase-edit.component';
 import { ClaseDeleteComponent } from '../clase-delete/clase-delete.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-clase-add',
@@ -26,6 +27,7 @@ export class ClaseAddComponent implements OnInit {
     public activedRouter:ActivatedRoute,
     public toaster: Toaster,
     public modalService:NgbModal,
+    public sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
@@ -110,5 +112,32 @@ export class ClaseAddComponent implements OnInit {
     // setTimeout(() => {
     //   this.courseService.isLoadingSubject.next(false);
     // }, 50);
+  }
+
+  generateYouTubeEmbedUrl(videoLink: string): SafeResourceUrl {
+    // Formato de enlace embebido de YouTube
+    const embedUrl = `https://www.youtube.com/embed/${this.getYouTubeVideoId(videoLink)}`;
+
+    // Sanitiza la URL antes de devolverla
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  // Función para obtener el ID del video de YouTube
+  private getYouTubeVideoId(videoLink: string): string | null {
+    // Patrones de enlace de YouTube
+    const youtubePatterns = [
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /^([a-zA-Z0-9_-]{11})$/
+    ];
+
+    // Comprueba cada patrón
+    for (const pattern of youtubePatterns) {
+      const match = videoLink.match(pattern);
+      if (match) {
+        return match[1];  // Devuelve el ID del video si hay coincidencia
+      }
+    }
+
+    return null;  // Devuelve null si no se encuentra un ID válido
   }
 }

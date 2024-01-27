@@ -65,8 +65,8 @@
                         <label class="fs-6 fw-bold mt-2 mb-3">Link de tu video de youtube: </label>
                         <input type="text" class="form-control form-control-solid" name="video_link" [(ngModel)]="video_link" placeholder="https://www.youtube.com/watch?v=id">
                     </div>
-                    <div *ngIf="video_link">
-                        <iframe width="560" height="315" [src]="generateYouTubeEmbedUrl(video_link)" frameborder="0" allowfullscreen></iframe>
+                    <div *ngIf="video_link" style="margin-top: 20px;" >
+                        <iframe width="350" height="220" [src]="generateYouTubeEmbedUrl(video_link)" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
 

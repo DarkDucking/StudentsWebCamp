@@ -25,6 +25,7 @@ export class ClaseEditComponent implements OnInit {
   video_curso:any = null;
   isUploadVideo:Boolean = false;
   isUploadFiles:Boolean = false;
+  video_link:any = null;
   link_video_course:any = null;
   state:any = 1;
   constructor(
@@ -40,6 +41,7 @@ export class ClaseEditComponent implements OnInit {
     this.title = this.clase_selected.name;
     this.description = this.clase_selected.description;
     this.FILES_CLASE = this.clase_selected.files;
+    this.video_link = this.clase_selected.video_link;
     this.link_video_course = this.clase_selected.vimeo_id;
     this.state= this.clase_selected.state;
   }
@@ -49,6 +51,7 @@ export class ClaseEditComponent implements OnInit {
     let data = {
       name: this.title,
       description: this.description,
+      video_link: this.video_link,
       state: this.state,
     }
 

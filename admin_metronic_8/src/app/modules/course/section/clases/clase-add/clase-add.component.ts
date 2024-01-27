@@ -16,7 +16,7 @@ export class ClaseAddComponent implements OnInit {
   CLASES:any = [];
   isLoading:any;
   title:any;
-
+  video_link:any;
   description:any = "<p>Hello, world!</p>";
 
   FILES:any = [];
@@ -52,6 +52,7 @@ export class ClaseAddComponent implements OnInit {
     let formData = new FormData();
     formData.append("name",this.title);
     formData.append("description",this.description);
+    formData.append("video_link",this.video_link);
     formData.append("course_section_id",this.section_id)
 
     this.FILES.forEach((file:any,index:number) => {

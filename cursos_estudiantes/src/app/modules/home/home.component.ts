@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit{
 
   // DESCOUNT_FLASH:any = null;
   // DESCOUNT_FLASH_COURSES:any = [];
+  COURSES: any= [];
   constructor(
     public homeService: HomeService,
   ){

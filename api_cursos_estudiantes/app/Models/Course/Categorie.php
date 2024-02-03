@@ -18,40 +18,47 @@ class Categorie extends Model
         "state",
     ];
 
-    public function setCreateAttribute($value) {
-
-        date_default_timezone_set("America/Mexico");
+    public function setCreatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Lima");
         $this->attributes["created_at"] = Carbon::now();
-
-
-        
-    }
-    public function setUpdateAttribute($value) {
-
-        date_default_timezone_set("America/Mexico");
-        $this->attributes["update_at"] = Carbon::now();
-
-
-        
     }
 
-    public function children() {
-        return $this->hasMany(Categorie::class, "categorie_id");
+    public function setUpdatedAtAttribute($value)
+    {
+        date_default_timezone_set("America/Lima");
+        $this->attributes["updated_at"] = Carbon::now();
     }
-    
-    public function father() {
-        return $this->BelongsTo(Categorie::class, "categorie_id");
-        
+
+    public function children()
+    {
+        return $this->hasMany(Categorie::class,"categorie_id");
     }
-    function scopeFilterAdvance($query,$search,$state){
+
+    public function father()
+    {
+        return $this->belongsTo(Categorie::class,"categorie_id");
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    // public function discount_categories()
+    // {
+    //     return $this->hasMany(DiscountCategorie::class);
+    // }
+
+    function scopeFilterAdvance($query,$search,$state)
+    {
         if($search){
-            $query->where("name", "like", "%".$search."%");
+            $query->where("name","like","%".$search."%");
         }
         if($state){
-            $query->where("state", $state);
+            $query->where("state",$state);
         }
-
+        
         return $query;
     }
-
 }

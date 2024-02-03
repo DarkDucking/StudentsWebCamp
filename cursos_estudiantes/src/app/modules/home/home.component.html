@@ -10,11 +10,11 @@
                   <div class="content">
                       <div class="inner">
                           <div class="rbt-new-badge rbt-new-badge-one">
-                              <span class="rbt-new-badge-icon">🏆</span> The Leader in Online Learning
+                              <span class="rbt-new-badge-icon">🏆</span> Plataforma hecha por y para estudiantes
                           </div>
 
                           <h1 class="title">
-                              Build The Skills <br> To Drive Your Career.
+                            CuceInfomatiCamp <br> 
                           </h1>
                           <p class="description">
                               Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
@@ -24,7 +24,7 @@
                           <div class="slider-btn">
                               <a class="rbt-btn btn-gradient hover-icon-reverse" href="#">
                                   <span class="icon-reverse-wrapper">
-                                      <span class="btn-text">View Course</span>
+                                      <span class="btn-text">Ver cursos</span>
                                   <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                   <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                   </span>
@@ -37,7 +37,7 @@
                               <img src="assets/images/shape/shape-01.png" alt="Hero Image Background Shape">
                           </div>
                           <div class="hero-bg-shape-2 layer" data-depth="0.4">
-                              <img src="assets/images/shape/shape-02.png" alt="Hero Image Background Shape">
+                              <img src="assets/images/shape/shape-03.png" alt="Hero Image Background Shape">
                           </div>
                       </div>
 
@@ -105,8 +105,8 @@
           <div class="row">
               <div class="col-lg-12">
                   <div class="section-title text-center">
-                      <span class="subtitle bg-primary-opacity">CATEGORIES</span>
-                      <h2 class="title">Explore Top Courses Caterories <br /> That Change Yourself</h2>
+                      <span class="subtitle bg-primary-opacity">CATEGORIAS DE NUESTROS CURSOS</span>
+                      <h2 class="title">Explore las más relevantes del momento <br /> Aprende sobre</h2>
                   </div>
               </div>
           </div>
@@ -142,7 +142,7 @@
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 order-2 order-lg-1">
                     <div class="section-title text-start">
-                        <span class="subtitle bg-pink-opacity">Curso</span>
+                        <!-- <span class="subtitle bg-pink-opacity">Cursos</span> -->
                         <!-- <h2 class="title">Aprovecha el {{ DESCOUNT_FLASH.discount }}% menos en estos cursos !</h2>
                         <p class="description has-medium-font-size mt--20 mb--0">Tiempo limitado del {{ DESCOUNT_FLASH.start_date_d }} a {{ DESCOUNT_FLASH.end_date_d }}.</p> -->
                     </div>
@@ -169,7 +169,7 @@
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2">
                     <div class="row">
-                        <ng-container *ngFor="let COURSE of COURSES">
+                        <!-- <ng-container *ngFor="let COURSE of COURSES_HOME">
                             <div class="col-md-6 col-sm-12 col-12 py-3">
                                 <div class="rbt-card variation-01 rbt-hover">
                                     <div class="rbt-card-img">
@@ -191,8 +191,8 @@
                                             class="feather-bookmark"></i></a>
                                             </div>
                                         </div>
-                                        <!-- <h4 class="rbt-card-title"><a [routerLink]="['landing-curso/',COURSE.slug]" [queryParams]="{'campaing_discount': DESCOUNT_FLASH.id}">{{ COURSE.title }}</a>
-                                        </h4> -->
+                                        <h4 class="rbt-card-title"><a [routerLink]="['landing-curso/',COURSE.slug]" >{{ COURSE.title }}</a>
+                                        </h4> 
                                         <ul class="rbt-meta">
                                             <li><i class="feather-book"></i>{{ COURSE.count_class }} Lessons</li>
                                             <li><i class="feather-users"></i>40 Students</li>
@@ -207,7 +207,7 @@
                                 </div>
                             </div>
                         </ng-container>
-                        
+                         -->
                        
                     </div>
                 </div>
@@ -237,11 +237,11 @@
                         <div class="rbt-card-img">
                             <a [routerLink]="['landing-curso/',COURSE.slug]">
                                 <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
-                                <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
+                                <!-- <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
                                     <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
                                     <span *ngIf="COURSE.discount_g.type_discount == 2">-{{ COURSE.discount_g.discount }} USD</span>
                                     <span>Off</span>
-                                </div>
+                                </div> -->
                             </a>
                         </div>
                         <div class="rbt-card-body">
@@ -265,7 +265,7 @@
                             <ul class="rbt-meta">
                                 <li><i class="feather-book"></i>{{ COURSE.count_class }} Lessons</li>
                                 <li><i class="feather-users"></i>50 Students</li>
-                                <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
+                                <!-- <li><i class="feather-play"></i>{{ COURSE.time_course }}</li> -->
                             </ul>
                             <p class="rbt-card-text">{{ COURSE.subtitle }}.</p>
                             <div class="rbt-author-meta mb--20">
@@ -1034,12 +1034,12 @@
                                             <a [routerLink]="['landing-curso/',courses.slug]">
                                                 <img [src]="courses.imagen" style="height: 171px;" alt="Card image">
                                             </a>
-                                            <div class="rbt-badge-3 bg-white" *ngIf="courses.discount_g">
+                                            <!-- <div class="rbt-badge-3 bg-white" *ngIf="courses.discount_g">
                                                 <span *ngIf="courses.discount_g.type_discount == 1">-{{ courses.discount_g.discount }}%</span>
                                                 <span *ngIf="courses.discount_g.type_discount == 2">-{{ courses.discount_g.discount }} USD</span>
                                                 <span>Off</span>
                                             </div>
-                                            
+                                             -->
                                         </div>
                                         <div class="rbt-card-body">
                                             <div class="rbt-card-top">
@@ -1071,10 +1071,10 @@
                                                     <span class="current-price">{{ courses.precio_usd }} USD</span>
                                                     <span class="off-price">$120</span>
                                                 </div> -->
-                                                <div class="rbt-price">
+                                                <!-- <div class="rbt-price">
                                                     <span class="current-price">{{ getTotalPriceCourse(courses) }} USD</span>
                                                     <span class="off-price" *ngIf="courses.discount_g">{{ courses.precio_usd }}</span>
-                                                </div>
+                                                </div> -->
                                                 <a class="rbt-btn-link" [routerLink]="['landing-curso/',courses.slug]">Learn
                                                     More<i class="feather-arrow-right"></i></a>
                                             </div>

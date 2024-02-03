@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Categorie;
-use App\Models\Discount\Discount;
+
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Ecommerce\Course\CourseHomeResource;
 use App\Http\Resources\Ecommerce\Course\CourseHomeCollection;
@@ -35,32 +35,32 @@ class HomeController extends Controller
             ]);
         }
 
-        date_default_timezone_set("America/Lima");
-        $DESCOUNT_BANNER = Discount::where("type_campaing",3)->where("state",1)
-                            ->where("start_date","<=",today())
-                            ->where("end_date",">=",today())
-                            ->first();
+        // date_default_timezone_set("America/Lima");
+        // $DESCOUNT_BANNER = Discount::where("type_campaing",3)->where("state",1)
+        //                     ->where("start_date","<=",today())
+        //                     ->where("end_date",">=",today())
+        //                     ->first();
 
-        $DESCOUNT_BANNER_COURSES = collect([]);
-        if($DESCOUNT_BANNER){
-            foreach ($DESCOUNT_BANNER->courses as $key => $course_discount) {
-                $DESCOUNT_BANNER_COURSES->push(CourseHomeResource::make($course_discount->course));
-            }
-        }
+        // $DESCOUNT_BANNER_COURSES = collect([]);
+        // if($DESCOUNT_BANNER){
+        //     foreach ($DESCOUNT_BANNER->courses as $key => $course_discount) {
+        //         $DESCOUNT_BANNER_COURSES->push(CourseHomeResource::make($course_discount->course));
+        //     }
+        // }
 
-        date_default_timezone_set("America/Lima");
-        $DESCOUNT_FLASH = Discount::where("type_campaing",2)->where("state",1)
-                            ->where("start_date","<=",today())
-                            ->where("end_date",">=",today())
-                            ->first();
+        // date_default_timezone_set("America/Lima");
+        // $DESCOUNT_FLASH = Discount::where("type_campaing",2)->where("state",1)
+        //                     ->where("start_date","<=",today())
+        //                     ->where("end_date",">=",today())
+        //                     ->first();
 
-        $DESCOUNT_FLASH_COURSES = collect([]);
-        if($DESCOUNT_FLASH){
-            $DESCOUNT_FLASH->end_date = Carbon::parse($DESCOUNT_FLASH->end_date)->addDays(1);
-            foreach ($DESCOUNT_FLASH->courses as $key => $course_discount) {
-                $DESCOUNT_FLASH_COURSES->push(CourseHomeResource::make($course_discount->course));
-            }
-        }
+        // $DESCOUNT_FLASH_COURSES = collect([]);
+        // if($DESCOUNT_FLASH){
+        //     $DESCOUNT_FLASH->end_date = Carbon::parse($DESCOUNT_FLASH->end_date)->addDays(1);
+        //     foreach ($DESCOUNT_FLASH->courses as $key => $course_discount) {
+        //         $DESCOUNT_FLASH_COURSES->push(CourseHomeResource::make($course_discount->course));
+        //     }
+        // }
 
         return response()->json([
             "categories" => $categories->map(function($categorie){
@@ -73,29 +73,24 @@ class HomeController extends Controller
             }),
             "courses_home" => CourseHomeCollection::make($courses),
             "group_courses_categories" => $group_courses_categories,
-            "DESCOUNT_BANNER" => $DESCOUNT_BANNER,
-            "DESCOUNT_BANNER_COURSES" => $DESCOUNT_BANNER_COURSES,
+            // "DESCOUNT_BANNER" => $DESCOUNT_BANNER,
+            // "DESCOUNT_BANNER_COURSES" => $DESCOUNT_BANNER_COURSES,
 
-            "DESCOUNT_FLASH" => $DESCOUNT_FLASH ? [
-                "id" => $DESCOUNT_FLASH->id,
-                "discount" => $DESCOUNT_FLASH->discount,
-                "type_discount" => $DESCOUNT_FLASH->type_discount,
-                "end_date" => Carbon::parse($DESCOUNT_FLASH->end_date)->format("Y-m-d"), 
-                "start_date_d" =>  Carbon::parse($DESCOUNT_FLASH->start_date)->format("Y/m/d"), 
-                "end_date_d" =>  Carbon::parse($DESCOUNT_FLASH->end_date)->subDays(1)->format("Y/m/d"), 
-            ] : NULL,
-            "DESCOUNT_FLASH_COURSES" => $DESCOUNT_FLASH_COURSES,
+            // "DESCOUNT_FLASH" => $DESCOUNT_FLASH ? [
+            //     "id" => $DESCOUNT_FLASH->id,
+        //         "discount" => $DESCOUNT_FLASH->discount,
+        //         "type_discount" => $DESCOUNT_FLASH->type_discount,
+        //         "end_date" => Carbon::parse($DESCOUNT_FLASH->end_date)->format("Y-m-d"), 
+        //         "start_date_d" =>  Carbon::parse($DESCOUNT_FLASH->start_date)->format("Y/m/d"), 
+        //         "end_date_d" =>  Carbon::parse($DESCOUNT_FLASH->end_date)->subDays(1)->format("Y/m/d"), 
+        //     ] : NULL,
+        //     "DESCOUNT_FLASH_COURSES" => $DESCOUNT_FLASH_COURSES,
         ]);
     }
 
     public function course_detail(Request $request,$slug)
     {
-        $campaing_discount = $request->get("campaing_discount");
-        $discount = null;
-        if($campaing_discount){
-            $discount = Discount::findOrFail($campaing_discount);
-        }
-        $course = Course::where("slug",$slug)->first();
+         $course = Course::where("slug",$slug)->first();
         if(!$course){
             return abort(404);
         }
@@ -111,7 +106,7 @@ class HomeController extends Controller
             "courses_related_categories" => $courses_related_categories->map(function($course){
                 return CourseHomeResource::make($course);
             }),
-            "DISCOUNT" => $discount,
+            
         ]);
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\UserController;
 
+use App\Http\Controllers\Tienda\HomeController;
 use App\Http\Controllers\Admin\Course\ClaseGController;
 use App\Http\Controllers\Admin\Course\CourseGController;
 use App\Http\Controllers\Admin\Course\SeccionGController;
@@ -58,4 +59,9 @@ Route::group([
   Route::post('/course-clases-file',[ClaseGController::class, "addFiles"]);
   Route::delete('/course-clases-file/{id}',[ClaseGController::class, "removeFiles"]);
   Route::post('/course-clases/upload_video/{id}',[ClaseGController::class, "upload_video"]);
+});
+
+Route::group(["prefix" => "ecommerce"],function($router){
+  Route::get("home",[HomeController::class,"home"]);
+  Route::get("course-detail/{slug}",[HomeController::class,"course_detail"]);
 });

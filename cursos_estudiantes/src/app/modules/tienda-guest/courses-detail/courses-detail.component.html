@@ -683,11 +683,11 @@
                                             </div>
                                         </div>
                                         <div class="rbt-card-bottom">
-                                            <div class="rbt-price">
+                                            <!-- <div class="rbt-price">
                                                 <span class="current-price">{{ getTotalPriceCourse(COURSE) }} USD</span>
                                                 <span class="off-price" *ngIf="COURSE.discount_g">{{ COURSE.precio_usd }}</span>
-                                            </div>
-                                            <a class="rbt-btn-link left-icon" [attr.href]="'landing-curso/'+COURSE.slug"><i class="feather-shopping-cart"></i> Add To Cart</a>
+                                            </div> -->
+                                            <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart()"><i class="feather-shopping-cart"></i> Add To Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -717,7 +717,7 @@
                         <!-- End Viedo Wrapper  -->
 
                         <div class="content-item-content">
-                            <div class="rbt-price-wrapper d-flex flex-wrap align-items-center justify-content-between">
+                            <!-- <div class="rbt-price-wrapper d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="rbt-price">
                                     <span class="current-price" *ngIf="!LANDING_COURSE.discount_g">{{ LANDING_COURSE.precio_usd }} USD</span>
                                     <span class="current-price" *ngIf="LANDING_COURSE.discount_g">{{ getNewTotal(LANDING_COURSE,LANDING_COURSE.discount_g) }} USD</span>
@@ -727,10 +727,10 @@
                                     <span class="rbt-badge color-danger bg-color-danger-opacity"><i
                                             class="feather-clock"></i> {{ LANDING_COURSE.discount_date }} left!</span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="add-to-card-button mt--15">
-                                <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#">
+                                <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#" onclick="return false;" (click)="addCart()">
                                     <span class="btn-text">Add to Cart</span>
                                     <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                 </a>
@@ -818,11 +818,11 @@
                         <div class="rbt-card-img">
                             <a [attr.href]="'landing-curso/'+COURSE.slug">
                                 <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
-                                <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
+                                <!-- <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
                                     <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
                                     <span *ngIf="COURSE.discount_g.type_discount == 2">-{{ COURSE.discount_g.discount }} USD</span>
                                     <span>Off</span>
-                                </div>
+                                </div> -->
                             </a>
                         </div>
                         <div class="rbt-card-body">
@@ -860,10 +860,10 @@
                                 </div>
                             </div>
                             <div class="rbt-card-bottom">
-                                <div class="rbt-price">
+                                <!-- <div class="rbt-price">
                                     <span class="current-price">{{ getTotalPriceCourse(COURSE) }} USD</span>
                                     <span class="off-price" *ngIf="COURSE.discount_g">{{ COURSE.precio_usd }}</span>
-                                </div>
+                                </div> -->
                                 <a class="rbt-btn-link left-icon" [attr.href]="'landing-curso/'+COURSE.slug"><i class="feather-shopping-cart"></i> Add To Cart</a>
                             </div>
                         </div>

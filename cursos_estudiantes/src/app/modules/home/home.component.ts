@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './services/home.service';
+import { CartService } from '../tienda-guest/service/cart.service';
+import { Router } from '@angular/router';
 
 declare var $:any ;
 declare function HOMEINIT([]):any;
 declare function banner_home():any;
 declare function countdownT():any;
+declare function alertWarning([]):any;
+declare function alertDanger([]):any;
+declare function alertSuccess([]):any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,14 +20,16 @@ export class HomeComponent implements OnInit{
   CATEGORIES:any = [];
   COURSES_HOME:any = [];
   group_courses_categories:any = [];
-  // DESCOUNT_BANNER:any = null;
-  // DESCOUNT_BANNER_COURSES:any = [];
+  DESCOUNT_BANNER:any = null;
+  DESCOUNT_BANNER_COURSES:any = [];
 
-  // DESCOUNT_FLASH:any = null;
-  // DESCOUNT_FLASH_COURSES:any = [];
-  COURSES: any= [];
+  DESCOUNT_FLASH:any = null;
+  DESCOUNT_FLASH_COURSES:any = [];
+  user:any = null;
   constructor(
     public homeService: HomeService,
+    public cartService:CartService,
+    public router: Router,
   ){
     setTimeout(() => {
       HOMEINIT($);
@@ -36,16 +43,13 @@ export class HomeComponent implements OnInit{
       this.CATEGORIES = resp.categories;
       this.COURSES_HOME = resp.courses_home.data;
       this.group_courses_categories = resp.group_courses_categories;
-      // this.DESCOUNT_BANNER = resp.DESCOUNT_BANNER;
-      // this.DESCOUNT_BANNER_COURSES = resp.DESCOUNT_BANNER_COURSES;
-      // this.DESCOUNT_FLASH = resp.DESCOUNT_FLASH;
-      // this.DESCOUNT_FLASH_COURSES = resp.DESCOUNT_FLASH_COURSES;
       setTimeout(() => {
         banner_home();
         countdownT();
       }, 50);
     })
     
+    this.user = this.cartService.authService.user;
   }
 
   // getNewTotal(COURSE:any,DESCOUNT_BANNER:any){
@@ -62,4 +66,28 @@ export class HomeComponent implements OnInit{
   //   }
   //   return COURSE.precio_usd;
   // }
+
+  addCart(LANDING_COURSE:any){
+    if(!this.user){
+      alertWarning("NECESITAS REGISTRARTE EN LA TIENDA");
+      this.router.navigateByUrl("auth/login");
+      return;
+    }
+    
+    let data = {
+      course_id: LANDING_COURSE.id,
+      
+    };
+
+    this.cartService.registerCart(data).subscribe((resp:any) => {
+      console.log(resp);
+      if(resp.message == 403){
+        alertDanger(resp.message_text);
+        return;
+      }else{
+        this.cartService.addCart(resp.cart);
+        alertSuccess("EL CURSO SE AGREGÓ A TU LISTA EXITOSAMENTE");
+      }
+    })
+  }
 }

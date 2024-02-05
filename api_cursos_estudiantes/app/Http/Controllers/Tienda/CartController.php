@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tienda;
 
 use App\Models\Sale\Cart;
 use Illuminate\Http\Request;
-use App\Models\Coupon\Coupon;
+
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Ecommerce\Cart\CartResource;
 use App\Http\Resources\Ecommerce\Cart\CartCollection;

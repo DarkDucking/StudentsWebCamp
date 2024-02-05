@@ -1,0 +1,102 @@
+<!-- Start breadcrumb Area -->
+<div class="rbt-breadcrumb-default ptb--100 ptb_md--50 ptb_sm--30 bg-gradient-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-inner text-center">
+                    <h2 class="title">Mis cursos de interés</h2>
+                    <ul class="page-list">
+                        <li class="rbt-breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li>
+                            <div class="icon-right"><i class="feather-chevron-right"></i></div>
+                        </li>
+                        <li class="rbt-breadcrumb-item active">Mi lista de cursos </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb Area -->
+
+<div class="rbt-cart-area bg-color-white rbt-section-gap">
+    <div class="cart_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#">
+                        <!-- Cart Table -->
+                        <div class="cart-table table-responsive mb--60">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="pro-thumbnail">Portada </th>
+                                        <th class="pro-title">Título del curso</th>
+                                         <th class="pro-quantity">Detalle</th>
+                                         <th class="pro-remove">Eliminar</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let cart of listCarts">
+                                        <tr>
+                                            <td class="pro-thumbnail"><a [href]="'/landing-curso/'+cart.course.slug" target="_blank"><img [src]="cart.course.imagen" alt="Product"></a></td>
+                                            <td class="pro-title"><a [href]="'/landing-curso/'+cart.course.slug" target="_blank">{{ cart.course.title }}</a></td>
+                                            <td class="pro-quantity">
+                                                <a [href]="'/landing-curso/'+cart.course.slug" target="_blank">{{ cart.course.subtitle }}</a>
+                                            </td>
+                                            <td class="pro-remove"><a href="#" onclick="return false;" (click)="removeItem(cart)"><i class="feather-x"></i></a>
+                                            </td>
+                                            
+                                        </tr>
+                                      
+                                    </ng-container>
+                                  
+                                    
+                                </tbody>
+                            </table>
+                            <div class="breadcrumb-inner text-center">
+                            <h6 class="title"><br><br>Todos los cursos son gratuitos</h6>
+                        </div>
+                        </div>
+                    </form>
+
+                    <div class="row g-5">
+
+                        <div class="col-lg-6 col-12">
+
+                            <!-- Discount Coupon -->
+                          
+                        <!-- Cart Summary -->
+
+                        <div class="col-lg-5 offset-lg-1 col-12">
+                        
+                                <div class="cart-submit-btn-group">
+                                    <div class="single-button w-50">
+                                        <button class="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100">
+                                            <span data-text="Gratis">Acceder</span>
+                                        </button>
+                                    </div>
+                                    <div class="single-button w-50">
+                                        <button class="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100">
+
+                                        <span data-text="Mis cursos">Actualizar</span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="rbt-separator-mid">
+    <div class="container">
+        <hr class="rbt-separator m-0">
+    </div>
+</div>

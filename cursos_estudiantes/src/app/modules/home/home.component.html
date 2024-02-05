@@ -41,29 +41,28 @@
                           </div>
                       </div>
 
-                      <!-- <div class="banner-card pb--60 mb--50 swiper rbt-dot-bottom-center banner-swiper-active" *ngIf="DESCOUNT_BANNER">
+                      <div class="banner-card pb--60 mb--50 swiper rbt-dot-bottom-center banner-swiper-active" >
                           <div class="swiper-wrapper">
-                             -->
-                            <!-- <ng-container *ngFor="let COURSE of DESCOUNT_BANNER_COURSES">
+                            
+                            <ng-container *ngFor="let COURSE of COURSES_HOME">
                                 <div class="swiper-slide">
                                     <div class="rbt-card variation-01 rbt-hover">
                                         <div class="rbt-card-img">
-                                            <a [routerLink]="['landing-curso/',COURSE.slug]" [queryParams]="{'campaing_discount': DESCOUNT_BANNER.id}">
+                                            <a [routerLink]="['landing-curso/',COURSE.slug]" >
                                                 <img [src]="COURSE.imagen" alt="Card image">
-                                                <div class="rbt-badge-3 bg-white">
-                                                    <span *ngIf="DESCOUNT_BANNER.type_discount == 1">-{{ DESCOUNT_BANNER.discount }}%</span>
-                                                    <span *ngIf="DESCOUNT_BANNER.type_discount == 2">-{{ DESCOUNT_BANNER.discount }} USD</span>
-                                                    <span>Off</span>
-                                                </div>
+                                                
                                             </a>
                                         </div>
                                         <div class="rbt-card-body">
                                             <ul class="rbt-meta">
                                                 <li><i class="feather-book"></i>{{COURSE.count_class }} Lessons</li>
                                                 <li><i class="feather-users"></i>50 Students</li>
-                                                <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
+                                                <li><i class="feather-book-open"></i>Semestre n°{{ COURSE.level }} </li>
+                                                
+                                                
+                                                <li><i class="feather-clock"></i>{{ COURSE.time_course }}</li>
                                             </ul>
-                                            <h4 class="rbt-card-title"><a [routerLink]="['landing-curso/',COURSE.slug]" [queryParams]="{'campaing_discount': DESCOUNT_BANNER.id}">{{ COURSE.title }}</a>
+                                            <h4 class="rbt-card-title"><a [routerLink]="['landing-curso/',COURSE.slug]" >{{ COURSE.title }}</a>
                                             </h4>
                                             <p class="rbt-card-text">{{ COURSE.subtitle }}</p>
                                             <div class="rbt-review">
@@ -77,28 +76,24 @@
                                                 <span class="rating-count"> (15 Reviews)</span>
                                             </div>
                                             <div class="rbt-card-bottom">
-                                                <div class="rbt-price">
-                                                    <span class="current-price">{{ getNewTotal(COURSE,DESCOUNT_BANNER) }} USD</span>
-                                                    <span class="off-price">{{ COURSE.precio_usd }} USD</span>
-                                                </div>
-                                                <a class="rbt-btn-link" href="course-details.html">Learn More<i
-                                                        class="feather-arrow-right"></i></a>
+                                                
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                              </ng-container>
-                             -->
+                            
 
-                          <!-- </div> -->
+                          </div>
                           <div class="rbt-swiper-pagination"></div>
                       </div>
                   </div>
               </div>
           </div>
       </div>
+  </div>
   
-  <!-- End Banner Area -->
 
   <div class="rbt-categories-area bg-color-white rbt-section-gapBottom">
       <div class="container">
@@ -111,7 +106,7 @@
               </div>
           </div>
           <div class="row g-5 mt--20">
-              <!-- Start Category Box Layout  -->
+              Start Category Box Layout 
                 <ng-container *ngFor="let CATEGORIE of CATEGORIES">
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <a class="rbt-cat-box rbt-cat-box-1 text-center" href="course-filter-one-toggle.html">
@@ -279,12 +274,11 @@
                                 </div>
                             </div>
                             <div class="rbt-card-bottom">
-                                <!-- <div class="rbt-price">
-                                    <span class="current-price">{{ getTotalPriceCourse(COURSE) }} USD</span>
-                                    <span class="off-price" *ngIf="COURSE.discount_g">{{ COURSE.precio_usd }}</span>
-                                </div> -->
-                                <a class="rbt-btn-link left-icon" href="course-details.html"><i class="feather-shopping-cart"></i> Add To Cart</a>
+                                                
+                                <a class="rbt-btn-link" href="#" onclick = "return false;" (click)="addCart(COURSE)">Añadir a mi lista <i
+                                        class="feather-heart"></i></a>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -1063,7 +1057,10 @@
                                             <ul class="rbt-meta">
                                                 <li><i class="feather-book"></i>{{ courses.count_class }} Lessons</li>
                                                 <li><i class="feather-users"></i>40 Students</li>
-                                                <li><i class="feather-users"></i>{{ courses.time_course }}</li>
+                                                <li><i class="feather-book-open"></i>Semestre n°{{ courses.level }} </li>
+                                                
+                                                
+                                                <li><i class="feather-clock"></i>{{ courses.time_course }}</li>
                                             </ul>
         
                                             <div class="rbt-card-bottom">
@@ -1075,8 +1072,10 @@
                                                     <span class="current-price">{{ getTotalPriceCourse(courses) }} USD</span>
                                                     <span class="off-price" *ngIf="courses.discount_g">{{ courses.precio_usd }}</span>
                                                 </div> -->
-                                                <a class="rbt-btn-link" [routerLink]="['landing-curso/',courses.slug]">Learn
-                                                    More<i class="feather-arrow-right"></i></a>
+                                                <!-- <a class="rbt-btn-link" [routerLink]="['landing-curso/',courses.slug]">Learn
+                                                    More<i class="feather-arrow-right"></i></a> -->
+                                                     <a class="rbt-btn-link" href="#" onclick = "return false;" (click)="addCart(courses)">Añadir a mi lista<i
+                                                        class="feather-heart"></i></a>
                                             </div>
                                         </div>
                                     </div>

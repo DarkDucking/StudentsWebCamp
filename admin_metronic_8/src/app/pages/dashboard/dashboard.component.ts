@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/modules/course/service/course.service';
 import { UserService } from 'src/app/modules/user/service/user.service';
+import { Chart } from 'chart.js';
 
 declare var $:any;
 
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
   COURSES:any = [];
   USERS:any = [];
   isLoading:any;
+  barChart: any;
 
   search:any = null;
   state:any = null;
@@ -26,6 +28,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = this.courseService.isLoading$;
     this.loadData();
+    this.loadBarChart();
   }
 
   loadData(): void {
@@ -37,5 +40,31 @@ export class DashboardComponent implements OnInit {
       console.log(resp);
       this.USERS  = resp.users.data;
     })
+  }
+
+  loadBarChart(): void {
+    // Puedes personalizar este método según tus datos y necesidades
+    this.barChart = new Chart('barChart', {
+      type: 'bar',
+      data: {
+        labels: ['Curso 1', 'Curso 2', 'Curso 3'], // Ejemplo de etiquetas
+        datasets: [
+          {
+            label: 'Número de Estudiantes',
+            data: [10, 15, 8], // Ejemplo de datos
+            backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 255, 0, 0.2)'],
+            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 255, 0, 1)'],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }

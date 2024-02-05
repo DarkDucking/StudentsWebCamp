@@ -42,19 +42,19 @@ export class CoursesDetailComponent implements OnInit{
     //   console.log(resp);
     //   this.campaing_discount_id = resp.campaing_discount;
     // })
-    // this.tiendaGuestService.landingCourse(this.SLUG,this.campaing_discount_id).subscribe((resp:any) => {
-    //   console.log(resp);
-    //   this.LANDING_COURSE = resp.course;
-    //   this.courses_related_instructor = resp.courses_related_instructor;
-    //   this.courses_related_categories = resp.courses_related_categories;
-    //   // this.DISCOUNT = resp.DISCOUNT;
+    this.tiendaGuestService.landingCourse(this.SLUG).subscribe((resp:any) => {
+      console.log(resp);
+      this.LANDING_COURSE = resp.course;
+      // this.courses_related_instructor = resp.courses_related_instructor;
+      // this.courses_related_categories = resp.courses_related_categories;
+      // this.DISCOUNT = resp.DISCOUNT;
       // if(this.DISCOUNT){
       //   this.LANDING_COURSE.discount_g = resp.DISCOUNT;
-    //   // }
-    //   setTimeout(() => {
-    //     magnigyPopup();
-    //   }, 50);
-    // });
+      // }
+      setTimeout(() => {
+        magnigyPopup();
+      }, 50);
+    });
     setTimeout(() => {
       courseView();
       showMoreBtn();
@@ -85,14 +85,8 @@ export class CoursesDetailComponent implements OnInit{
     }
     let data = {
       course_id: this.LANDING_COURSE.id,
-      // type_discount: this.LANDING_COURSE.discount_g ? this.LANDING_COURSE.discount_g.type_discount : null,
-      // discount: this.LANDING_COURSE.discount_g ? this.LANDING_COURSE.discount_g.discount : null,
-      // type_campaing: this.LANDING_COURSE.discount_g ? this.LANDING_COURSE.discount_g.type_campaing : null,
-      // code_cupon: null,
-      // code_discount: this.LANDING_COURSE.discount_g ? this.LANDING_COURSE.discount_g.code : null,
-      // precio_unitario: this.LANDING_COURSE.precio_usd,
-      // total: this.getTotalPriceCourse(this.LANDING_COURSE),
-    };
+     
+         };
 
     this.cartService.registerCart(data).subscribe((resp:any) => {
       console.log(resp);

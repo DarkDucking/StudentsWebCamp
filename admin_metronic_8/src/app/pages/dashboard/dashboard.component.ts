@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CourseService } from 'src/app/modules/course/service/course.service';
 import { UserService } from 'src/app/modules/user/service/user.service';
-import { Chart } from 'chart.js';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,7 @@ import { Chart } from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
   data: any;
-  COURSES:any = [];
+  COURSES:any[] = [];
   USERS:any = [];
   isLoading:any;
   barChart: any;
@@ -30,28 +30,42 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData(): void {
-    this.courseService.listCourse(this.search,this.state).subscribe((resp:any) => {
-      console.log(resp);
-      this.COURSES  = resp.courses.data;
-    })
+    this.courseService.listCourse(this.search, this.state).subscribe((resp: any) => {
+      this.COURSES = resp.courses.data;
+      console.log(this.COURSES);
+    
+      // Call the function to render the chart here
+      this.renderCoursesPerCategoryChart();
+    });
     this.userService.listUsers(this.search,this.state).subscribe((resp:any) => {
       console.log(resp);
       this.USERS  = resp.users.data;
     })
   }
 
-  loadBarChart(): void {
-    // Puedes personalizar este método según tus datos y necesidades
-    const barChart = new Chart('barChart', {
+  renderCoursesPerCategoryChart() {
+    console.log(this.COURSES);
+    const categories: { [key: number]: number } = {};
+    this.COURSES.forEach((COURSE) => {
+      const categoryName = COURSE.categorie_id; // Assuming 'categorie_id' represents the category
+      categories[categoryName] = (categories[categoryName] || 0) + 1;
+    });
+
+    const labels = Object.keys(categories);
+    const data = Object.values(categories);
+
+    const canvas = document.getElementById('coursesPerCategoryChart') as HTMLCanvasElement;
+
+    const barChart = new Chart(canvas, {
       type: 'bar',
       data: {
-        labels: ['Curso 1', 'Curso 2', 'Curso 3'],
+        labels: labels,
         datasets: [
           {
-            label: 'Número de Estudiantes',
-            data: [10, 15, 8],
-            backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 255, 0, 0.2)'],
-            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 255, 0, 1)'],
+            label: 'Courses per Category',
+            data: data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
           },
         ],

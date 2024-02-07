@@ -63,5 +63,9 @@ export class CartService {
   //   let URL = URL_SERVICIOS+"/ecommerce/apply_coupon";
   //   return this.http.post(URL,data,{headers: headers});
   // }
-
+  checkout(data:any){
+    let headers = new HttpHeaders({"Authorization": "Bearer "+this.authService.token});
+    let URL = URL_SERVICIOS+"/ecommerce/checkout";
+    return this.http.post(URL,data,{headers: headers});
+  }
 }

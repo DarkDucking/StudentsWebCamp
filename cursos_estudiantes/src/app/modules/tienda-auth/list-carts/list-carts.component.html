@@ -73,17 +73,34 @@
                         
                                 <div class="cart-submit-btn-group">
                                     <div class="single-button w-50">
-                                        <button class="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100">
+                                        <div #acceder>
+                                        <button class="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100" (click)="accederCurso()">
                                             <span data-text="Gratis">Acceder</span>
                                         </button>
                                     </div>
+                                    </div>
                                     <div class="single-button w-50">
                                         <button class="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100">
-
                                         <span data-text="Mis cursos">Actualizar</span>
                                         </button>
-                                    </div>
 
+                                    </div>
+                                    <div id="donate-button-container">
+                                        <div id="donate-button"></div>
+                                        <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+                                        <script>
+                                        PayPal.Donation.Button({
+                                        env:'sandbox',
+                                        hosted_button_id:'XZNUVJXG3QTZL',
+                                        image: {
+                                        src:'https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif',
+                                        alt:'Donar con el botón PayPal',
+                                        title:'PayPal - The safer, easier way to pay online!',
+                                        }
+                                        }).render('#donate-button');
+                                        </script>
+                                        </div>
+                            
                                 </div>
                             </div>
                         </div>

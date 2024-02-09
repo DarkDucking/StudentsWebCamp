@@ -36,13 +36,16 @@ export class DashboardComponent implements OnInit {
       this.COURSES = resp.courses.data;
       console.log(this.COURSES);
     
-      // Call the function to render the chart here
+      // Funcion de la grafica
       this.renderCoursesPerCategoryChart();
     });
 
     this.userService.listUsers(this.search,this.state).subscribe((resp:any) => {
       console.log(resp);
       this.USERS  = resp.users.data;
+
+      // Funcion de la grafica
+      this.renderUsersByDateChart();
     });
     
   }
@@ -96,8 +99,64 @@ export class DashboardComponent implements OnInit {
         });
       } else {
         console.error('Invalid category data format:', categoryData);
-        // Handle the error or log a message
       }
     });
   }   
+
+  renderUsersByDateChart() {
+    const usersByDate: { [key: string]: number } = {};
+    const colors: string[] = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+
+    this.userService.listUsers(null, null).subscribe(
+      (response: any) => {
+        console.log('Response from userService.listUsers:', response);
+
+        const userData = response.users.data; // Ajusta esto según la estructura de tu respuesta
+
+        if (!userData || !Array.isArray(userData)) {
+          console.error('Invalid user data format:', userData);
+          return;
+        }
+
+        userData.forEach((user: any) => {
+          const userDate = new Date(user.created_at);
+          const monthYearKey = `${userDate.getMonth() + 1}-${userDate.getFullYear()}`;
+          usersByDate[monthYearKey] = (usersByDate[monthYearKey] || 0) + 1;
+        });
+
+        const labels = Object.keys(usersByDate);
+        const data = Object.values(usersByDate);
+        const backgroundColors = colors.slice(0, labels.length); // Ajusta según el número de meses
+
+        const canvas = document.getElementById('usersByDateChart') as HTMLCanvasElement;
+
+        const barChart = new Chart(canvas, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Users Added by Month',
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+}
+
 }  

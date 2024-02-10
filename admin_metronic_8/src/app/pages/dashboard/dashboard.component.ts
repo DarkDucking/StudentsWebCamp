@@ -36,8 +36,9 @@ export class DashboardComponent implements OnInit {
       this.COURSES = resp.courses.data;
       console.log(this.COURSES);
     
-      // Funcion de la grafica
+      // Funcion de la graficas
       this.renderCoursesPerCategoryChart();
+      this.renderCoursesByLevelPieChart();
     });
 
     this.userService.listUsers(this.search,this.state).subscribe((resp:any) => {
@@ -50,6 +51,52 @@ export class DashboardComponent implements OnInit {
     
   }
 
+  //PieChartCursosNiveles
+  renderCoursesByLevelPieChart() {
+    const levels: { [key: string]: number } = {};
+    const colors: string[] = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
+  
+    // Filtrar los cursos con state igual a 2
+    const filteredCourses = this.COURSES.filter(course => {
+      const meetsCondition = course.state === 2;
+  
+      // Agregar registro de consola para depuración
+      console.log(`Course ID: ${course.id}, State: ${course.state}, Meets Condition: ${meetsCondition}`);
+  
+      return meetsCondition;
+    });
+  
+    // Agregar registro de consola para depuración
+    console.log('Filtered Courses:', filteredCourses);
+  
+    filteredCourses.forEach((course) => {
+      const levelKey = course.level.toString();
+      levels[levelKey] = (levels[levelKey] || 0) + 1;
+    });
+  
+    const labels = Object.keys(levels);
+    const data = Object.values(levels);
+    const backgroundColors = colors.slice(0, labels.length); // Ajusta según el número de niveles
+  
+    const canvas = document.getElementById('coursesByLevelPieChart') as HTMLCanvasElement;
+  
+    const pieChart = new Chart(canvas, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: 'black',
+            borderWidth: 1,
+          },
+        ],
+      },
+    });
+  }
+  
+  //BarrasCursos/Seccion
   renderCoursesPerCategoryChart() {
     const categories: { [key: string]: number } = {};
     const categoryNames: { [key: string]: string } = {};
@@ -81,7 +128,7 @@ export class DashboardComponent implements OnInit {
             labels: labels,
             datasets: [
               {
-                label: 'Courses per Category',
+                label: 'Coursos por categoria',
                 data: data,
                 backgroundColor: backgroundColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -103,6 +150,7 @@ export class DashboardComponent implements OnInit {
     });
   }   
 
+  //GraficaUsuariosMes
   renderUsersByDateChart() {
     const usersByDate: { [key: string]: number } = {};
     const colors: string[] = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'];
@@ -131,15 +179,15 @@ export class DashboardComponent implements OnInit {
         const canvas = document.getElementById('usersByDateChart') as HTMLCanvasElement;
 
         const barChart = new Chart(canvas, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: labels,
             datasets: [
               {
-                label: 'Users Added by Month',
+                label: 'Users añadidos por mes',
                 data: data,
                 backgroundColor: backgroundColors,
-                borderColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'purple',
                 borderWidth: 1,
               },
             ],
@@ -157,6 +205,6 @@ export class DashboardComponent implements OnInit {
         console.error('Error fetching user data:', error);
       }
     );
-}
+  }
 
 }  

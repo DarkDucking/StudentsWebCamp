@@ -1,10 +1,66 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.css" />
 
 <div class="content-wrapper">
-  <div style="width: 80%;">
-    <canvas id="coursesPerCategoryChart"></canvas>
-    <canvas id="usersByDateChart"></canvas>
-    <canvas id="thirdChart"></canvas>
-    <canvas id="fourthChart"></canvas>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Control panel</small>
+    </h1>
+  </section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Courses por Categoria</h3>
+        </div>
+        <div class="box-body">
+          <canvas id="coursesPerCategoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Usuarios por fechas</h3>
+        </div>
+        <div class="box-body">
+          <canvas id="usersByDateChart"></canvas>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Cursos por Semestre</h3>
+        </div>
+        <div class="box-body">
+          <canvas id="coursesByLevelPieChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Fourth Chart</h3>
+        </div>
+        <div class="box-body">
+          <canvas id="fourthChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

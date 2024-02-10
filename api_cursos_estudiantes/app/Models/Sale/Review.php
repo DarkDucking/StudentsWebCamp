@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Sale;
 
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Course\Course;
+use App\Models\Sale\SaleDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CoursesStudent extends Model
+class Review extends Model
 {
     use HasFactory;
     protected $fillable = [
         "course_id",
         "user_id",
-        "clases_checkeds",
-        "state",
+        "sale_detail_id",
+        "message",
+        "rating",
     ];
-
     public function setCreatedAtAttribute($value)
     {
         date_default_timezone_set("America/Lima");
@@ -38,5 +39,10 @@ class CoursesStudent extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function sale_detail()
+    {
+        return $this->belongsTo(SaleDetail::class);
     }
 }

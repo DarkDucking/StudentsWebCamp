@@ -3,6 +3,7 @@
 namespace App\Models\Sale;
 
 use Carbon\Carbon;
+use App\Models\Sale\Review;
 use App\Models\Course\Course;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,5 +39,10 @@ class SaleDetail extends Model
     public function sale()
     {
         return $this->belongsTo(Sale::class);
+    }
+    
+    public function review()
+    {
+        return $this->hasOne(Review::class);
     }
 }

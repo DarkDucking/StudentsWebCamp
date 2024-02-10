@@ -4,6 +4,7 @@ namespace App\Models\Course;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\CoursesStudent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -60,6 +61,12 @@ class Course extends Model
     {
         return $this->hasMany(CourseSection::class);
     }
+
+    public function courses_students()
+    {
+        return $this->hasMany(CoursesStudent::class);
+    }
+
 
     // public function discount_courses()
     // {
@@ -178,4 +185,21 @@ function AddTimes($horas)
         
         return $query;
     }
+
+    public function getCountStudentsAttribute()
+    {
+        return $this->courses_students->count();
+    }
+
+    public function getCountReviewsAttribute()
+    {
+        return $this->reviews->count();
+    }
+
+    public function getAvgReviewsAttribute()
+    {
+        return $this->reviews->avg("rating");
+    }
+
+    
 }

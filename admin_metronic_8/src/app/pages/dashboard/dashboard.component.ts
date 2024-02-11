@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
             labels: labels,
             datasets: [
               {
-                label: 'Coursos por categoria',
+                label: 'Cursos por categoria',
                 data: data,
                 backgroundColor: backgroundColors,
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit {
             labels: labels,
             datasets: [
               {
-                label: 'Users añadidos por mes',
+                label: 'Usuarios añadidos por mes',
                 data: data,
                 backgroundColor: backgroundColors,
                 borderColor: 'purple',

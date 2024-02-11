@@ -10,6 +10,7 @@ use App\Models\CoursesStudent;
 use App\Models\Sale\SaleDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\Ecommerce\Sale\SaleCollection;
 
 class CheckoutController extends Controller
 {
@@ -20,8 +21,15 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        $sales = Sale::orderBy("id", "desc")->get();
+        $totalSalesCount = $sales->count();
+
+        return response()->json([
+            "sales" => SaleCollection::make($sales),
+            "totalSalesCount" => $totalSalesCount,
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

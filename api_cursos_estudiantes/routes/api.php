@@ -64,7 +64,7 @@ Route::group([
     Route::delete('/course-clases-file/{id}',[ClaseGController::class, "removeFiles"]);
     Route::post('/course-clases/upload_video/{id}',[ClaseGController::class, "upload_video"]);
 
- 
+    Route::get('/sales',[CheckoutController::class, "index"]);
 });
 
 Route::group(["prefix" => "ecommerce"],function($router){

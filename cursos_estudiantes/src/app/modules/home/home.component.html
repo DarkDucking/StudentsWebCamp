@@ -55,9 +55,9 @@
                                         </div>
                                         <div class="rbt-card-body">
                                             <ul class="rbt-meta">
-                                                <li><i class="feather-book"></i>{{COURSE.count_class }} Lessons</li>
-                                                <li><i class="feather-users"></i>50 Students</li>
-                                                <li><i class="feather-book-open"></i>Semestre n°{{ COURSE.level }} </li>
+                                                <li><i class="feather-book"></i>{{COURSE.count_class }} Clases</li>
+                                                <li><i class="feather-users"></i>{{COURSE.count_students}} Estudiantes</li>
+                                                <li><i class="feather-book-open"></i>Para semestre n°{{ COURSE.level }} </li>
                                                 
                                                 
                                                 <li><i class="feather-clock"></i>{{ COURSE.time_course }}</li>
@@ -73,7 +73,7 @@
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                 </div>
-                                                <span class="rating-count"> (15 Reviews)</span>
+                                                <span class="rating-count"> ({{ COURSE.count_reviews }} Reviews)</span>
                                             </div>
                                             <div class="rbt-card-bottom">
                                                 

@@ -211,9 +211,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="rbt-card-bottom">
+                                                            <!-- <div class="rbt-card-bottom">
                                                                 <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" href="#">Download Certificate</a>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -264,15 +264,15 @@
                                                                     <h6 class="rbt-title-style-2 mb--10" *ngIf="enrolled_course.state == 2">Complete</h6>
                                                                     <h6 class="rbt-title-style-2 mb--10" *ngIf="enrolled_course.state == 1">Proceso</h6>
                                                                     <div class="progress">
-                                                                        <div class="progress-bar wow fadeInLeft bar-color-success" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" [ngStyle]="{'width': enrolled_course.percentage+'%'}" [attr.aria-valuenow]="enrolled_course.percentage" aria-valuemin="0" aria-valuemax="100">
+                                                                        <div class="progress-bar wow fadeInLeft bar-color-success" data-wow-duration="0.8s" data-wow-delay=".3s" role="progressbar" [ngStyle]="{'width': enrolled_course.percentage+'%'}" [attr.aria-valuenow]="enrolled_course.percentage" aria-valuemin="0" aria-valuemax="100">
                                                                         </div>
                                                                         <span class="rbt-title-style-2 progress-number">{{ enrolled_course.percentage }}%</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="rbt-card-bottom">
+                                                            <!-- <div class="rbt-card-bottom">
                                                                 <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" href="#">Download Certificate</a>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -327,9 +327,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="rbt-card-bottom">
+                                                            <!-- <div class="rbt-card-bottom">
                                                                 <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" href="#">Download Certificate</a>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -433,28 +433,28 @@
                         <div class="rbt-dashboard-content bg-color-white rbt-shadow-box"  *ngIf="nav_option == 4">
                             <div class="content">
                                 <div class="section-title">
-                                    <h4 class="rbt-title-style-3">Order History</h4>
+                                    <h4 class="rbt-title-style-3">Solicitudes de acceso a cursos</h4>
                                 </div>
 
                                 <div class="rbt-dashboard-table table-responsive mobile-table-750" *ngIf="!sale_selected">
                                     <table class="rbt-table table table-borderless">
                                         <thead>
                                             <tr>
-                                                <th>Order ID</th>
-                                                <th>Method Payment</th>
-                                                <th>Date</th>
-                                                <th>Total</th>
-                                                <th>Show Detail</th>
+                                                <th>Solicitud</th>
+                                                
+                                                <th>Fecha</th>
+                                                
+                                                <th>Ver detalles de solicitud</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                             <ng-container *ngFor="let sale of sales">
                                                 <tr>
-                                                    <th>#{{ sale.n_transaccion }}</th>
-                                                    <td>{{ sale.method_payment }}</td>
+                                                    <td>#{{ sale.n_transaccion }}</td>
+                                                    
                                                     <td>{{ sale.created_at }}</td>
-                                                    <td>{{ sale.total }} {{ sale.currency_payment }}</td>
+                                                    
                                                     <td>
                                                         <div class="rbt-button-group justify-content-end">
                                                             <a class="rbt-btn btn-xs bg-primary-opacity radius-round" href="#" onclick="return false;" (click)="selectedSale(sale)" title="Edit" ><i class="feather-edit pl--0"></i></a>
@@ -472,10 +472,10 @@
                                     <table class="rbt-table table table-borderless">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Imagen Course</th>
-                                                <th>Name Course</th>
-                                                <th>Detalle</th>
+                                                
+                                                <th>Imagen del curso</th>
+                                                <th>Nombre del Curso</th>
+                                                
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
@@ -483,22 +483,15 @@
                                         <tbody>
                                             <ng-container *ngFor="let sale_detail of sale_selected.sale_details">
                                                 <tr>
-                                                    <th>#{{ sale_detail.id }}</th>
+                                                    
                                                     <td>
                                                         <img [src]="sale_detail.course.imagen" style="width: 64px;;" alt="" srcset="">
                                                     </td>
                                                     <td>{{ sale_detail.course.title }}</td>
-                                                    <td>
-                                                        <ng-container *ngIf="sale_detail.code_cupon">
-                                                            <small *ngIf="sale_detail.type_discount == 1"> Descuento : - {{ sale_detail.discount }} %</small>
-                                                            <!-- <br> -->
-                                                            <small *ngIf="sale_detail.type_discount == 2"> Descuento : - {{ sale_detail.discount }} USD</small>
-                                                            <br>
-                                                            <small > CODIGO:  {{ sale_detail.code_cupon }} </small>
-                                                        </ng-container>
-                                                       
-                                                    </td>
-                                                    <td>{{ sale_detail.total }} {{ sale_selected.currency_payment }}</td>
+                                                    
+                                                    
+                                                    
+                                                    <td>Curso Gratuito</td>
                                                 </tr>
                                             </ng-container>
                                             

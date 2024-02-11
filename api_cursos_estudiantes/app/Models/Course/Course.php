@@ -4,6 +4,7 @@ namespace App\Models\Course;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Sale\Review;
 use App\Models\CoursesStudent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -65,6 +66,10 @@ class Course extends Model
     public function courses_students()
     {
         return $this->hasMany(CoursesStudent::class);
+    }
+    public function review()
+    {
+        return $this->hasMany(Review::class);
     }
 
 
@@ -200,6 +205,7 @@ function AddTimes($horas)
     {
         return $this->reviews->avg("rating");
     }
+    
 
     
 }

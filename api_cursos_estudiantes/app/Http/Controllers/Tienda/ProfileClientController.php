@@ -51,7 +51,7 @@ class ProfileClientController extends Controller
                 return [
                     "id" => $course_student->id,
                     "clases_checkeds" => $clases_checkeds,
-                    "percentage" => round((sizeof($clases_checkeds)/$course_student->course->count_class)*100,2),
+                    "percentage" => $course_student->course->count_class > 0 ? round((sizeof($clases_checkeds) / $course_student->course->count_class) * 100, 2) : 0,
                     "course" => CourseHomeResource::make($course_student->course),
                 ];
             }),

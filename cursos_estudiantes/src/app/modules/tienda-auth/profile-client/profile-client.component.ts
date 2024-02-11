@@ -178,7 +178,7 @@ export class ProfileClientComponent implements OnInit{
     formData.append("surname",this.surname);
     formData.append("email",this.email);
     formData.append("phone",this.phone);
-    formData.append("profession",this.profession);
+    formData.append("profesion",this.profession);
     formData.append("description",this.description);
     if(this.new_password){
       formData.append("new_password",this.new_password);

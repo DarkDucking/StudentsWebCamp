@@ -67,7 +67,7 @@ class Course extends Model
     {
         return $this->hasMany(CoursesStudent::class);
     }
-    public function review()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }

@@ -51,6 +51,10 @@ class LandingCourseResource extends JsonResource
             "count_class" => $this->resource->count_class,
             "time_course" => $this->resource->time_course,
             "files_count" => $this->resource->files_count,
+            "count_students" => $this->resource->count_students,
+            "avg_reviews" => $this->resource->avg_reviews ? round($this->resource->avg_reviews,2): 0,
+            "count_reviews" => $this->resource->count_reviews,
+            
             "discount_g" => $discount_g,
             "discount_date" => $discount_g ? Carbon::parse($discount_g->end_date)->format("d/m") : NULL,
             "description" => $this->resource->description,
@@ -63,7 +67,8 @@ class LandingCourseResource extends JsonResource
                 "profesion" => $this->resource->instructor->profesion,
                 "courses_count"  => $this->resource->instructor->courses_count,
                 "description" => $this->resource->instructor->description,
-            ] : NULL,
+                "avg_reviews" => $this->resource->instructor->avg_reviews,
+                ] : NULL,
             // MALLA CURRICULAR
             "malla" => $this->resource->sections->map(function($section){
                 return [

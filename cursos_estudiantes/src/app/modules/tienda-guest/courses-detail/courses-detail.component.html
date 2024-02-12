@@ -34,21 +34,38 @@
                         </div>
 
                         <div class="feature-sin rating">
-                            <a href="#">4.8</a>
+                            <a href="#"></a> {{ LANDING_COURSE.count_reviews }}
+                            <!-- <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
                             <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a> -->
+                            <a href="#" [ngClass]="{'rating-a': LANDING_COURSE.avg_reviews < 1}">
+                                <i class="fas fa-star" ></i>
+                            </a>
+                            <a href="#" [ngClass]="{'rating-a': LANDING_COURSE.avg_reviews < 2}">
+                                <i class="fas fa-star" ></i>
+                            </a>
+                            <a href="#" [ngClass]="{'rating-a': LANDING_COURSE.avg_reviews < 3}">
+                                <i class="fas fa-star" ></i>
+                            </a>
+                            <a href="#" [ngClass]="{'rating-a': LANDING_COURSE.avg_reviews < 4}">
+                                <i class="fas fa-star" ></i>
+                            </a>
+                            <a href="#" [ngClass]="{'rating-a': LANDING_COURSE.avg_reviews < 5}">
+                                <i class="fas fa-star" ></i>
+                            </a>
+
                         </div>
 
                         <div class="feature-sin total-rating">
-                            <a class="rbt-badge-4" href="#">215,475 rating</a>
+                            <a class="rbt-badge-4" href="#">{{ LANDING_COURSE.avg_reviews }} rating</a>
                         </div>
 
                         <div class="feature-sin total-student">
-                            <span>616,029 students</span>
+                            <span>{{ LANDING_COURSE.count_students }} students</span>
                         </div>
+
 
                     </div>
 
@@ -59,7 +76,7 @@
                             </a>
                         </div>
                         <div class="rbt-author-info">
-                            By <a href="profile.html">{{ LANDING_COURSE.instructor.full_name }}</a> In <a href="#">{{ LANDING_COURSE.instructor.profesion }}</a>
+                            By <a href="profile.html">{{ LANDING_COURSE.instructor.full_name }}</a> estudiante de <a href="#">{{ LANDING_COURSE.instructor.profesion }}</a>
                         </div>
                     </div>
 

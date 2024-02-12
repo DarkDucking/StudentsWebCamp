@@ -60,29 +60,43 @@
   <div class="col-xl-4 mb-xl-10">
     <!-- Primer bloque -->
     <div class="card card-flush h-xl-32 mb-2">
-        <div class="box-header with-border">
-            <div class="card-header pt-7">
-                <h3 class="card-title align-items-start flex-column">Primera Dato</h3>
-            </div>
+      <div class="card-header pt-5">
+        <!--Titulo-->
+        <div class="card-title d-flex flex-column"> 
+          <div class="d-flex align-items-center">
+            <span class="fs-2hx fw-bolder text-dark me-2 lh-1 ls-n2">{{ totalSalesCount?.toString() }} Inscripciones</span>
+          </div>
+          <span class="text-gray-400 pt-1 fw-bold fs-6">En total de los cursos</span>
         </div>
-        <div class="card-body d-flex justify-content-between flex-column pb-1 px-0 min-h-auto ps-4 pe-6">
-            <div class="apexcharts-canvas apexcharts74pkfughj apexcharts-theme-light">
-                <canvas id="PrimeraChart"></canvas>
-            </div>
+      </div>
+        <div class="card-body d-flex align-items-end pt-0">
+          <div class="d-flex align-items-center flex-column mt-3 w-100">
+            <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+              <span class="fw-boldest fs-6 text-dark">Nuestra meta: 50</span>
+              <span class="fw-bolder fs-6 text-gray-400">{{ percentaje?.toString() }} %</span>
+            </div>                     
+          </div>
         </div>
     </div>
 
     <!-- Segundo bloque -->
     <div class="card card-flush h-xl-32 mb-2">
-        <div class="box-header with-border">
-            <div class="card-header pt-7">
-                <h3 class="card-title align-items-start flex-column">Segunda Dato</h3>
-            </div>
+      <div class="card-header pt-5">
+        <!--Titulo-->
+        <div class="card-title d-flex flex-column"> 
+          <div class="d-flex align-items-center">
+            <span class="fs-2hx fw-bolder text-dark me-2 lh-1 ls-n2">{{ totalClassCount?.toString() }} Videos</span>
+          </div>
+          <span class="text-gray-400 pt-1 fw-bold fs-6">Subidos en la plataforma</span>
         </div>
-        <div class="card-body d-flex justify-content-between flex-column pb-1 px-0 min-h-auto ps-4 pe-6">
-            <div class="apexcharts-canvas apexcharts74pkfughj apexcharts-theme-light">
-                <canvas id="SegundaChart"></canvas>
-            </div>
+      </div>
+        <div class="card-body d-flex align-items-end pt-0">
+          <div class="d-flex align-items-center flex-column mt-3 w-100">
+            <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+              <span class="fw-boldest fs-6 text-dark">Nuestra meta: 50</span>
+              <span class="fw-bolder fs-6 text-gray-400">{{ percentaje?.toString() }} %</span>
+            </div>                     
+          </div>
         </div>
     </div>
 

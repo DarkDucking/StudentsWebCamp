@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CourseService } from 'src/app/modules/course/service/course.service';
 import { UserService } from 'src/app/modules/user/service/user.service';
 import Chart from 'chart.js/auto';
 import { CategorieService } from 'src/app/modules/categories/service/categorie.service';
+import { SalesService } from 'src/app/modules/service/sales.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +13,14 @@ import { CategorieService } from 'src/app/modules/categories/service/categorie.s
 export class DashboardComponent implements OnInit {
   data: any;
   COURSES:any[] = [];
-  USERS:any = [];
+  USERS:any = []; 
+  SALES:any = []; 
   isLoading:any;
   barChart: any;
 
+  totalSalesCount: number = 0;
+  totalClassCount: number = 0;
+  percentaje: number = 0;
   search:any = null;
   state:any = null;
 
@@ -23,12 +28,16 @@ export class DashboardComponent implements OnInit {
     private courseService: CourseService,
     private userService: UserService,
     private categorieService: CategorieService,
+    private salesService: SalesService,
+    private cdr: ChangeDetectorRef,
     ) {}
 
   ngOnInit(): void {
     this.isLoading = this.courseService.isLoading$;
     this.isLoading = this.userService.isLoading$;
+    this.loadSalesData();
     this.loadData();
+    this.LoadClass();
   }
 
   loadData(): void {
@@ -48,8 +57,31 @@ export class DashboardComponent implements OnInit {
       // Funcion de la grafica
       this.renderUsersByDateChart();
     });
-    
   }
+
+  loadSalesData(): void {
+    this.salesService.listSales(this.data).subscribe(
+      (response) => {
+        const sales = response.sales;
+        this.totalSalesCount = response.totalSalesCount;
+  
+        // Calcular el porcentaje (por ejemplo, 10%)
+        const porcentajeBase = 50; // Puedes ajustar el valor según tus necesidades
+        this.percentaje = (this.totalSalesCount * 100) / porcentajeBase;
+  
+        // Forzar la detección de cambios
+        this.cdr.detectChanges();
+  
+        console.log('Ventas:', sales);
+        console.log('Total de Ventas:', this.totalSalesCount);
+        console.log('Porcentaje Calculado:', this.percentaje);
+      },
+      (error) => {
+        console.error('Error en la solicitud:', error);
+      }
+    );
+  }
+  
 
   //PieChartCursosNiveles
   renderCoursesByLevelPieChart() {
@@ -59,10 +91,6 @@ export class DashboardComponent implements OnInit {
     // Filtrar los cursos con state igual a 2
     const filteredCourses = this.COURSES.filter(course => {
       const meetsCondition = course.state === 2;
-  
-      // Agregar registro de consola para depuración
-      console.log(`Course ID: ${course.id}, State: ${course.state}, Meets Condition: ${meetsCondition}`);
-  
       return meetsCondition;
     });
   
@@ -207,4 +235,23 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  LoadClass(): void {
+    this.courseService.obtenerSumaTotalClases(this.data).subscribe(
+      (response) => {
+        const clases = response.clases;
+        this.totalClassCount = response.totalClassCount;
+        console.log('Respuesta del backend:', response);
+        console.log('Suma Total de Clases:', this.totalClassCount);
+       // Forzar la detección de cambios
+       this.cdr.detectChanges();
+
+       console.log('Clases:', clases);
+       console.log('Total de Clases:', this.totalClassCount);
+       console.log('Porcentaje Calculado:', this.percentaje);
+     },
+     (error) => {
+       console.error('Error en la solicitud:', error);
+     }
+   );
+  }
 }  

@@ -28,6 +28,17 @@ class ClaseGController extends Controller
         ]);
     }
 
+    public function indexCount(Request $request)
+    {
+        $clases = CourseClase::whereNotNull('video_link')->orderBy("id", "desc")->get();
+        $totalClassCount = $clases->count();
+
+        return response()->json([
+            "clases" => CourseClaseCollection::make($clases),
+            "totalClassCount" => $totalClassCount,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -180,4 +180,12 @@ export class CourseService {
     );
   }
 
+  obtenerSumaTotalClases(data: any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.authservice.token });
+    let URL = URL_SERVICIOS + "/course-clases-sum";
+    return this.http.get(URL, { headers: headers }).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
 }

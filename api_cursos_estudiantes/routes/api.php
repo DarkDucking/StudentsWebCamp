@@ -65,6 +65,7 @@ Route::group([
     Route::post('/course-clases/upload_video/{id}',[ClaseGController::class, "upload_video"]);
 
     Route::get('/sales',[CheckoutController::class, "index"]);
+    Route::get('/course-students',[CheckoutController::class, "indexCoursesStudent"]);
     Route::get('/course-clases-sum',[ClaseGController::class, "indexCount"]);
 
 });

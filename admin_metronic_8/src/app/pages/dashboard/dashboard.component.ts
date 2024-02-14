@@ -13,10 +13,13 @@ import { SalesService } from 'src/app/modules/service/sales.service';
 export class DashboardComponent implements OnInit {
   data: any;
   COURSES:any[] = [];
+  COURSESSTUDENT:any[] = [];
   USERS:any = []; 
   SALES:any = []; 
   isLoading:any;
   barChart: any;
+  user_id: number;
+  course_id: number;
 
   totalSalesCount: number = 0;
   totalClassCount: number = 0;
@@ -57,8 +60,16 @@ export class DashboardComponent implements OnInit {
       // Funcion de la grafica
       this.renderUsersByDateChart();
     });
+
+    this.salesService.listCourseStudent().subscribe((resp: any) => {
+      this.COURSESSTUDENT = resp.coursesStudent;
+      console.log(this.COURSESSTUDENT);
+      this.renderStudentsPerCategoryChart();
+    });
+    
   }
 
+  //Inscripciones
   loadSalesData(): void {
     this.salesService.listSales(this.data).subscribe(
       (response) => {
@@ -81,7 +92,6 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-  
 
   //PieChartCursosNiveles
   renderCoursesByLevelPieChart() {
@@ -235,6 +245,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  //VideosSubidos
   LoadClass(): void {
     this.courseService.obtenerSumaTotalClases(this.data).subscribe(
       (response) => {
@@ -254,4 +265,84 @@ export class DashboardComponent implements OnInit {
      }
    );
   }
+
+  renderStudentsPerCategoryChart() {
+    const courses: { [key: string]: number } = {};
+    const categories: { [key: string]: number } = {};
+    const categoryNames: { [key: string]: string } = {};
+    const colors: string[] = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+
+    this.COURSESSTUDENT.forEach((courseStudent) => {
+      // Check if 'course_id' is defined in courseStudent and is not null
+      if (courseStudent.course_id !== undefined && courseStudent.course_id !== null) {
+        const courseId = courseStudent.course_id.toString();
+        courses[courseId] = (courses[courseId] || 0) + 1;
+      }
+    });
+    
+    this.courseService.listCourse(this.search, this.state).subscribe(async (response: any) => {
+      console.log('Course Service Response:', response);
+    
+      const courseData = response.courses?.data;
+    
+      if (Array.isArray(courseData) && courseData.length > 0) {
+        console.log('Course Data:', courseData);
+    
+        const courseStudentMap: { [key: string]: Set<number> } = {};
+    
+        this.COURSESSTUDENT.forEach((courseStudent) => {
+          const courseId = courseStudent.course_id.toString();
+          const userId = courseStudent.user_id;
+    
+          if (!courseStudentMap[courseId]) {
+            courseStudentMap[courseId] = new Set();
+          }
+    
+          courseStudentMap[courseId].add(userId);
+        });
+
+        const courseIds = Object.keys(courseStudentMap);
+        
+        //labels
+        const labels = courseIds.map((courseId) => {
+          const course = courseData.find((c: any) => c.id.toString() === courseId);
+          return course ? course.title : courseId;
+        });
+        
+        //data
+        const data = courseIds.map((courseId) => courseStudentMap[courseId].size);
+        //canvas
+        const backgroundColors = colors.slice(0, courseData.length);
+        const canvas = document.getElementById('studentsPerCourseChart') as HTMLCanvasElement;
+        console.log('Canvas Element:', canvas);
+    
+        const barChart = new Chart(canvas, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Estudiantes por categoria',
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      } else {
+        console.error('No valid course data available.');
+      }
+    });
+    
+  }
+  
 }  

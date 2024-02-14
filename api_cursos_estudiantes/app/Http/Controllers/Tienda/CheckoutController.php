@@ -30,6 +30,12 @@ class CheckoutController extends Controller
         ]);
     }
 
+    public function indexCoursesStudent()
+    {
+        $coursesStudent = CoursesStudent::all();
+        return response()->json(['coursesStudent' => $coursesStudent]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

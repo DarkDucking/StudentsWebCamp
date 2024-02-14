@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\Course\Course;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -36,12 +37,6 @@ class User extends Authenticatable implements JWTSubject
         "description",
         "phone",
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -81,14 +76,41 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
-    function scopeFilterAdvance($query,$search,$state){
+    public function courses()
+    {
+        return $this->hasMany(Course::class)->where("state",2);
+    }
+
+    public function getCoursesCountAttribute()
+    {
+        return $this->courses->count();
+    }
+
+    public function getAvgReviewsAttribute()
+    {
+        return $this->courses->avg("avg_reviews");
+    }
+
+    public function getCountReviewsAttribute()
+    {
+        return $this->courses->sum("count_reviews");
+    }
+
+    public function getCountStudentsAttribute()
+    {
+        return $this->courses->sum("count_students");
+    }
+
+
+    function scopeFilterAdvance($query,$search,$state)
+    {
         if($search){
-            $query->where("email", "like", "%".$search."%");
+            $query->where("email","like","%".$search."%");
         }
         if($state){
-            $query->where("state", $state);
+            $query->where("state",$state);
         }
-
+        
         return $query;
     }
 }

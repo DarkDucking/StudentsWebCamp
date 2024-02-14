@@ -67,7 +67,9 @@ class LandingCourseResource extends JsonResource
                 "profesion" => $this->resource->instructor->profesion,
                 "courses_count"  => $this->resource->instructor->courses_count,
                 "description" => $this->resource->instructor->description,
-                "avg_reviews" => $this->resource->instructor->avg_reviews,
+                "count_reviews" => $this->resource->instructor->count_reviews,
+                "count_students" => $this->resource->instructor->count_students,
+                
                 ] : NULL,
             // MALLA CURRICULAR
             "malla" => $this->resource->sections->map(function($section){
@@ -85,6 +87,16 @@ class LandingCourseResource extends JsonResource
                 ];
             }),
             "updated_at" => $this->resource->updated_at->format("m/Y"),
+            "reviews" => $this->resource->reviews->map(function($review){
+                return [
+                    "message" => $review->message,
+                    "rating" => $review->rating,
+                    "user" => [
+                        "full_name" =>  $review->user->name.' '.$review->user->surname,
+                        "avatar" => env("APP_URL")."storage/".$review->user->avatar,
+                    ],
+                ];
+            })
         ];
     }
 }

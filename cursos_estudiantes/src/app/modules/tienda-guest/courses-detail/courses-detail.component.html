@@ -508,7 +508,12 @@
                                     <div class="rbt-card-img">
                                         <a [attr.href]="'landing-curso/'+COURSE.slug">
                                             <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
-                                                                                   </a>
+                                            <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
+                                                <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
+                                                <span *ngIf="COURSE.discount_g.type_discount == 2">-{{ COURSE.discount_g.discount }} USD</span>
+                                                <span>Off</span>
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="rbt-card-body">
                                         <div class="rbt-card-top">
@@ -545,6 +550,8 @@
                                             </div>
                                         </div>
                                         <div class="rbt-card-bottom">
+                                            <div class="rbt-price">
+                                                          </div>
                                             <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart()"><i class="feather-shopping-cart"></i> Add To Cart</a>
                                         </div>
                                     </div>
@@ -575,34 +582,29 @@
                         <!-- End Viedo Wrapper  -->
 
                         <div class="content-item-content">
-                            <!-- <div class="rbt-price-wrapper d-flex flex-wrap align-items-center justify-content-between">
-                                <div class="rbt-price">
-                                    <span class="current-price" *ngIf="!LANDING_COURSE.discount_g">{{ LANDING_COURSE.precio_usd }} USD</span>
-                                    <span class="current-price" *ngIf="LANDING_COURSE.discount_g">{{ getNewTotal(LANDING_COURSE,LANDING_COURSE.discount_g) }} USD</span>
-                                    <span class="off-price" *ngIf="LANDING_COURSE.discount_g">{{ LANDING_COURSE.precio_usd }} USD</span>
-                                </div>
-                                <div class="discount-time" *ngIf="LANDING_COURSE.discount_g">
-                                    <span class="rbt-badge color-danger bg-color-danger-opacity"><i
-                                            class="feather-clock"></i> {{ LANDING_COURSE.discount_date }} left!</span>
-                                </div>
-                            </div> -->
-
-                            <div class="add-to-card-button mt--15">
-                                <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#" onclick="return false;" (click)="addCart()">
-                                    <span class="btn-text">Añadir a mi lista</span>
-                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                </a>
+                            <div class="rbt-price-wrapper d-flex flex-wrap align-items-center justify-content-between">
+                                
                             </div>
+                            
+                            <ng-container *ngIf="!is_have_course">
+                                
+                                <div class="add-to-card-button mt--15">
+                                    <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#" onclick="return false;" (click)="addCart()">
+                                        <span class="btn-text">Add to Cart</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+                                </div>
+    
+                                <div class="buy-now-btn mt--15">
+                                    <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
+                                        <span class="btn-text">Buy Now</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </ng-container>
 
-                            <div class="buy-now-btn mt--15">
-                                <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
-                                    <span class="btn-text">Acceder al curso</span>
-                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                </a>
-                            </div>
-
-                            <span class="subtitle"><i class="feather-rotate-ccw"></i> Todos los cursos son gratuitos
-                                </span>
+                            <span class="subtitle"><i class="feather-rotate-ccw"></i> 30-Day Money-Back
+                                Guarantee</span>
 
 
                             <div class="rbt-widget-details has-show-more">
@@ -676,24 +678,22 @@
                         <div class="rbt-card-img">
                             <a [attr.href]="'landing-curso/'+COURSE.slug">
                                 <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
-                                <!-- <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
-                                    <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
-                                    <span *ngIf="COURSE.discount_g.type_discount == 2">-{{ COURSE.discount_g.discount }} USD</span>
-                                    <span>Off</span>
-                                </div> -->
+                                <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
+                                    
+                                </div>
                             </a>
                         </div>
                         <div class="rbt-card-body">
                             <div class="rbt-card-top">
                                 <div class="rbt-review">
                                     <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 1}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 2}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 3}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 4}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 5}"></i>
                                     </div>
-                                    <span class="rating-count"> (15 Reviews)</span>
+                                    <span class="rating-count"> ({{ COURSE.count_reviews }} Reviews)</span>
                                 </div>
                                 <div class="rbt-bookmark-btn">
                                     <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
@@ -703,7 +703,7 @@
                             </h4>
                             <ul class="rbt-meta">
                                 <li><i class="feather-book"></i>{{ COURSE.count_class }} Lessons</li>
-                                <li><i class="feather-users"></i>50 Students</li>
+                                <li><i class="feather-users"></i>{{ COURSE.count_students }} Students</li>
                                 <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
                             </ul>
                             <p class="rbt-card-text">{{ COURSE.subtitle }}.</p>
@@ -718,10 +718,7 @@
                                 </div>
                             </div>
                             <div class="rbt-card-bottom">
-                                <!-- <div class="rbt-price">
-                                    <span class="current-price">{{ getTotalPriceCourse(COURSE) }} USD</span>
-                                    <span class="off-price" *ngIf="COURSE.discount_g">{{ COURSE.precio_usd }}</span>
-                                </div> -->
+                                
                                 <a class="rbt-btn-link left-icon" [attr.href]="'landing-curso/'+COURSE.slug"><i class="feather-shopping-cart"></i> Add To Cart</a>
                             </div>
                         </div>

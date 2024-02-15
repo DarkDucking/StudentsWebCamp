@@ -21,9 +21,9 @@ export class CoursesDetailComponent implements OnInit{
   LANDING_COURSE:any = null;
   courses_related_instructor:any = [];
   courses_related_categories:any = [];
-  campaing_discount_id:any
-  DISCOUNT:any = null;
   user: any = null;
+
+  is_have_course:any = false;
   constructor(
     public activedRouter: ActivatedRoute,
     public tiendaGuestService: TiendaGuestService,
@@ -32,28 +32,23 @@ export class CoursesDetailComponent implements OnInit{
   ) {
     
   }
-
   ngOnInit(): void {
     this.activedRouter.params.subscribe((resp:any) => {
       console.log(resp);
       this.SLUG = resp.slug;
     })
-    // this.activedRouter.queryParams.subscribe((resp:any) => {
-    //   console.log(resp);
-    //   this.campaing_discount_id = resp.campaing_discount;
-    // })
+    this.activedRouter.queryParams.subscribe((resp:any) => {
+      console.log(resp);
+    })
     this.tiendaGuestService.landingCourse(this.SLUG).subscribe((resp:any) => {
       console.log(resp);
       this.LANDING_COURSE = resp.course;
-      // this.courses_related_instructor = resp.courses_related_instructor;
-      // this.courses_related_categories = resp.courses_related_categories;
-      // this.DISCOUNT = resp.DISCOUNT;
-      // if(this.DISCOUNT){
-      //   this.LANDING_COURSE.discount_g = resp.DISCOUNT;
-      // }
+      this.courses_related_instructor = resp.courses_related_instructor;
+      this.courses_related_categories = resp.courses_related_categories;
       setTimeout(() => {
         magnigyPopup();
       }, 50);
+      this.is_have_course = resp.is_have_course;
     });
     setTimeout(() => {
       courseView();
@@ -62,7 +57,7 @@ export class CoursesDetailComponent implements OnInit{
     this.user = this.cartService.authService.user;
   }
 
-  // getNewTotal(COURSE:any,DESCOUNT_BANNER:any){
+  // getNewTotal(COURSE:any){
   //   if(DESCOUNT_BANNER.type_discount == 1){
   //     return COURSE.precio_usd - COURSE.precio_usd*(DESCOUNT_BANNER.discount*0.01);
   //   }else{
@@ -85,8 +80,8 @@ export class CoursesDetailComponent implements OnInit{
     }
     let data = {
       course_id: this.LANDING_COURSE.id,
-     
-         };
+      
+    };
 
     this.cartService.registerCart(data).subscribe((resp:any) => {
       console.log(resp);

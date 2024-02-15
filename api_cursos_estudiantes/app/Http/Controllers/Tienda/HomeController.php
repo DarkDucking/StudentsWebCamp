@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Categorie;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Ecommerce\Course\CourseHomeResource;
 use App\Http\Resources\Ecommerce\Course\CourseHomeCollection;
@@ -94,6 +94,12 @@ class HomeController extends Controller
         if(!$course){
             return abort(404);
         }
+        if(Auth::guard("api")->check()){
+            $course_student = CoursesStudent::where("user_id",auth("api")->user()->id)->where("course_id",$course->id)->first();
+            if($course_student){
+                $is_have_course = true;
+            }
+        }
         $courses_related_instructor = Course::where("id","<>",$course->id)->where("user_id",$course->user_id)->inRandomOrder()->take(2)->get();
 
         $courses_related_categories = Course::where("id","<>",$course->id)->where("categorie_id",$course->categorie_id)->inRandomOrder()->take(3)->get();
@@ -107,6 +113,7 @@ class HomeController extends Controller
                 return CourseHomeResource::make($course);
             }),
             
+            "is_have_course" => $is_have_course,
         ]);
     }
 }

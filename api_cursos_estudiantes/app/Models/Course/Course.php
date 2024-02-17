@@ -191,6 +191,15 @@ function AddTimes($horas)
         return $query;
     }
 
+    function scopeFilterAdvanceEcommerce($query,$search)
+    {
+        if($search){
+            $query->where("title","like","%".$search."%");
+        }
+        
+        return $query;
+    }
+
     public function getCountStudentsAttribute()
     {
         return $this->courses_students->count();

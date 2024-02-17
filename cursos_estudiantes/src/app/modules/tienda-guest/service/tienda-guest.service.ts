@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+  import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { URL_SERVICIOS } from 'src/app/config/config';
 
@@ -18,5 +18,10 @@ export class TiendaGuestService {
     // }
     let URL = URL_SERVICIOS+"/ecommerce/course-detail/"+slug+LINK;
     return this.http.get(URL);
+  }
+
+  listCourses(data:any){
+    let URL = URL_SERVICIOS+"/ecommerce/list_courses";
+    return this.http.post(URL,data);
   }
 }

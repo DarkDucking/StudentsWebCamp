@@ -1,22 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { debounceTime, fromEvent } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/service/auth.service';
 import { CartService } from 'src/app/modules/tienda-guest/service/cart.service';
+import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
 declare function cartSidenav():any;
 declare function alertSuccess([]):any;
+declare function _clickDocTwo():any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, AfterViewInit{
 
   user:any = null;
   listCarts:any = [];
   totalSum:any = 0;
+
+  search:any = null;
+
+  @ViewChild("filter") filter?:ElementRef;
+  source:any;
+  listCourse:any = [];
   constructor(
     public authService: AuthService,
     public cartService: CartService,
+    public router:Router,
+    public tiendaGuest: TiendaGuestService,
   ) {
     
   }
@@ -44,7 +56,24 @@ export class HeaderComponent implements OnInit{
 
     setTimeout(() => {
       cartSidenav();
+      _clickDocTwo();
     }, 50);
+  }
+
+  ngAfterViewInit(): void{
+    this.source = fromEvent(this.filter?.nativeElement,"keyup");
+    this.source.pipe(debounceTime(500)).subscribe((resp: any) => {
+      console.log(this.search);
+
+      //filtro
+      let data = {
+        search: this.search
+      }
+      this.tiendaGuest.listCourses(data).subscribe((resp:any) => {
+        console.log(resp);
+        this.listCourse = resp.courses.data;
+      })
+    })
   }
 
   logout(){
@@ -57,5 +86,9 @@ export class HeaderComponent implements OnInit{
       alertSuccess("EL ITEM SE A ELIMINADO CORRECTAMENTE ");
       this.cartService.removeItemCart(cart);
     })
+  }
+
+  searchCourse(){
+    this.router.navigateByUrl("/list-de-cursos?search="+this.search);
   }
 }

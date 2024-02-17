@@ -116,4 +116,16 @@ class HomeController extends Controller
             "is_have_course" => $is_have_course,
         ]);
     }
+
+    public function listCourses(Request $request){
+        $search = $request->search;
+
+        if(!$search){
+            return response()->json(["courses" => []]);
+        }
+
+        $courses = Course::filterAdvanceEcommerce($search)->orderBy("id", "desc")->get();
+
+        return response()->json(["courses" => CourseHomeCollection::make($courses)]);
+    }
 }

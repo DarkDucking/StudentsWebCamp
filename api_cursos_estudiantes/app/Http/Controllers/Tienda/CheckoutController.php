@@ -8,6 +8,8 @@ use App\Models\Sale\Sale;
 use Illuminate\Http\Request;
 use App\Models\CoursesStudent;
 use App\Models\Sale\SaleDetail;
+use App\Models\Course\Categorie;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\Ecommerce\Sale\SaleCollection;
@@ -34,6 +36,42 @@ class CheckoutController extends Controller
     {
         $coursesStudent = CoursesStudent::all();
         return response()->json(['coursesStudent' => $coursesStudent]);
+    }
+
+    public function consultaAvanzada(){
+        $result = Categorie::select('categories.name as category', DB::raw('count(courses_students.id) as total_students'))
+        ->leftJoin('courses', 'categories.id', '=', 'courses.categorie_id')
+        ->leftJoin('courses_students', 'courses.id', '=', 'courses_students.course_id')
+        ->groupBy('category')
+        ->orderBy('total_students')
+        ->get();
+        return response()->json($result);
+    }
+
+    public function categoriaMenosConsultada(){
+        $result = Categorie::select('categories.name as category', DB::raw('count(courses_students.id) as total_students'))
+            ->leftJoin('courses', 'categories.id', '=', 'courses.categorie_id')
+            ->leftJoin('courses_students', 'courses.id', '=', 'courses_students.course_id')
+            ->groupBy('category')
+            ->orderBy('total_students')
+            ->orderBy('courses_students.id')
+            ->limit(1)
+            ->get();
+
+        return response()->json($result);
+    }
+
+    public function categoriaMasConsultada(){
+        $result = Categorie::select('categories.name as category', DB::raw('count(courses_students.id) as total_students'))
+            ->leftJoin('courses', 'categories.id', '=', 'courses.categorie_id')
+            ->leftJoin('courses_students', 'courses.id', '=', 'courses_students.course_id')
+            ->groupBy('category')
+            ->orderByDesc('total_students')
+            ->orderByDesc('courses_students.id')
+            ->limit(1)
+            ->get();
+    
+        return response()->json($result);
     }
 
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Course\CourseGResource;
 use App\Http\Resources\Course\CourseGCollection;
+use Illuminate\Support\Facades\DB;
 
 class CourseGController extends Controller
 {
@@ -50,6 +51,21 @@ class CourseGController extends Controller
             }),
         ]);
     }
+
+    public function totalClasesPorCurso(){
+        $cursos = DB::table('courses')
+            ->select('categories.name as category', DB::raw('COUNT(course_clases.id) as total_clases'))
+            ->leftJoin('course_sections', 'courses.id', '=', 'course_sections.course_id')
+            ->leftJoin('course_clases', 'course_sections.id', '=', 'course_clases.course_section_id')
+            ->leftJoin('categories', 'courses.categorie_id', '=', 'categories.id')
+            ->whereNull('courses.deleted_at') // Filtrar cursos que no han sido eliminados
+            ->groupBy('categories.name')
+            ->get();
+    
+        return response()->json($cursos);
+    }
+    
+    
 
     /**
      * Show the form for creating a new resource.

@@ -53,6 +53,7 @@ Route::group([
 
     // 
     Route::get('/course/config',[CourseGController::class, "config"]);
+    Route::get('/course/totalClases',[CourseGController::class, "totalClasesPorCurso"]);
     Route::resource('/course',CourseGController::class);
     Route::post('/course/upload_video/{id}',[CourseGController::class, "upload_video"]);
     Route::post('/course/{id}',[CourseGController::class, "update"]);
@@ -65,6 +66,9 @@ Route::group([
     Route::post('/course-clases/upload_video/{id}',[ClaseGController::class, "upload_video"]);
 
     Route::get('/sales',[CheckoutController::class, "index"]);
+    Route::get('/sales-consulta',[CheckoutController::class, "consultaAvanzada"]);
+    Route::get('/sales-mineria',[CheckoutController::class, "categoriaMenosConsultada"]);
+    Route::get('/sales-mineria-desc',[CheckoutController::class, "categoriaMasConsultada"]);
     Route::get('/course-students',[CheckoutController::class, "indexCoursesStudent"]);
     Route::get('/course-clases-sum',[ClaseGController::class, "indexCount"]);
 

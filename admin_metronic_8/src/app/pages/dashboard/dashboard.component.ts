@@ -13,13 +13,17 @@ import { SalesService } from 'src/app/modules/service/sales.service';
 export class DashboardComponent implements OnInit {
   data: any;
   COURSES:any[] = [];
-  COURSESSTUDENT:any[] = [];
+  COURSESSTUDENT:any[];
   USERS:any = []; 
   SALES:any = []; 
   isLoading:any;
   barChart: any;
   user_id: number;
   course_id: number;
+  categorie_less: any[] = [];
+  categorie_most: any[] = [];
+  categoryNames: string[] = [];
+  categoryNamesM: string[] = [];
 
   totalSalesCount: number = 0;
   totalClassCount: number = 0;
@@ -41,6 +45,10 @@ export class DashboardComponent implements OnInit {
     this.loadSalesData();
     this.loadData();
     this.LoadClass();
+    this.consulta();
+    this.lastCategorie();
+    this.firstCategorie();
+    this.totalClases();
   }
 
   loadData(): void {
@@ -64,7 +72,7 @@ export class DashboardComponent implements OnInit {
     this.salesService.listCourseStudent().subscribe((resp: any) => {
       this.COURSESSTUDENT = resp.coursesStudent;
       console.log(this.COURSESSTUDENT);
-      this.renderStudentsPerCategoryChart();
+
     });
     
   }
@@ -251,14 +259,9 @@ export class DashboardComponent implements OnInit {
       (response) => {
         const clases = response.clases;
         this.totalClassCount = response.totalClassCount;
-        console.log('Respuesta del backend:', response);
-        console.log('Suma Total de Clases:', this.totalClassCount);
-       // Forzar la detección de cambios
-       this.cdr.detectChanges();
-
-       console.log('Clases:', clases);
-       console.log('Total de Clases:', this.totalClassCount);
-       console.log('Porcentaje Calculado:', this.percentaje);
+        // Forzar la detección de cambios
+        this.cdr.detectChanges();
+        console.log('Total de Clases:', this.totalClassCount);
      },
      (error) => {
        console.error('Error en la solicitud:', error);
@@ -266,66 +269,97 @@ export class DashboardComponent implements OnInit {
    );
   }
 
-  renderStudentsPerCategoryChart() {
-    const courses: { [key: string]: number } = {};
-    const categories: { [key: string]: number } = {};
-    const categoryNames: { [key: string]: string } = {};
-    const colors: string[] = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+  consulta(){
+    this.salesService.studentsPerCategorie().subscribe((resp: any) => {
+      this.COURSESSTUDENT = resp;
 
-    this.COURSESSTUDENT.forEach((courseStudent) => {
-      // Check if 'course_id' is defined in courseStudent and is not null
-      if (courseStudent.course_id !== undefined && courseStudent.course_id !== null) {
-        const courseId = courseStudent.course_id.toString();
-        courses[courseId] = (courses[courseId] || 0) + 1;
+      const categories = this.COURSESSTUDENT.map(item => item.category);
+      const students = this.COURSESSTUDENT.map(item => item.total_students);
+
+      // Obtén el contexto del canvas en tu HTML
+      const canvas: any = document.getElementById('studentsPerCourseChart');
+      const ctx = canvas.getContext('2d');
+
+      // Crea el gráfico de barras
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: categories,
+          datasets: [{
+            label: 'Total de Estudiantes por Categoría',
+            data: students,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    })
+  }
+
+  lastCategorie(): void {
+    this.salesService.mineria().subscribe((resp: any) => {
+      console.log(resp);
+      if (Array.isArray(resp) && resp.length > 0) {
+        if (resp.length === 1) {
+          // Si solo hay un elemento, asegúrate de envolverlo en un array
+          this.categorie_less = [resp[0]];
+        } else {
+          this.categorie_less = resp;
+        }
+        this.categoryNames = this.categorie_less.map(item => item.category);
+        console.log(this.categoryNames.length);
+        this.cdr.detectChanges();
+      } else {
+        console.error('Respuesta del servicio no es un array o está vacía.');
       }
     });
-    
-    this.courseService.listCourse(this.search, this.state).subscribe(async (response: any) => {
-      console.log('Course Service Response:', response);
-    
-      const courseData = response.courses?.data;
-    
-      if (Array.isArray(courseData) && courseData.length > 0) {
-        console.log('Course Data:', courseData);
-    
-        const courseStudentMap: { [key: string]: Set<number> } = {};
-    
-        this.COURSESSTUDENT.forEach((courseStudent) => {
-          const courseId = courseStudent.course_id.toString();
-          const userId = courseStudent.user_id;
-    
-          if (!courseStudentMap[courseId]) {
-            courseStudentMap[courseId] = new Set();
-          }
-    
-          courseStudentMap[courseId].add(userId);
-        });
+  }
 
-        const courseIds = Object.keys(courseStudentMap);
-        
-        //labels
-        const labels = courseIds.map((courseId) => {
-          const course = courseData.find((c: any) => c.id.toString() === courseId);
-          return course ? course.title : courseId;
-        });
-        
-        //data
-        const data = courseIds.map((courseId) => courseStudentMap[courseId].size);
-        //canvas
-        const backgroundColors = colors.slice(0, courseData.length);
-        const canvas = document.getElementById('studentsPerCourseChart') as HTMLCanvasElement;
-        console.log('Canvas Element:', canvas);
-    
+  firstCategorie(): void {
+    this.salesService.mineriaDesc().subscribe((resp: any) => {
+      console.log(resp);
+      if (Array.isArray(resp) && resp.length > 0) {
+        if (resp.length === 1) {
+          // Si solo hay un elemento, asegúrate de envolverlo en un array
+          this.categorie_most = [resp[0]];
+        } else {
+          this.categorie_most = resp;
+        }
+        this.categoryNamesM = this.categorie_most.map(item => item.category);
+        console.log(this.categoryNamesM.length);
+        this.cdr.detectChanges();
+      } else {
+        console.error('Respuesta del servicio no es un array o está vacía.');
+      }
+    });
+  }
+  
+  totalClases(): void {
+    this.courseService.totalClasesPorCurso().subscribe((resp: any) => {
+      if (Array.isArray(resp)) {
+        const labels = resp.map((categoria: any) => categoria.category);
+        const data = resp.map((categoria: any) => categoria.total_clases);
+  
+        const canvas = document.getElementById('totalClasesChart') as HTMLCanvasElement;
+  
         const barChart = new Chart(canvas, {
           type: 'bar',
           data: {
             labels: labels,
             datasets: [
               {
-                label: 'Estudiantes por categoria',
+                label: 'Total de Clases por Categoría',
                 data: data,
-                backgroundColor: backgroundColors,
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.7)', // Color rojo
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1,
               },
             ],
@@ -339,10 +373,11 @@ export class DashboardComponent implements OnInit {
           },
         });
       } else {
-        console.error('No valid course data available.');
+        console.error('Invalid category data format:', resp);
       }
     });
-    
   }
+  
+  
   
 }  

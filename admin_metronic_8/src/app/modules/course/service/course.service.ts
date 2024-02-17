@@ -188,4 +188,13 @@ export class CourseService {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+
+  totalClasesPorCurso(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.authservice.token });
+    let URL = URL_SERVICIOS + "/course/totalClases";
+    return this.http.get(URL, { headers: headers }).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
 }

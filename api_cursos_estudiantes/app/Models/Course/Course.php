@@ -191,12 +191,16 @@ function AddTimes($horas)
         return $query;
     }
 
-    function scopeFilterAdvanceEcommerce($query,$search)
+    function scopeFilterAdvanceEcommerce($query,$search,$selected_categories = [])
     {
         if($search){
             $query->where("title","like","%".$search."%");
         }
-        
+        if(sizeof($selected_categories) > 0){
+            $query->whereIn("categorie_id",$selected_categories);
+        }
+
+
         return $query;
     }
 

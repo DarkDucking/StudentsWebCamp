@@ -119,13 +119,24 @@ class HomeController extends Controller
 
     public function listCourses(Request $request){
         $search = $request->search;
+        $selected_categories = $request->selected_categories ?? [];
 
-        if(!$search){
-            return response()->json(["courses" => []]);
-        }
+        // if(!$search){
+        //     return response()->json(["courses" => []]);
+        // }
 
-        $courses = Course::filterAdvanceEcommerce($search)->orderBy("id", "desc")->get();
+        $courses = Course::filterAdvanceEcommerce($search, $selected_categories)->orderBy("id", "desc")->get();
 
         return response()->json(["courses" => CourseHomeCollection::make($courses)]);
+    }
+
+    public function config_all(){
+        $categories = Categorie::where("categorie_id",NULL)->withCount("courses")->orderBy("id","desc")->get();
+
+        return response()->json([
+            "categories" => $categories,
+            "semestres" => ["1", "2", "3", "4", "5", "6"],
+            "idiomas" => ["Español", "Ingles"],
+        ]);
     }
 }

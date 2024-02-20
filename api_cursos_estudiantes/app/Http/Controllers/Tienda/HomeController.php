@@ -90,7 +90,9 @@ class HomeController extends Controller
 
     public function course_detail(Request $request,$slug)
     {
-         $course = Course::where("slug",$slug)->first();
+        
+        $course = Course::where("slug",$slug)->first();
+        $is_have_course = false;
         if(!$course){
             return abort(404);
         }
@@ -112,22 +114,46 @@ class HomeController extends Controller
             "courses_related_categories" => $courses_related_categories->map(function($course){
                 return CourseHomeResource::make($course);
             }),
-            
             "is_have_course" => $is_have_course,
-        ]);
+        ]);     
     }
 
     public function listCourses(Request $request){
         $search = $request->search;
         $selected_categories = $request->selected_categories ?? [];
 
+        
+        $idiomas_selected = $request->idiomas_selected ?? [];
+        $levels_selected = $request->levels_selected ?? [];
+        $rating_selected = $request->rating_selected;
+
+        $courses_a = [];
+        if($rating_selected){
+            $courses_query = Course::where("state",2)
+                         ->join("reviews","reviews.course_id" ,"=", "courses.id")
+                         ->select("courses.id as courseId",DB::raw("AVG(reviews.rating) as rating_reviews"))
+                         ->groupBy("courseId")
+                         ->having("rating_reviews",">=",$rating_selected) // 3.6
+                         ->having("rating_reviews","<",$rating_selected + 1)
+                         ->get();
+            $courses_a= $courses_query->pluck("courseId")->toArray();
+            // error_log(json_encode($courses_a));
+        }
         // if(!$search){
         //     return response()->json(["courses" => []]);
         // }
 
-        $courses = Course::filterAdvanceEcommerce($search, $selected_categories)->orderBy("id", "desc")->get();
+        // if(!$search){
+        //     return response()->json(["courses" => []]);
+        // }
 
-        return response()->json(["courses" => CourseHomeCollection::make($courses)]);
+        $courses = Course::filterAdvanceEcommerce($search,
+        $selected_categories,
+        $idiomas_selected,$levels_selected,
+        $courses_a,$rating_selected)->where("state",2)->orderBy("id","desc")->get();
+
+return response()->json(["courses" => CourseHomeCollection::make($courses)]);
+
     }
 
     public function config_all(){

@@ -181,15 +181,15 @@
                                 <!-- End Widget Area  -->
 
                                 <!-- Start Widget Area  -->
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-2">
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                     <div class="rbt-single-widget rbt-widget-lavels">
                                         <div class="inner">
-                                            <h4 class="rbt-widget-title-2">Semestre</h4>
+                                            <h4 class="rbt-widget-title-2">Semestres</h4>
                                             <ul class="rbt-sidebar-list-wrapper lavels-list-check">
-                                                <ng-container *ngFor="let SEMESTRE of SEMESTRES; let i=index">
+                                                <ng-container *ngFor="let LEVEL of LEVELS;let i=index">
                                                     <li class="rbt-check-group">
-                                                        <input [id]="'lavels-list-'+i" type="checkbox" [name]="'lavels-list-'+i">
-                                                        <label [for]="'lavels-list-'+i">{{ SEMESTRE }} Semestre</label>
+                                                        <input [id]="'lavels-list-'+i" type="checkbox" [name]="'lavels-list-'+i" (click)="addLevels(LEVEL)">
+                                                        <label [attr.for]="'lavels-list-'+i">{{ LEVEL }} Semestre</label>
                                                     </li>
                                                 </ng-container>
                                             </ul>
@@ -206,8 +206,9 @@
                                             <ul class="rbt-sidebar-list-wrapper features-list-check">
                                                 <ng-container *ngFor="let IDIOMA of IDIOMAS; let i=index">
                                                     <li class="rbt-check-group">
-                                                        <input [id]="'features-list-'+i" type="checkbox" [name]="'features-list-'+i">
-                                                        <label [for]="'features-list-'+i">{{ IDIOMA }}</label>
+                                                        <input [id]="'features-list-'+i" type="checkbox" [name]="'features-list-'+i" (click)="addIdiomas(IDIOMA)">
+                                                        <label [attr.for]="'features-list-'+i">{{ IDIOMA }}</label>
+                                                      
                                                     </li>
                                                 </ng-container>
                                             </ul>

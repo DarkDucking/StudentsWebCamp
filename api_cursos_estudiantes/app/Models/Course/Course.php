@@ -191,18 +191,28 @@ function AddTimes($horas)
         return $query;
     }
 
-    function scopeFilterAdvanceEcommerce($query,$search,$selected_categories = [])
-    {
+    function scopeFilterAdvanceEcommerce($query,$search,$selected_categories = [],$idiomas_selected = [],$levels_selected = [],
+    $courses_a = [],$rating_selected = 0)
+{
         if($search){
-            $query->where("title","like","%".$search."%");
+        $query->where("title","like","%".$search."%");
         }
         if(sizeof($selected_categories) > 0){
-            $query->whereIn("categorie_id",$selected_categories);
+        $query->whereIn("categorie_id",$selected_categories);
+        }
+        if(sizeof($idiomas_selected) > 0){
+        $query->whereIn("idioma",$idiomas_selected);
+        }
+        if(sizeof($levels_selected) > 0){
+        $query->whereIn("level",$levels_selected);
+        }
+        if($courses_a || $rating_selected){
+        $query->whereIn("id",$courses_a);
+        }
+        return $query;
         }
 
 
-        return $query;
-    }
 
     public function getCountStudentsAttribute()
     {

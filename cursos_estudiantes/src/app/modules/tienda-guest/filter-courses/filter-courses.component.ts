@@ -17,6 +17,7 @@ export class FilterCoursesComponent implements OnInit {
   CATEGORIES: any = [];
   SEMESTRES: any = [];
   IDIOMAS: any = [];
+  LEVELS:any = [];
 
   selected_option:number=1;
 
@@ -25,6 +26,13 @@ export class FilterCoursesComponent implements OnInit {
   search: any = null;
   user: any = null;
 
+
+  instructores_selected:any = [];
+  idiomas_selected:any = [];
+  levels_selected:any = [];
+
+  rating_selected:number = 0;
+ 
   constructor(
     public tiendaGuestService: TiendaGuestService,
     public cartService: CartService,
@@ -53,14 +61,20 @@ export class FilterCoursesComponent implements OnInit {
 
   addOption(value:number){
     this.selected_option = value;
+    
   }
 
   listCourses(){
+    console.log(this.search);
     let data = {
       search: this.search,
       selected_categories: this.selected_categories,
+      instructores_selected: this.instructores_selected,
+      idiomas_selected: this.idiomas_selected,
+      levels_selected: this.levels_selected,
+      rating_selected: this.rating_selected,
     }
-    this.tiendaGuestService.listCourses(data).subscribe((resp:any)=>{
+    this.tiendaGuestService.listCourses(data).subscribe((resp:any) => {
       console.log(resp);
       this.LISTCOURSES = resp.courses.data;
     })
@@ -101,4 +115,30 @@ export class FilterCoursesComponent implements OnInit {
     // console.log(this.selected_categories);
     this.listCourses();
   }
+
+  addIdiomas(IDIOMA:any){
+    let INDEX = this.idiomas_selected.findIndex((item:any) => IDIOMA == item);
+    if(INDEX != -1){
+      this.idiomas_selected.splice(INDEX,1);
+    }else{
+      this.idiomas_selected.push(IDIOMA);
+    }
+    this.listCourses();
+  }
+
+  addLevels(LEVELE:any){
+    let INDEX = this.levels_selected.findIndex((item:any) => LEVELE == item);
+    if(INDEX != -1){
+      this.levels_selected.splice(INDEX,1);
+    }else{
+      this.levels_selected.push(LEVELE);
+    }
+    this.listCourses();
+  }
+
+  selectedRating(value:number){
+    this.rating_selected = value;
+    this.listCourses();
+  }
+  
 }

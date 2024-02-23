@@ -2,3 +2,30 @@
     color: black !important;
     margin-right: 0px;
 }
+.bg_color--solid {
+    background-color: #ff0000; /* Cambia el color a tu elección */
+    background-image: none; /* Elimina cualquier imagen de fondo */
+}
+
+.tutor-bg-photo {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+}
+
+.tutor-bg-photo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #ff0000, #00ff00); /* Colores del gradiente */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%); /* Forma del clip-path */
+}
+
+.t{
+    width: 300px; /* Ajusta el ancho según tus necesidades */
+    height: auto; /* Mantén las proporciones originales */
+    border-radius: 100px;
+}

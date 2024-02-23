@@ -57,13 +57,18 @@ class ProfileClientController extends Controller
             }),
             "active_courses" => $active_courses->map(function($course_student){
                 $clases_checkeds = $course_student->clases_checkeds ? explode(",",$course_student->clases_checkeds) : [];
+                
+                // Check if $course_student->course->count_class is not zero before performing the division
+                $percentage = ($course_student->course->count_class !== 0) ? round((sizeof($clases_checkeds) / $course_student->course->count_class) * 100, 2) : 0;
+            
                 return [
                     "id" => $course_student->id,
                     "clases_checkeds" => $clases_checkeds,
-                    "percentage" => round((sizeof($clases_checkeds)/$course_student->course->count_class)*100,2),
+                    "percentage" => $percentage,
                     "course" => CourseHomeResource::make($course_student->course),
                 ];
             }),
+            
             "termined_courses" => $termined_courses->map(function($course_student){
                 $clases_checkeds = $course_student->clases_checkeds ? explode(",",$course_student->clases_checkeds) : [];
                 return [

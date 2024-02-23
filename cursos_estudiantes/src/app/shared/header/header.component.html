@@ -1114,9 +1114,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="#">
-                            <input type="text" [(ngModel)]="search" name="search" (keyup.enter)="searchCourse()" #filter placeholder="What are you looking for?">
+                            <input type="text" [(ngModel)]="search" name="search" (keyup.enter)="searchCourse()" #filter placeholder="¿Qué materia estas buscando?">
                             <div class="submit-btn">
-                                <a class="rbt-btn btn-gradient btn-md" href="#">Search</a>
+                                <a class="rbt-btn btn-gradient btn-md" href="#">Buscar</a>
                             </div>
                         </form>
                     </div>
@@ -1138,12 +1138,12 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="rbt-card variation-01 rbt-hover">
                                 <div class="rbt-card-img">
-                                    <a [href]="'landing-curso/'+COURSE.slug">
+                                    <a [href]="'landing-curso/'+COURSE.slug" target="_blank">
                                         <img [src]="COURSE.imagen" alt="Card image">
                                     </a>
                                 </div>
                                 <div class="rbt-card-body">
-                                    <h5 class="rbt-card-title"><a href="course-details.html">React Js</a>
+                                    <h5 class="rbt-card-title"><a [href]="'landing-curso/'+COURSE.slug" target="_blank">{{ COURSE.title }}</a>
                                     </h5>
                                     <div class="rbt-review">
                                         <div class="rating">
@@ -1155,13 +1155,7 @@
                                         </div>
                                         <span class="rating-count"> ({{ COURSE.count_reviews }} Reviews)</span>
                                     </div>
-                                    <div class="rbt-card-bottom">
-                                        <!-- <div class="rbt-price">
-                                            <span class="current-price">$15</span>
-                                            <span class="off-price">$25</span>
-                                        </div> -->
-                                    </div>
-                                </div>
+                                          </div>
                             </div>
                         </div>
                     </ng-container>

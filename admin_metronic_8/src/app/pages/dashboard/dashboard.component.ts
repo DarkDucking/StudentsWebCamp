@@ -54,7 +54,6 @@ export class DashboardComponent implements OnInit {
   loadData(): void {
     this.courseService.listCourse(this.search, this.state).subscribe((resp: any) => {
       this.COURSES = resp.courses.data;
-      console.log(this.COURSES);
     
       // Funcion de la graficas
       this.renderCoursesPerCategoryChart();
@@ -71,7 +70,6 @@ export class DashboardComponent implements OnInit {
 
     this.salesService.listCourseStudent().subscribe((resp: any) => {
       this.COURSESSTUDENT = resp.coursesStudent;
-      console.log(this.COURSESSTUDENT);
 
     });
     
@@ -85,15 +83,11 @@ export class DashboardComponent implements OnInit {
         this.totalSalesCount = response.totalSalesCount;
   
         // Calcular el porcentaje (por ejemplo, 10%)
-        const porcentajeBase = 50; // Puedes ajustar el valor según tus necesidades
+        const porcentajeBase = 138; // Puedes ajustar el valor según tus necesidades
         this.percentaje = (this.totalSalesCount * 100) / porcentajeBase;
   
         // Forzar la detección de cambios
         this.cdr.detectChanges();
-  
-        console.log('Ventas:', sales);
-        console.log('Total de Ventas:', this.totalSalesCount);
-        console.log('Porcentaje Calculado:', this.percentaje);
       },
       (error) => {
         console.error('Error en la solicitud:', error);
@@ -111,9 +105,6 @@ export class DashboardComponent implements OnInit {
       const meetsCondition = course.state === 2;
       return meetsCondition;
     });
-  
-    // Agregar registro de consola para depuración
-    console.log('Filtered Courses:', filteredCourses);
   
     filteredCourses.forEach((course) => {
       const levelKey = course.level.toString();
@@ -218,16 +209,26 @@ export class DashboardComponent implements OnInit {
           usersByDate[monthYearKey] = (usersByDate[monthYearKey] || 0) + 1;
         });
 
-        const labels = Object.keys(usersByDate);
-        const data = Object.values(usersByDate);
-        const backgroundColors = colors.slice(0, labels.length); // Ajusta según el número de meses
+        // Ordena las etiquetas cronológicamente
+        const sortedLabels = Object.keys(usersByDate).sort((a, b) => {
+          const [monthA, yearA] = a.split('-').map(Number);
+          const [monthB, yearB] = b.split('-').map(Number);
+        
+          const dateA = new Date(yearA, monthA - 1).getTime(); // Convierte a milisegundos
+          const dateB = new Date(yearB, monthB - 1).getTime();
+        
+          return dateA - dateB;
+        });
+
+        const data = sortedLabels.map((label) => usersByDate[label]);
+        const backgroundColors = colors.slice(0, sortedLabels.length); // Ajusta según el número de meses
 
         const canvas = document.getElementById('usersByDateChart') as HTMLCanvasElement;
 
         const barChart = new Chart(canvas, {
           type: 'line',
           data: {
-            labels: labels,
+            labels: sortedLabels,
             datasets: [
               {
                 label: 'Usuarios añadidos por mes',
@@ -269,6 +270,7 @@ export class DashboardComponent implements OnInit {
    );
   }
 
+  //UsuariosCategoria
   consulta(){
     this.salesService.studentsPerCategorie().subscribe((resp: any) => {
       this.COURSESSTUDENT = resp;

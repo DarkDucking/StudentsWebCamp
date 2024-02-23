@@ -23,12 +23,12 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $sales = Sale::orderBy("id", "desc")->get();
-        $totalSalesCount = $sales->count();
+        $coursesStudent = CoursesStudent::all();
+        $totalcoursesStudentCount = $coursesStudent->count();
 
         return response()->json([
-            "sales" => SaleCollection::make($sales),
-            "totalSalesCount" => $totalSalesCount,
+            "sales" => $coursesStudent,
+            "totalSalesCount" => $totalcoursesStudentCount,
         ]);
     }
 
@@ -38,13 +38,15 @@ class CheckoutController extends Controller
         return response()->json(['coursesStudent' => $coursesStudent]);
     }
 
-    public function consultaAvanzada(){
+    public function consultaAvanzada() {
         $result = Categorie::select('categories.name as category', DB::raw('count(courses_students.id) as total_students'))
-        ->leftJoin('courses', 'categories.id', '=', 'courses.categorie_id')
-        ->leftJoin('courses_students', 'courses.id', '=', 'courses_students.course_id')
-        ->groupBy('category')
-        ->orderBy('total_students')
-        ->get();
+            ->leftJoin('courses', 'categories.id', '=', 'courses.categorie_id')
+            ->leftJoin('courses_students', 'courses.id', '=', 'courses_students.course_id')
+            ->whereNull('categories.categorie_id') // Agrega esta línea para filtrar por categorie_id null
+            ->groupBy('category')
+            ->orderBy('total_students')
+            ->get();
+    
         return response()->json($result);
     }
 

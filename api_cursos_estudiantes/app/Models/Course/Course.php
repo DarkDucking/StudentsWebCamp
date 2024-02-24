@@ -190,10 +190,10 @@ function AddTimes($horas)
         
         return $query;
     }
-
-    function scopeFilterAdvanceEcommerce($query,$search,$selected_categories = [],$idiomas_selected = [],$levels_selected = [],
+    function scopeFilterAdvanceEcommerce($query,$search,$selected_categories = [],
+    $idiomas_selected = [],$levels_selected = [],
     $courses_a = [],$rating_selected = 0)
-{
+        {
         if($search){
         $query->where("title","like","%".$search."%");
         }
@@ -210,7 +210,7 @@ function AddTimes($horas)
         $query->whereIn("id",$courses_a);
         }
         return $query;
-        }
+}
 
 
 

@@ -17,17 +17,17 @@
                             <li>
                                 <div class="icon-right"><i class="feather-chevron-right"></i></div>
                             </li>
-                            <li class="rbt-breadcrumb-item active">All Courses</li>
+                            <li class="rbt-breadcrumb-item active">Todos los cursos</li>
                         </ul>
                         <!-- End Breadcrumb Area  -->
 
                         <div class=" title-wrapper">
-                            <h1 class="title mb--0">All Courses</h1>
+                            <h1 class="title mb--0">Todos nuestros cursos</h1>
                             <a href="#" class="rbt-badge-2">
-                                <div class="image">🎉</div> 50 Courses
+                                <div class="image">🎉</div>
                             </a>
                         </div>
-                        <p class="description">Courses that help beginner designers become true unicorns. </p>
+                        <p class="description"> </p>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="rbt-single-widget rbt-widget-categories has-show-more">
                                         <div class="inner">
-                                            <h4 class="rbt-widget-title-2">Categories</h4>
+                                            <h4 class="rbt-widget-title-2">Categoria</h4>
                                             <ul class="rbt-sidebar-list-wrapper categories-list-check has-show-more-inner-content">
                                                 <ng-container *ngFor="let CATEGORIE of CATEGORIES; let i=index">
                                                     <li class="rbt-check-group">
@@ -103,13 +103,13 @@
                                 <!-- End Widget Area  -->
 
                                 <!-- Start Widget Area  -->
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                     <div class="rbt-single-widget rbt-widget-rating">
                                         <div class="inner">
                                             <h4 class="rbt-widget-title-2">Ratings</h4>
                                             <ul class="rbt-sidebar-list-wrapper rating-list-check">
                                                 <li class="rbt-check-group">
-                                                    <input id="cat-radio-1" type="radio" name="rbt-radio">
+                                                    <input id="cat-radio-1" type="radio" name="rbt-radio" (click)="selectedRating(5)">
                                                     <label for="cat-radio-1">
                                                         <span class="rating">
                         <i class="fas fa-star"></i>
@@ -122,7 +122,7 @@
                                                     </label>
                                                 </li>
                                                 <li class="rbt-check-group">
-                                                    <input id="cat-radio-2" type="radio" name="rbt-radio">
+                                                    <input id="cat-radio-2" type="radio" name="rbt-radio" (click)="selectedRating(4)">
                                                     <label for="cat-radio-2">
                                                         <span class="rating">
                         <i class="fas fa-star"></i>
@@ -135,7 +135,7 @@
                                                     </label>
                                                 </li>
                                                 <li class="rbt-check-group">
-                                                    <input id="cat-radio-3" type="radio" name="rbt-radio">
+                                                    <input id="cat-radio-3" type="radio" name="rbt-radio" (click)="selectedRating(3)">
                                                     <label for="cat-radio-3">
                                                         <span class="rating">
                         <i class="fas fa-star"></i>
@@ -148,7 +148,7 @@
                                                     </label>
                                                 </li>
                                                 <li class="rbt-check-group">
-                                                    <input id="cat-radio-4" type="radio" name="rbt-radio">
+                                                    <input id="cat-radio-4" type="radio" name="rbt-radio" (click)="selectedRating(2)">
                                                     <label for="cat-radio-4">
                                                         <span class="rating">
                         <i class="fas fa-star"></i>
@@ -162,7 +162,7 @@
                                                 </li>
 
                                                 <li class="rbt-check-group">
-                                                    <input id="cat-radio-5" type="radio" name="rbt-radio">
+                                                    <input id="cat-radio-5" type="radio" name="rbt-radio" (click)="selectedRating(1)">
                                                     <label for="cat-radio-5">
                                                         <span class="rating">
                         <i class="fas fa-star"></i>
@@ -178,13 +178,14 @@
                                         </div>
                                     </div>
                                 </div>
+                              
                                 <!-- End Widget Area  -->
 
                                 <!-- Start Widget Area  -->
                                 <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                     <div class="rbt-single-widget rbt-widget-lavels">
                                         <div class="inner">
-                                            <h4 class="rbt-widget-title-2">Semestres</h4>
+                                            <h4 class="rbt-widget-title-2">Semestre</h4>
                                             <ul class="rbt-sidebar-list-wrapper lavels-list-check">
                                                 <ng-container *ngFor="let LEVEL of LEVELS;let i=index">
                                                     <li class="rbt-check-group">
@@ -192,11 +193,25 @@
                                                         <label [attr.for]="'lavels-list-'+i">{{ LEVEL }} Semestre</label>
                                                     </li>
                                                 </ng-container>
+                                                
+                                                <!-- <li class="rbt-check-group">
+                                                    <input id="lavels-list-2" type="checkbox" name="lavels-list-2">
+                                                    <label for="lavels-list-2">Beginner <span class="rbt-lable count">0</span></label>
+                                                </li>
+                                                <li class="rbt-check-group">
+                                                    <input id="lavels-list-3" type="checkbox" name="lavels-list-3">
+                                                    <label for="lavels-list-3">Intermediate <span class="rbt-lable count">10</span></label>
+                                                </li>
+                                                <li class="rbt-check-group">
+                                                    <input id="lavels-list-4" type="checkbox" name="lavels-list-4">
+                                                    <label for="lavels-list-4">Expert <span class="rbt-lable count">10</span></label>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Widget Area  -->
+                               
+                               <!-- End Widget Area  -->
 
                                 <!-- Start Widget Area  -->
                                 <div class="col-lg-2 col-md-4 col-sm-6 col-2">
@@ -207,7 +222,7 @@
                                                 <ng-container *ngFor="let IDIOMA of IDIOMAS; let i=index">
                                                     <li class="rbt-check-group">
                                                         <input [id]="'features-list-'+i" type="checkbox" [name]="'features-list-'+i" (click)="addIdiomas(IDIOMA)">
-                                                        <label [attr.for]="'features-list-'+i">{{ IDIOMA }}</label>
+                                                        <label [attr.for]="'features-list-'+i">{{ IDIOMA }} </label>
                                                       
                                                     </li>
                                                 </ng-container>
@@ -241,26 +256,21 @@
                                 <div class="rbt-card-img">
                                     <a [routerLink]="['landing-curso/',COURSE.slug]">
                                         <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
-                                        <!-- <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
-                                            <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
-                                            <span *ngIf="COURSE.discount_g.type_discount == 2">-{{ COURSE.discount_g.discount }} USD</span>
-                                            <span>Off</span>
-                                        </div> -->
+                                        
                                     </a>
                                 </div>
                                 <div class="rbt-card-body">
                                     <div class="rbt-card-top">
                                         <div class="rbt-review">
                                             <div class="rating">
-                                                <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 1}"></i>
-                                                <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 2}"></i>
-                                                <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 3}"></i>
-                                                <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 4}"></i>
-                                                <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_reviews < 5}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 1}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 2}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 3}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 4}"></i>
+                                                <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 5}"></i>
                                             </div>
                                             <span class="rating-count"> ({{ COURSE.count_reviews }} Reviews)</span>
                                         </div>
-                           
                                         <div class="rbt-bookmark-btn">
                                             <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
                                         </div>
@@ -269,9 +279,8 @@
                                     </h4>
                                     <ul class="rbt-meta">
                                         <li><i class="feather-book"></i>{{ COURSE.count_class }} Lessons</li>
-                                        <li><i class="feather-users"></i>{{COURSE.count_students}} Estudiantes</li>
-                                                       
-                                        <!-- <li><i class="feather-play"></i>{{ COURSE.time_course }}</li> -->
+                                        <li><i class="feather-users"></i>{{ COURSE.count_students }} Students</li>
+                                        <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
                                     </ul>
                                     <p class="rbt-card-text">{{ COURSE.subtitle }}.</p>
                                     <div class="rbt-author-meta mb--20">
@@ -285,17 +294,14 @@
                                         </div>
                                     </div>
                                     <div class="rbt-card-bottom">
-                                                        
-                                        <a class="rbt-btn-link" href="#" onclick = "return false;" (click)="addCart(COURSE)">Añadir a mi lista <i
-                                                class="feather-heart"></i></a>
+                                        <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart(COURSE)"><i class="feather-shopping-cart"></i> Add To Cart</a>
                                     </div>
-        
                                 </div>
                             </div>
                         </div>
                         <!-- End Single Card  -->
                     </ng-container>
-
+                 
                 </div>
                 <div class="row">
                     <div class="col-lg-12 mt--60">

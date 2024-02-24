@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\CoursesStudent;
 use App\Models\Course\Categorie;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Ecommerce\Course\CourseHomeResource;
@@ -163,7 +164,7 @@ return response()->json(["courses" => CourseHomeCollection::make($courses)]);
 
         return response()->json([
             "categories" => $categories,
-            "semestres" => ["1", "2", "3", "4", "5", "6"],
+            "levels" => ["1", "2", "3", "4", "5", "6","7","8"],
             "idiomas" => ["Español", "Ingles"],
         ]);
     }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
 import { CartService } from '../service/cart.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
+declare var $:any;
 declare function showMoreBtn():any;
 declare function alertWarning([]): any;
 declare function alertDanger([]): any;
@@ -16,8 +17,8 @@ export class FilterCoursesComponent implements OnInit {
 
   CATEGORIES: any = [];
   SEMESTRES: any = [];
-  IDIOMAS: any = [];
   LEVELS:any = [];
+  IDIOMAS:any = [];
 
   selected_option:number=1;
 
@@ -27,7 +28,6 @@ export class FilterCoursesComponent implements OnInit {
   user: any = null;
 
 
-  instructores_selected:any = [];
   idiomas_selected:any = [];
   levels_selected:any = [];
 
@@ -37,26 +37,31 @@ export class FilterCoursesComponent implements OnInit {
     public tiendaGuestService: TiendaGuestService,
     public cartService: CartService,
     public router: Router,
+    public actived: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.user = this.cartService.authService.user,
-
-    setTimeout(() => { 
-    }, 50);
-
+    
+    this.user = this.tiendaGuestService.authService.user;
     this.tiendaGuestService.listConfig().subscribe((resp:any) => {
       console.log(resp);
       this.CATEGORIES = resp.categories;
-      this.SEMESTRES = resp.semestres;
+       this.LEVELS = resp.levels;
       this.IDIOMAS = resp.idiomas;
 
-      setTimeout(() => { 
+      setTimeout(() => {
         showMoreBtn();
       }, 50);
     })
 
-    this.listCourses();
+    
+    this.actived.queryParams.subscribe((resp:any) => {
+      console.log(resp);
+      this.search = resp.search;
+      this.listCourses();
+      // console.log(this.search);
+    })
+    
   }
 
   addOption(value:number){
@@ -69,7 +74,6 @@ export class FilterCoursesComponent implements OnInit {
     let data = {
       search: this.search,
       selected_categories: this.selected_categories,
-      instructores_selected: this.instructores_selected,
       idiomas_selected: this.idiomas_selected,
       levels_selected: this.levels_selected,
       rating_selected: this.rating_selected,
@@ -77,7 +81,7 @@ export class FilterCoursesComponent implements OnInit {
     this.tiendaGuestService.listCourses(data).subscribe((resp:any) => {
       console.log(resp);
       this.LISTCOURSES = resp.courses.data;
-    })
+    })  
   }
 
   addCart(LANDING_COURSE:any){
@@ -115,7 +119,6 @@ export class FilterCoursesComponent implements OnInit {
     // console.log(this.selected_categories);
     this.listCourses();
   }
-
   addIdiomas(IDIOMA:any){
     let INDEX = this.idiomas_selected.findIndex((item:any) => IDIOMA == item);
     if(INDEX != -1){
@@ -140,5 +143,5 @@ export class FilterCoursesComponent implements OnInit {
     this.rating_selected = value;
     this.listCourses();
   }
-  
+    
 }

@@ -12,11 +12,12 @@
             <div class="col-lg-12">
                 <!-- Start Dashboard Top  -->
                 <div class="rbt-dashboard-content-wrapper">
-                    <div class="tutor-bg-photo bg_image bg_image--23 height-350"></div>
+                    <div class="tutor-bg-photo bg_color bg_color--solid height-350"></div>
+
                     <!-- Start Tutor Information  -->
                     <div class="rbt-tutor-information">
                         <div class="rbt-tutor-information-left">
-                            <div class="thumbnail rbt-avatars size-lg">
+                            <div class="thumbnail rbt-avatars size-lg t">
                                 <img *ngIf="user" [src]="user.avatar" alt="Instructor">
                             </div>
                             <div class="tutor-content">
@@ -50,8 +51,8 @@
                                             <ul class="dashboard-mainmenu rbt-default-sidebar-list">
                                                 <!-- class="active" -->
                                                 <li><a href="#" onclick="return false;" (click)="navOption(1)" [ngClass]="{'active': nav_option == 1}"><i class="feather-home"></i><span>Dashboard</span></a></li>
-                                                <li><a href="#" onclick="return false;" (click)="navOption(2)" [ngClass]="{'active': nav_option == 2}"><i class="feather-book-open"></i><span>Enrolled Courses</span></a></li>
-                                                <li><a href="#" onclick="return false;" (click)="navOption(3)" [ngClass]="{'active': nav_option == 3}"><i class="feather-star"></i><span>Reviews</span></a></li>
+                                                <li><a href="#" onclick="return false;" (click)="navOption(2)" [ngClass]="{'active': nav_option == 2}"><i class="feather-book-open"></i><span>Cursos inscritos</span></a></li>
+                                                <li><a href="#" onclick="return false;" (click)="navOption(3)" [ngClass]="{'active': nav_option == 3}"><i class="feather-star"></i><span>Reseñas</span></a></li>
                                                 <li><a href="#" onclick="return false;" (click)="navOption(4)" [ngClass]="{'active': nav_option == 4}"><i class="feather-shopping-bag"></i><span>Order History</span></a></li>
                                             </ul>
                                         </nav>
@@ -526,11 +527,7 @@
                                                 <span class="title">Password</span>
                                             </a>
                                         </li>
-                                        <li role="presentation">
-                                            <a href="#" class="tab-button" id="social-tab" data-bs-toggle="tab" data-bs-target="#social" role="tab" aria-controls="social" aria-selected="false">
-                                                <span class="title">Social Share</span>
-                                            </a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
 
@@ -552,7 +549,6 @@
                                                 </div>
                                                 <div class="rbt-tutor-information-right">
                                                     <div class="tutor-btn">
-                                                        <a class="rbt-btn btn-sm btn-border color-white radius-round-10" href="#">Edit Cover Photo</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -594,7 +590,7 @@
                                                 <label class="form-label">Sube tu imagen: *</label>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
-                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    <label class="custom-file-label" for="customFile"></label>
                                                 </div>
                                             </div>
 
@@ -643,48 +639,7 @@
                                         <!-- End Profile Row  -->
                                     </div>
 
-                                    <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab">
-                                        <!-- Start Profile Row  -->
-                                        <form action="#" class="rbt-profile-row rbt-default-form row row--15">
-                                            <div class="col-12">
-                                                <div class="rbt-form-group">
-                                                    <label for="facebook"><i class="feather-facebook"></i> Facebook</label>
-                                                    <input id="facebook" type="text" placeholder="https://facebook.com/">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="rbt-form-group">
-                                                    <label for="twitter"><i class="feather-twitter"></i> Twitter</label>
-                                                    <input id="twitter" type="text" placeholder="https://twitter.com/">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="rbt-form-group">
-                                                    <label for="linkedin"><i class="feather-linkedin"></i> Linkedin</label>
-                                                    <input id="linkedin" type="text" placeholder="https://linkedin.com/">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="rbt-form-group">
-                                                    <label for="website"><i class="feather-globe"></i> Website</label>
-                                                    <input id="website" type="text" placeholder="https://website.com/">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="rbt-form-group">
-                                                    <label for="github"><i class="feather-github"></i> Github</label>
-                                                    <input id="github" type="text" placeholder="https://github.com/">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt--10">
-                                                <div class="rbt-form-group">
-                                                    <a class="rbt-btn btn-gradient" href="#">Update Profile</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <!-- End Profile Row  -->
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <!-- End Instructor Profile  -->

@@ -40,7 +40,7 @@ export class ListCartsComponent implements OnInit{
   accederCurso(): void {
     // Verifica si hay cursos en el carrito
     if (this.listCarts.length === 0) {
-      alertDanger("NO TIENES NINGUN CURSO DISPONIBLE PARA ACCEDER");
+      alertDanger("No has elegido ningún curso para registrarte");
       return;
     }
 
@@ -58,6 +58,8 @@ export class ListCartsComponent implements OnInit{
     // Llama a la función para configurar la transacción
     this.cartService.checkout(dataT).subscribe((resp: any) => {
       console.log(resp);
+      alertSuccess("Te hemos enviado un correo con los detalles, ya puedes acceder a los cursos ");
+     
       // Puedes realizar más acciones si es necesario
     });
     

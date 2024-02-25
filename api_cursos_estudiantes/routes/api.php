@@ -84,6 +84,8 @@ Route::group(["prefix" => "ecommerce"],function($router){
     Route::group([
         'middleware' => 'api',
     ], function ($router) {
+        Route::get("course_leason/{slug}",[HomeController::class,"course_leason"]);
+       
         Route::post('/apply_coupon',[CartController::class, "apply_coupon"]);
         Route::resource('/cart',CartController::class);
         Route::post('/checkout',[CheckoutController::class,"store"]);

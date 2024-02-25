@@ -120,7 +120,25 @@ class HomeController extends Controller
             "is_have_course" => $is_have_course,
         ]);     
     }
+    public function course_leason(Request $request,$slug)
+    {
 
+        $course = Course::where("slug",$slug)->first();
+
+        if(!$course){
+            return response()->json(["message" => 403, "message_text" => "EL CURSO NO EXISTE"]);
+        }
+
+        $course_student = CoursesStudent::where("course_id",$course->id)->where("user_id",auth("api")->user()->id)->first();
+        if(!$course_student){
+            return response()->json(["message" => 403, "message_text" => "TU NO ESTAS INSCRITO EN ESTE CURSO"]);
+        }
+        
+        return response()->json([
+            "course" => LandingCourseResource::make($course),
+        ]);
+    }
+    
     public function listCourses(Request $request){
         $search = $request->search;
         $selected_categories = $request->selected_categories ?? [];
@@ -158,7 +176,7 @@ class HomeController extends Controller
 return response()->json(["courses" => CourseHomeCollection::make($courses)]);
 
     }
-
+    
     public function config_all(){
         $categories = Categorie::where("categorie_id",NULL)->withCount("courses")->orderBy("id","desc")->get();
 

@@ -40,6 +40,7 @@ class CourseGResource extends JsonResource
             "idioma" => $this->resource->idioma,
             "time" => $this->resource->time,
             "description" => $this->resource->description,
+            "video_link" => $this->resource->video_link,
             "requirements" => json_decode($this->resource->requirements),
             "who_is_it_for" => json_decode($this->resource->who_is_it_for),
             "state" => $this->resource->state,

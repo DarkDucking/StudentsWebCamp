@@ -43,7 +43,7 @@ class LandingCourseResource extends JsonResource
             ],
             "level" => $this->resource->level,
             "idioma" => $this->resource->idioma,
-            "vimeo_id" => $this->resource->vimeo_id ? "https://player.vimeo.com/video/".$this->resource->vimeo_id : NULL,
+            "video_link" => $this->resource->video_link,
             "time" => $this->resource->time,
             "imagen" => env("APP_URL")."storage/".$this->resource->imagen,
             "precio_usd" => $this->resource->precio_usd,
@@ -67,6 +67,8 @@ class LandingCourseResource extends JsonResource
                 "profesion" => $this->resource->instructor->profesion,
                 "courses_count"  => $this->resource->instructor->courses_count,
                 "description" => $this->resource->instructor->description,
+                "avg_reviews" => round($this->resource->instructor->avg_reviews,2),
+               
                 "count_reviews" => $this->resource->instructor->count_reviews,
                 "count_students" => $this->resource->instructor->count_students,
                 
@@ -82,6 +84,7 @@ class LandingCourseResource extends JsonResource
                             "id" => $clase->id,
                             "name" => $clase->name,
                             "time_clase" => $clase->time_clase,
+                            "video_link" => $clase->video_link,
                         ];
                     })
                 ];

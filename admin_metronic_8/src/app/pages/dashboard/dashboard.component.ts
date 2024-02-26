@@ -4,6 +4,7 @@ import { UserService } from 'src/app/modules/user/service/user.service';
 import Chart from 'chart.js/auto';
 import { CategorieService } from 'src/app/modules/categories/service/categorie.service';
 import { SalesService } from 'src/app/modules/service/sales.service';
+import { AuthService } from 'src/app/modules/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
   isLoading:any;
   barChart: any;
   user_id: number;
+  user_role_id: number = 0;
   course_id: number;
   categorie_less: any[] = [];
   categorie_most: any[] = [];
@@ -37,11 +39,14 @@ export class DashboardComponent implements OnInit {
     private categorieService: CategorieService,
     private salesService: SalesService,
     private cdr: ChangeDetectorRef,
+    private authService: AuthService,
     ) {}
 
   ngOnInit(): void {
     this.isLoading = this.courseService.isLoading$;
     this.isLoading = this.userService.isLoading$;
+    this.user_role_id = this.authService.user.role_id;
+    console.log(this.authService.user);
     this.loadSalesData();
     this.loadData();
     this.LoadClass();

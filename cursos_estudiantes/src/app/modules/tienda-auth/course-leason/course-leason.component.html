@@ -78,7 +78,20 @@
                             <span class="play-view-text d-block color-white"><i class="feather-eye"></i> Preview this course</span>
                         </div>
                     </a> -->
-                    <ng-container *ngIf="clase_selected">
+                    <div *ngIf="video_link" style="margin-top: 20px;" >
+                        <iframe style="width: 100%; aspect-ratio: 16 / 9;"
+                            [src]="generateYouTubeEmbedUrl(video_link)"
+                            [title]="clase_selected.name"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                      </iframe>
+                    </div>
+                    <ng-template #elseBlock>
+                        <!-- Contenido si la condición es falsa -->
+                        <p class="title theme-gradient">No existe video para esta clase</p>
+                    </ng-template>
+                    <!-- <ng-container *ngIf="clase_selected">
                         <iframe style="width: 100%;" height="800" 
                             [src]="urlVideo(clase_selected)"
                             [title]="clase_selected.name"
@@ -86,7 +99,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             allowfullscreen>
                         </iframe>
-                    </ng-container>
+                    </ng-container> -->
                     
                     <!-- End Viedo Wrapper  -->
 

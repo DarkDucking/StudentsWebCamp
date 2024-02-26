@@ -18,11 +18,12 @@ export class CourseLeasonComponent {
   slug:any = null;
   courses_selected:any = null;
   clase_selected:any = null;
+  video_link:any;
   constructor(
     public tiendaAuthService: TiendaAuthService,
     public activedRoute: ActivatedRoute,
     public router: Router,
-    public Sanitizer: DomSanitizer,
+    public sanitizer: DomSanitizer,
   
   ) {
     
@@ -43,19 +44,48 @@ export class CourseLeasonComponent {
       this.courses_selected = resp.course;
 
       this.clase_selected = this.courses_selected.malla[0].clases[0];
+      this.video_link = this.clase_selected.video_link;
     })
 
+    
   }
 
   // urlVideo(clase_selected:any){
   //   return this.Sanitizer.bypassSecurityTrustResourceUrl(clase_selected.video_link);
   // }
   urlVideo(clase_selected: any): SafeResourceUrl {
-      return this.Sanitizer.bypassSecurityTrustResourceUrl(clase_selected.video_link);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(clase_selected.video_link);
     
   }
 
   openClase(clase:any){
     this.clase_selected = clase;
+  }
+
+  generateYouTubeEmbedUrl(videoLink: string): SafeResourceUrl {
+    // Formato de enlace embebido de YouTube
+    const embedUrl = `https://www.youtube.com/embed/${this.getYouTubeVideoId(videoLink)}`;
+
+    // Sanitiza la URL antes de devolverla
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  // Función para obtener el ID del video de YouTube
+  private getYouTubeVideoId(videoLink: string): string | null {
+    // Patrones de enlace de YouTube
+    const youtubePatterns = [
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /^([a-zA-Z0-9_-]{11})$/
+    ];
+
+    // Comprueba cada patrón
+    for (const pattern of youtubePatterns) {
+      const match = videoLink.match(pattern);
+      if (match) {
+        return match[1];  // Devuelve el ID del video si hay coincidencia
+      }
+    }
+
+    return null;  // Devuelve null si no se encuentra un ID válido
   }
 }

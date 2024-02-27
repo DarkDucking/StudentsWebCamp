@@ -85,6 +85,13 @@ class LandingCourseResource extends JsonResource
                             "name" => $clase->name,
                             "time_clase" => $clase->time_clase,
                             "video_link" => $clase->video_link,
+                            "files" => $clase->files->map(function($file) {
+                                return [
+                                    "name" => $file->name_file,
+                                    "url" => env("APP_URL")."storage/".$file->file,
+                                    "size" => $file->size,
+                                ];
+                            })
                         ];
                     })
                 ];

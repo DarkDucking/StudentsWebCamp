@@ -275,7 +275,8 @@
                                                     <div class="accordion-item card">
                                                         <h2 class="accordion-header card-header" id="headingTwo1">
                                                             <button class="accordion-button" [ngClass]="{'collapsed': i!=0}" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseTwo'+section.id" aria-expanded="true" [attr.aria-controls]="'#collapseTwo'+section.id">
-                                                                {{ section.name }} <span class="rbt-badge-5 ml--10">{{ section.time_section }}</span>
+                                                                {{ section.name }} 
+                                                                <!-- <span class="rbt-badge-5 ml--10">{{ section.time_section }}</span> -->
                                                             </button>
                                                         </h2>
                                                         <div [attr.id]="'collapseTwo'+section.id" class="accordion-collapse collapse" [ngClass]="{'show': i==0}" aria-labelledby="headingTwo1" data-bs-parent="#accordionExampleb2">

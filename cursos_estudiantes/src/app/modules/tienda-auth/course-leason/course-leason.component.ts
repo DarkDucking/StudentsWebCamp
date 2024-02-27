@@ -44,7 +44,14 @@ export class CourseLeasonComponent {
       this.courses_selected = resp.course;
 
       this.clase_selected = this.courses_selected.malla[0].clases[0];
+
+      console.log("clase");
+      console.log(this.clase_selected);
+
+      this.generateYouTubeEmbedUrl(this.clase_selected.video_link);
       this.video_link = this.clase_selected.video_link;
+    
+    
     })
 
     
@@ -60,6 +67,9 @@ export class CourseLeasonComponent {
 
   openClase(clase:any){
     this.clase_selected = clase;
+    this.generateYouTubeEmbedUrl(this.clase_selected.video_link);
+      this.video_link = this.clase_selected.video_link;
+    
   }
 
   generateYouTubeEmbedUrl(videoLink: string): SafeResourceUrl {
@@ -71,6 +81,7 @@ export class CourseLeasonComponent {
   }
 
   // Función para obtener el ID del video de YouTube
+
   private getYouTubeVideoId(videoLink: string): string | null {
     // Patrones de enlace de YouTube
     const youtubePatterns = [

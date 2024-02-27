@@ -101,7 +101,7 @@
 																		<label class="required fw-bold fs-6 mb-2">Contraseña:</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" [(ngModel)] ="password"placeholder="***********" />
+																		<input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" [(ngModel)] ="password" placeholder="***********" />
 																		<!--end::Input-->
 																	</div>
 																	
@@ -121,28 +121,38 @@
 																	<div class="mb-7">
 																		<!--begin::Label-->
 																		<label class="required fw-bold fs-6 mb-5">Role</label>
-																		<!--end::Label-->
-																		<!--begin::Roles-->
-																		<!--begin::Input row-->
-																		<div class="d-flex fv-row">
-																			<!--begin::Radio-->
-																			<div class="form-check form-check-custom form-check-solid">
-																				<!--begin::Input-->
-																				<input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked='checked' />
-																				<!--end::Input-->
-																				<!--begin::Label-->
-																				<label class="form-check-label" for="kt_modal_update_role_option_0">
-																					<div class="fw-bolder text-gray-800">Administrator</div>
-																					<div class="text-gray-600">Best for business owners and company administrators</div>
-																				</label>
-																				<!--end::Label-->
+																			<!--begin::Roles-->
+																			<!--begin::Input row-->
+																			<div class="d-flex flex-column fv-row">
+																				<!--begin::Radio - Administrator-->
+																				<div class="form-check form-check-custom form-check-solid">
+																					<!--begin::Input-->
+																					<input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" [(ngModel)]="role_id" checked />
+																					<!--end::Input-->
+																					<!--begin::Label-->
+																					<label class="form-check-label" for="kt_modal_update_role_option_2">
+																						<div class="fw-bolder text-gray-800">Administrator</div>
+																						<div class="text-gray-600">Best for business owners and company administrators</div>
+																					</label>
+																					<!--end::Label-->
+																				</div>
+																				<!--end::Radio - Administrator-->
+																				<p></p>
+																				<!--begin::Radio - Estudiante-->
+																				<div class="form-check form-check-custom form-check-solid">
+																					<!--begin::Input-->
+																					<input class="form-check-input me-3" name="user_role" type="radio" value="1" id="kt_modal_update_role_option_1" [(ngModel)]="role_id" />
+																					<!--end::Input-->
+																					<!--begin::Label-->
+																					<label class="form-check-label" for="kt_modal_update_role_option_1">
+																						<div class="fw-bolder text-gray-800">Estudiante</div>
+																						<div class="text-gray-600">Best for students</div>
+																					</label>
+																					<!--end::Label-->
+																				</div>
+																				<!--end::Radio - Estudiante-->
 																			</div>
-																			<!--end::Radio-->
-																		</div>
-																		<!--end::Input row-->
-																		<div class='separator separator-dashed my-5'></div>
-																		<!--begin::Input row-->
-																		
+																			<!--end::Input row-->
 																	</div>
 																	<!--end::Input group-->
 																</div>

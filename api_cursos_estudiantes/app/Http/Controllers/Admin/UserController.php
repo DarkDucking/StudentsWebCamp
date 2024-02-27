@@ -21,8 +21,7 @@ class UserController extends Controller
         $search = $request->search;
         $state = $request->state;
 
-        $users = User::filterAdvance($search,$state)->where("type_user", 2)->orderby("id","desc")->get();
-
+        $users = User::orderby("id", "desc")->get();
         return response()->json([
             "users" => UserGCollection::make($users),
             
@@ -47,14 +46,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile("imagen")){
-            $path = Storage::putFile("users",$request->file("imagen"));
+        if ($request->hasFile("imagen")) {
+            $path = Storage::putFile("users", $request->file("imagen"));
             $request->request->add(["avatar" => $path]);
-
         }
-        if($request->password){
+
+        if ($request->password) {
             $request->request->add(["password" => bcrypt($request->password)]);
         }
+
+        // Asegúrate de que role_id existe en la solicitud antes de asignar a type_user
+        if ($request->has("role_id")) {
+            $request->request->add(["type_user" => $request->role_id]);
+        }
+
         $user = User::create($request->all());
 
         return response()->json(["user" => UserGResource::make($user)]);

@@ -138,63 +138,39 @@
 																	<div class="mb-7">
 																		<!--begin::Label-->
 																		<label class="required fw-bold fs-6 mb-5">Role</label>
-																		<!--end::Label-->
-																		<!--begin::Roles--> 
-																		<!--begin::Input row-->
-																		<div class="d-flex fv-row">
-																			<!--begin::Radio-->
-																			<div class="form-check form-check-custom form-check-solid">
-																				<!--begin::Input-->
-																				<input class="form-check-input me-3" name="user_role" type="radio" value="0" id="kt_modal_update_role_option_0" checked='checked' />
-																				<!--end::Input-->
-																				<!--begin::Label-->
-																				<label class="form-check-label" for="kt_modal_update_role_option_0">
-																					<div class="fw-bolder text-gray-800">Administrator</div>
-																					<div class="text-gray-600">Best for business owners and company administrators</div>
-																				</label>
-																				<!--end::Label-->
+																			<!--begin::Roles-->
+																			<!--begin::Input row-->
+																			<div class="d-flex flex-column fv-row">
+																				<!--begin::Radio - Administrator-->
+																				<div class="form-check form-check-custom form-check-solid">
+																					<!--begin::Input-->
+																					<input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" [(ngModel)]="role_id" checked />
+																					<!--end::Input-->
+																					<!--begin::Label-->
+																					<label class="form-check-label" for="kt_modal_update_role_option_2">
+																						<div class="fw-bolder text-gray-800">Administrator</div>
+																						<div class="text-gray-600">Best for business owners and company administrators</div>
+																					</label>
+																					<!--end::Label-->
+																				</div>
+																				<!--end::Radio - Administrator-->
+																				<p></p>
+																				<!--begin::Radio - Estudiante-->
+																				<div class="form-check form-check-custom form-check-solid">
+																					<!--begin::Input-->
+																					<input class="form-check-input me-3" name="user_role" type="radio" value="1" id="kt_modal_update_role_option_1" [(ngModel)]="role_id" />
+																					<!--end::Input-->
+																					<!--begin::Label-->
+																					<label class="form-check-label" for="kt_modal_update_role_option_1">
+																						<div class="fw-bolder text-gray-800">Estudiante</div>
+																						<div class="text-gray-600">Best for students</div>
+																					</label>
+																					<!--end::Label-->
+																				</div>
+																				<!--end::Radio - Estudiante-->
 																			</div>
-																			<!--end::Radio-->
-																		</div>
-																		<!--end::Input row-->
-																		<div class='separator separator-dashed my-5'></div>
-																		<!--begin::Input row-->
-																		
-
-																		<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="mb-7">
-																		
-																		
-																		<label class="form-label">¿Es instructor?</label>
-																		
-																		<div class="form-check form-check-custom form-check-solid mb-2">
-																				
-																				<input class="form-check-input" type="checkbox" value="1" [checked]="is_instructor" (click)="isInstructor()">
-																				<label class="form-check-label">si </label> 
-																			
-																			</div>
-																		
-																	
-																		<div class="text-muted fs-7">Habilitar usuario como instructor </div>
-																		<!--begin::Input row-->
-																		
+																			<!--end::Input row-->
 																	</div>
-
-																	<div class="mb-7" *ngIf="is_instructor">
-																		<label class="required fw-bold fs-6 mb-2">Profesión</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Desarrollador web" [(ngModel)]="profesion" />
-																	</div>
-															
-																		<div class="mb-7" *ngIf="is_instructor">
-																		<label class="required fw-bold fs-6 mb-2">Descripción</label>
-																		<textarea name="description" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Detalles sobr el usuario" [(ngModel)]="description" cols="30" rows="5"></textarea>
-																		
-																	</div>
-																	<!--end::Input group-->
-																</div>
 																<!--end::Scroll-->
 																<!--begin::Actions-->
 																<div class="text-center pt-15">

@@ -18,7 +18,8 @@ export class UserEditComponent implements OnInit {
  email:any = null;
  password:any = null;
  confirmation_password:any = null;
-  state:any = 1
+  state:any = 1;
+  role_id:any = null;
   is_instructor:any =null;
   profesion:any = null;
   description:any = null;
@@ -84,6 +85,8 @@ export class UserEditComponent implements OnInit {
   formData.append("surname", this.surname);
   formData.append("email", this.email);
   formData.append("state", this.state);
+  formData.append("role_id", this.role_id);
+  formData.append("type_user", this.role_id);
   
   if(this.is_instructor){
     formData.append("is_instructor", this.is_instructor ? "1" : "0");

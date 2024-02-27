@@ -18,6 +18,7 @@ export class UserAddComponent implements OnInit {
  email:any = null;
  password:any = null;
  confirmation_password:any = null;
+ role_id:any = 1;
 
  IMAGEN_PREVISUALIZA: any= "./assets/media/avatars/300-6.jpg";
  FILE_AVATAR:any =null;
@@ -74,8 +75,8 @@ export class UserAddComponent implements OnInit {
   formData.append("surname", this.surname);
   formData.append("email", this.email);
   formData.append("password", this.password);
-  formData.append("role_id", "1");
-  formData.append("type_user", "2");
+  formData.append("role_id", this.role_id);
+  formData.append("type_user", this.role_id);
   formData.append("imagen", this.FILE_AVATAR);
 
  this.userService.register(formData).subscribe((resp:any) => {

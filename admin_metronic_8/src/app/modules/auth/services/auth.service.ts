@@ -58,8 +58,13 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.http.post(URL_SERVICIOS+"/auth/login", {email: email, password: password}).pipe(
       map((auth: any) => {
-        console.log(auth);
+        console.log('Respuesta del servidor:', auth);
         const result = this.setAuthFromLocalStorage(auth);
+        console.log('Resultado de setAuthFromLocalStorage:', result);
+      
+        // Agrega este log antes de la redirección
+        console.log('Antes de redirección. Result:', result);
+      
         return result;
       }),
       catchError((err) => {
@@ -81,22 +86,31 @@ export class AuthService implements OnDestroy {
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
     if (!auth) {
+      console.log('No hay información de autenticación en el almacenamiento local');
       return of(undefined);
     }
-
+  
     this.isLoadingSubject.next(true);
+    console.log('Auth obtenida del almacenamiento local:', auth);
+  
     return of(auth).pipe(
       map((user: any) => {
+        console.log('Usuario obtenido:', user);
         if (user) {
           this.currentUserSubject.next(user);
         } else {
+          console.log('Usuario no encontrado. Realizando cierre de sesión.');
           this.logout();
         }
         return user;
       }),
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => {
+        console.log('Finalizando la operación de obtención de usuario.');
+        this.isLoadingSubject.next(false);
+      })
     );
   }
+  
 
   // need create new user then login
   registration(user: UserModel): Observable<any> {
@@ -127,6 +141,9 @@ export class AuthService implements OnDestroy {
     if (auth && auth.access_token) {
       localStorage.setItem("token", auth.access_token);
       localStorage.setItem("user", JSON.stringify(auth.user));
+  
+      console.log('Información del usuario almacenada en el local storage:', JSON.stringify(auth.user));
+  
       return true;
     }
     return false;

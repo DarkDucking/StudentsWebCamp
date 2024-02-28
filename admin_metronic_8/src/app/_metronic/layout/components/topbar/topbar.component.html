@@ -14,7 +14,11 @@
     data-kt-menu-placement="bottom-end"
     data-kt-menu-flip="bottom"
   >
-    <img src="./assets/media/avatars/300-1.jpg" alt="metronic" />
+  <div *ngIf="user$ | async as user">
+    <img [src]="'http://127.0.0.1:8000/storage/' + user.avatar" alt="metronic" 
+    [style.width.px]="50" [style.height.px]="50"/>
+  </div>
+
   </div>
   <!-- end::Toggle  -->
   <app-user-inner></app-user-inner>

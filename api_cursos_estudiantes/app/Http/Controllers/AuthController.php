@@ -58,8 +58,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
- 
-        if (! $token = auth('api')->attempt(["email" => $request->email, "password" => $request->password, "type_user" => 2, "state" => 1 ])) {
+        // "type_user" => 2,
+        if (! $token = auth('api')->attempt(["email" => $request->email, "password" => $request->password,  "state" => 1 ])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
  
@@ -125,6 +125,9 @@ class AuthController extends Controller
             "user" => [
                 "name" => auth('api')->user()->name,
                 "email" => auth('api')->user()->email,
+                "role_id" => auth('api')->user()->role_id,
+                "type_user" => auth('api')->user()->type_user,
+                "avatar" => auth('api')->user()->avatar,
 
                  
             ]

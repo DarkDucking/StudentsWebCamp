@@ -119,11 +119,11 @@
 /*-- Variables --*/
 @import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap");
 :root {
-  --color-primary: #2f57ef;
-  --color-secondary: #b966e7;
+  --color-primary: #3b53b3;
+  --color-secondary: #d7b15a;
   --color-coral: #E9967A;
-  --color-violet: #800080;
-  --color-pink: #DB7093;
+  --color-violet: #ea555a;
+  --color-pink: #dca53f;
   --color-heading: #192335;
   --color-body: #6b7385;
   --color-white: #ffffff;
@@ -140,7 +140,7 @@
   --color-light: #F5F7FA;
   --color-lighter: #F2F5F9;
   --primary-opacity: #2f57ef21;
-  --secondary-opacity: #b966e721;
+  --secondary-opacity: #7b5e2821;
   --coral-opacity: #E9967A21;
   --violet-opacity: #80008021;
   --pink-opacity: #DB709321;
@@ -1092,10 +1092,11 @@ ol ul {
 .rbt-page-banner-wrapper .rbt-banner-image, .bg-gradient-9 {
   position: relative;
   z-index: 1;
-  background: linear-gradient(270deg, var(--color-secondary) 0%, var(--color-primary) 100%) !important;
+  background: linear-gradient(90deg, rgba(36,23,0,1) 0%, rgba(196,142,91,1) 26%, rgba(0,69,255,1) 100%);
+
 }
 .rbt-page-banner-wrapper .rbt-banner-image::after, .bg-gradient-9::after {
-  background: linear-gradient(#0077B5 0%, rgba(146, 123, 88, 0.1) 100%);
+  background: linear-gradient(#c8e5f4 0%, rgba(146, 123, 88, 0.1) 100%);
   position: absolute;
   top: 0;
   left: 0;
@@ -2085,7 +2086,7 @@ Custom Row
 input:-moz-placeholder,
 textarea:-moz-placeholder {
   opacity: 1;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  -ms-filte: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
 input::-webkit-input-placeholder,
@@ -8183,7 +8184,7 @@ textarea:-ms-input-placeholder {
 }
 
 .rbt-gradient-border {
-  background: linear-gradient(-145deg, #CFA2E8, #637FEA) !important;
+  background: linear-gradient(-145deg, #d49575, #637FEA) !important;
   z-index: 10;
 }
 .rbt-gradient-border::before {
@@ -8792,12 +8793,12 @@ hr {
 }
 
 .rbt-avatars {
-  min-width: 70px;
-  max-width: 70px;
+  min-width: 200px;
+  max-width: 200px;
 }
 .rbt-avatars.size-lg {
-  min-width: 120px;
-  max-width: 120px;
+  min-width: 200px;
+  max-width: 200px;
   width: 120px;
   height: 120px;
 }
@@ -13450,7 +13451,8 @@ Button Area
 .rbt-btn.btn-gradient {
   color: var(--color-white);
   background-size: 300% 100%;
-  background-image: linear-gradient(to right, var(--color-warning), var(--color-discord), var(--color-discord), var(--color-warning));
+  background-image: linear-gradient(90deg, rgb(22, 24, 136) 0%, rgba(237,231,226,1) 48%, rgb(89, 105, 151) 100%);
+
 }
 .rbt-btn.btn-gradient.btn-gradient-2 {
   background-image: linear-gradient(to right, var(--color-pink), var(--color-violet), var(--color-violet), var(--color-pink));
@@ -24199,7 +24201,7 @@ blockquote.has-text-align-right cite,
   padding: 0 150px;
   position: relative;
   overflow: hidden;
-  background-image: url(../images/bg/bg-g1.webp);
+  background-image: url(../images/bg/fondo.png);
   background-position: top center;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -26677,7 +26679,7 @@ Course Sidebar
   display: block;
   z-index: -1;
   content: "";
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5) 90%);
+  
   transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
   cursor: pointer;
   border-radius: 6px;
@@ -26693,7 +26695,7 @@ Course Sidebar
   align-items: end;
   justify-content: space-between;
   position: absolute;
-  bottom: 30px;
+  bottom: 100px;
   padding: 0 40px;
   width: 100%;
   z-index: 2;

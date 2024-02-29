@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Course\CourseGResource;
 use App\Http\Resources\Course\CourseGCollection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CourseGController extends Controller
 {
@@ -22,11 +23,21 @@ class CourseGController extends Controller
      */
     public function index(Request $request)
     {
+        $userId = auth('api')->user()->id;
+        error_log($userId);
+        $type_user = auth('api')->user()->type_user;
         $search = $request->search;
         $state = $request->state;
 
+        $query = Course::orderBy("id", "desc");
+
+        if ($type_user == 1) {
+            // Si el tipo de usuario es 1, filtrar por user_id
+            $query->where('user_id', $userId);
+        }
         //filterAdvance($search,$state)->
-        $courses = Course::orderBy("id","desc")->get();
+        $courses = $query->get();
+        
 
         return response()->json([
             "courses" => CourseGCollection::make($courses),

@@ -23,7 +23,5 @@ export class TopbarComponent implements OnInit {
   ngOnInit(): void {
     this.headerLeft = this.layout.getProp('header.left') as string;
     this.user$ = this.auth.currentUserSubject.asObservable();
-    console.log("TOPBAR");
-    console.log(this.user$);
   }
 }

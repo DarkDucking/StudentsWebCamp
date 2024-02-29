@@ -86,12 +86,10 @@ export class AuthService implements OnDestroy {
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
     if (!auth) {
-      console.log('No hay información de autenticación en el almacenamiento local');
       return of(undefined);
     }
   
     this.isLoadingSubject.next(true);
-    console.log('Auth obtenida del almacenamiento local:', auth);
   
     return of(auth).pipe(
       map((user: any) => {
@@ -105,7 +103,6 @@ export class AuthService implements OnDestroy {
         return user;
       }),
       finalize(() => {
-        console.log('Finalizando la operación de obtención de usuario.');
         this.isLoadingSubject.next(false);
       })
     );

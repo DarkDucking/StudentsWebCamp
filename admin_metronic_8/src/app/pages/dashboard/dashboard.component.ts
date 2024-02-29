@@ -5,6 +5,7 @@ import Chart from 'chart.js/auto';
 import { CategorieService } from 'src/app/modules/categories/service/categorie.service';
 import { SalesService } from 'src/app/modules/service/sales.service';
 import { AuthService } from 'src/app/modules/auth';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import { AuthService } from 'src/app/modules/auth';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  user$: Observable<any>;
   data: any;
   COURSES:any[] = [];
   COURSESSTUDENT:any[];
@@ -34,19 +36,20 @@ export class DashboardComponent implements OnInit {
   state:any = null;
 
   constructor(
+    private auth: AuthService,
     private courseService: CourseService,
     private userService: UserService,
     private categorieService: CategorieService,
     private salesService: SalesService,
     private cdr: ChangeDetectorRef,
-    private authService: AuthService,
     ) {}
 
   ngOnInit(): void {
     this.isLoading = this.courseService.isLoading$;
     this.isLoading = this.userService.isLoading$;
-    this.user_role_id = this.authService.user.role_id;
-    console.log(this.authService.user);
+    this.user_role_id = this.auth.user.role_id;
+    console.log(this.auth.user.role_id);
+    this.user$ = this.auth.currentUserSubject.asObservable();
     this.loadSalesData();
     this.loadData();
     this.LoadClass();

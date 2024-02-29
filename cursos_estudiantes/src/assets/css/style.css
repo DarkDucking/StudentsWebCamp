@@ -11900,7 +11900,7 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
   z-index: 99;
 }
 .rbt-header .logo a img {
-  max-height: 50px;
+  max-height: 60px;
   object-fit: cover;
 }
 @media only screen and (max-width: 575px) {
@@ -16801,7 +16801,7 @@ span.transparent-button:hover i {
 .rbt-table thead tr td,
 .rbt-table tfoot tr th,
 .rbt-table tfoot tr td {
-  color: var(--color-heading);
+  color: var(--color-warning);
   font-weight: 600;
   font-size: 16px;
 }

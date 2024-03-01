@@ -116,10 +116,10 @@
                                 <div class="icons">
                                     <img [src]="CATEGORIE.imagen" alt="Icons Images">
                                 </div>
-                                <div class="content">
+                                <div class="content" href= "/list-de-cursos">
                                     <h5 class="title">{{ CATEGORIE.name }}</h5>
-                                    <div class="read-more-btn">
-                                        <span class="rbt-btn-link">{{ CATEGORIE.course_count }} Courses<i class="feather-arrow-right"></i></span>
+                                    <div class="read-more-btn " href= "/list-de-cursos">
+                                        <span href="/list-de-cursos">{{ CATEGORIE.course_count }} Courses<a class="feather-arrow-right" href="/list-de-cursos"></a></span>
                                     </div>
                                 </div>
                             </div>
@@ -394,15 +394,15 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
                           <div class="col-lg-12 col-xl-5">
                               <div class="inner">
                                   <div class="rbt-category mb--20">
-                                      <a href="#">New Collection</a>
+                                      <a href="/list-de-cursos">CURSOS</a>
                                   </div>
-                                  <h4 class="title mb--15">Online Courses from Histudy</h4>
-                                  <p class="mb--15">Top instructors from around the world</p>
+                                  <h4 class="title mb--15">Estudiantes </h4>
+                                  <p class="mb--15">Ingeniería Informática y Computación</p>
                               </div>
                           </div>
                           <div class="col-lg-12 col-xl-7">
                               <div class="video-popup-wrapper mt_lg--10 mt_md--20 mt_sm--20">
-                                  <img class="w-100 rbt-radius" src="assets/images/others/video-01.jpg" alt="Video Images">
+                                  <img class="w-100 rbt-radius" src="assets/images/others/video-01.png" alt="Video Images">
                                   <a class="rbt-btn rounded-player-2 sm-size popup-video position-to-top with-animation" href="https://www.youtube.com/watch?v=nA1Aqp0sPQo">
                                       <span class="play-icon"></span>
                                   </a>
@@ -417,13 +417,14 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
                           <div class="col-lg-12">
                               <div class="inner">
                                   <div class="rbt-category mb--20">
-                                      <a href="#">Top Teacher</a>
+                                      <a href="#">¿Ya tienes cursos en tu lista?</a>
                                   </div>
-                                  <h4 class="title mb--10">Free Online Courses from Histudy School To Education</h4>
-                                  <p class="mb--15">Top instructors from around the world</p>
+                                  <h4 class="title mb--10">Añade tus cursos a tu lista de deseos</h4>
+                                  <p class="mb--15">Solo da click en el icono  <i class="feather-heart"></i>
+                                  </p>
                                   <div class="read-more-btn">
-                                      <a class="rbt-btn rbt-switch-btn btn-gradient btn-sm" href="#">
-                                          <span data-text="Join Now">Join Now</span>
+                                      <a class="rbt-btn rbt-switch-btn btn-gradient btn-sm" href="/lista-deseos">
+                                          <span data-text="Ver lista">Ver lista </span>
                                       </a>
                                   </div>
                               </div>
@@ -442,14 +443,14 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
           <div class="row mb--60">
               <div class="col-lg-12">
                   <div class="section-title text-center">
-                      <span class="subtitle bg-primary-opacity">Why Choose Us</span>
-                      <h2 class="title">Creating A Community Of <br /> Life Long Learners.</h2>
+                      <span class="subtitle bg-primary-opacity">Nuestras cifras</span>
+                      <h2 class="title">Comunidad de autodidactas <br /> UdeG</h2>
                   </div>
               </div>
           </div>
           <div class="row g-5 hanger-line">
               <!-- Start Single Counter  -->
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-15">
                   <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
                       <div class="top-circle-shape"></div>
                       <div class="inner">
@@ -457,9 +458,9 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
                               <img src="assets/images/icons/counter-01.png" alt="Icons Images">
                           </div>
                           <div class="content">
-                              <h3 class="counter"><span class="odometer" data-count="500">00</span>
+                              <h3 class="counter"><span class="odometer" data-count="200">00</span>
                               </h3>
-                              <span class="subtitle">Learners &amp; counting</span>
+                              <span class="subtitle">Estudiantes en la plataforma</span>
                           </div>
                       </div>
                   </div>
@@ -467,17 +468,17 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
               <!-- End Single Counter  -->
 
               <!-- Start Single Counter  -->
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--60 mt_md--30 mt_sm--30 mt_mobile--60">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-15 ">
                   <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
                       <div class="top-circle-shape"></div>
                       <div class="inner">
                           <div class="rbt-round-icon">
                               <img src="assets/images/icons/counter-02.png" alt="Icons Images">
                           </div>
-                          <div class="content">
-                              <h3 class="counter"><span class="odometer" data-count="800">00</span>
+                          <div class="content center">
+                              <h3 class="counter"><span class="odometer" data-count="50">00</span>
                               </h3>
-                              <span class="subtitle">Courses & Video</span>
+                              <span class="subtitle">Cursos y vídeos</span>
                           </div>
                       </div>
                   </div>
@@ -485,7 +486,7 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
               <!-- End Single Counter  -->
 
               <!-- Start Single Counter  -->
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt_md--60 mt_sm--60">
+              <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt_md--60 mt_sm--60">
                   <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
                       <div class="top-circle-shape"></div>
                       <div class="inner">
@@ -499,11 +500,11 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
                           </div>
                       </div>
                   </div>
-              </div>
+              </div> -->
               <!-- End Single Counter  -->
 
               <!-- Start Single Counter  -->
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--60 mt_md--60 mt_sm--60">
+              <!-- <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--60 mt_md--60 mt_sm--60">
                   <div class="rbt-counterup rbt-hover-03 border-bottom-gradient">
                       <div class="top-circle-shape"></div>
                       <div class="inner">
@@ -517,7 +518,7 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
                           </div>
                       </div>
                   </div>
-              </div>
+              </div> -->
               <!-- End Single Counter  -->
           </div>
       </div>
@@ -531,8 +532,8 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
               <div class="row">
                   <div class="col-lg-12">
                       <div class="section-title text-center mb--10">
-                          <span class="subtitle bg-primary-opacity">EDUCATION FOR EVERYONE</span>
-                          <h2 class="title">People like histudy education. <br /> No joking - here’s the proof!</h2>
+                          <span class="subtitle bg-primary-opacity">Opiniones</span>
+                          <h2 class="title">Comentarios <br /> De nuestros estudiantes</h2>
                       </div>
                   </div>
               </div>
@@ -1465,19 +1466,13 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
           <div class="row g-5 align-items-center mb--30">
               <div class="col-lg-6 col-md-6 col-12">
                   <div class="section-title">
-                      <span class="subtitle bg-pink-opacity">Blog Post</span>
-                      <h2 class="title">Post Popular Post.</h2>
+                      <span class="subtitle bg-pink-opacity">Artículos</span>
+                      <h2 class="title">Relacionados con la educación </h2>
                   </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
                   <div class="read-more-btn text-start text-md-end">
-                      <a class="rbt-btn btn-gradient hover-icon-reverse" href="blog.html">
-                          <div class="icon-reverse-wrapper">
-                              <span class="btn-text">See All Articles</span>
-                              <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                              <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                          </div>
-                      </a>
+
                   </div>
               </div>
           </div>
@@ -1491,10 +1486,11 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
                               <img src="assets/images/blog/blog-card-01.jpg" alt="Card image"> </a>
                       </div>
                       <div class="rbt-card-body">
-                          <h3 class="rbt-card-title"><a href="blog-details.html">React</a></h3>
-                          <p class="rbt-card-text">It is a long established fact that a reader.</p>
+                          <h3 class="rbt-card-title"><a href="https://www.crehana.com/blog/transformacion-digital/educacion-en-linea-cursos/">Impacto de los cursos online </a></h3>
+                          <p class="rbt-card-text">Educación en línea: 10 argumentos que te harán amar las clases online
+                        </p>
                           <div class="rbt-card-bottom">
-                              <a class="transparent-button" href="blog-details.html">Learn More<i><svg width="17" height="12" xmlns="http://www.w3.org/2000/svg"><g stroke="#27374D" fill="none" fill-rule="evenodd"><path d="M10.614 0l5.629 5.629-5.63 5.629"/><path stroke-linecap="square" d="M.663 5.572h14.594"/></g></svg></i></a>
+                              <a class="transparent-button" href="https://www.crehana.com/blog/transformacion-digital/educacion-en-linea-cursos/">Leer más al respecto<i><svg width="17" height="12" xmlns="http://www.w3.org/2000/svg"><g stroke="#27374D" fill="none" fill-rule="evenodd"><path d="M10.614 0l5.629 5.629-5.63 5.629"/><path stroke-linecap="square" d="M.663 5.572h14.594"/></g></svg></i></a>
                           </div>
                       </div>
                   </div>
@@ -1552,65 +1548,6 @@ Nuestro equipo conformado por Paulina Michelle Figueroa y Leonardo Cárdenas, es
       </div>
   </div>
   <!-- End Blog Style -->
-
-  <div class="rbt-newsletter-area newsletter-style-2 bg-color-primary rbt-section-gap">
-      <div class="container">
-          <div class="row row--15 align-items-center">
-              <div class="col-lg-12">
-                  <div class="inner text-center">
-                      <div class="section-title text-center">
-                          <span class="subtitle bg-white-opacity">Get Latest Histudy Update</span>
-                          <h2 class="title color-white"><strong>Subscribe</strong> Our Newsletter</h2>
-                          <p class="description color-white mt--20">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam explicabo sit est eos earum reprehenderit inventore nam autem corrupti rerum!</p>
-                      </div>
-                      <form action="#" class="newsletter-form-1 mt--40">
-                          <input type="email" placeholder="Enter Your E-Email">
-                          <button type="submit" class="rbt-btn btn-md btn-gradient hover-icon-reverse">
-                              <span class="icon-reverse-wrapper">
-                      <span class="btn-text">Subscribe</span>
-                              <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                              <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                              </span>
-                          </button>
-                      </form>
-                      <span class="note-text color-white mt--20">No ads, No trails, No commitments</span>
-
-                      <div class="row row--15 mt--50">
-                          <!-- Start Single Counter -->
-                          <div class="col-lg-3 offset-lg-3 col-md-6 col-sm-6 single-counter">
-                              <div class="rbt-counterup rbt-hover-03 style-2 text-color-white">
-                                  <div class="inner">
-                                      <div class="content">
-                                          <h3 class="counter color-white"><span class="odometer" data-count="500">00</span>
-                                          </h3>
-                                          <h5 class="title color-white">Successfully Trained</h5>
-                                          <span class="subtitle color-white">Learners &amp; counting</span>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- End Single Counter -->
-
-                          <!-- Start Single Counter -->
-                          <div class="col-lg-3 col-md-6 col-sm-6 single-counter mt_mobile--30">
-                              <div class="rbt-counterup rbt-hover-03 style-2 text-color-white">
-                                  <div class="inner">
-                                      <div class="content">
-                                          <h3 class="counter color-white"><span class="odometer" data-count="100">00</span>
-                                          </h3>
-                                          <h5 class="title color-white">Certification Students</h5>
-                                          <span class="subtitle color-white">Online Course</span>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- End Single Counter -->
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
 
   <app-footer></app-footer>
 

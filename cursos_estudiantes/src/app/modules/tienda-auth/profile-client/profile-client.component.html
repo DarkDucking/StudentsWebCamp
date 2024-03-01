@@ -15,16 +15,20 @@
                     <div class="tutor-bg-photo bg_color bg_color--solid height-350"></div>
 
                     <!-- Start Tutor Information  -->
-                    <div class="rbt-tutor-information">
-                        <div class="rbt-tutor-information-left">
-                            <div class="thumbnail rbt-avatars size-lg t">
-                                <img *ngIf="user" [src]="user.avatar" alt="Instructor">
-                            </div>
+                    <div class="rbt-dashboard-content-wrapper">
+                        <div class="tutor-bg-photo bg_image bg_image--23 height-350"></div>
+                        <!-- Start Tutor Information  -->
+                        <div class="rbt-tutor-information">
+                            <div class="rbt-tutor-information-left">
+                                <div class="thumbnail rbt-avatars size-lg">
+                                    <img *ngIf="user" [src]="user.avatar" alt="Instructor">
+                      
+                </div>
                             <div class="tutor-content">
                                 <h5 class="title" *ngIf="user">{{ user.name + ' '+user.surname }}</h5>
                                 <ul class="rbt-meta rbt-meta-white mt--5">
-                                    <li><i class="feather-book"></i>{{ enrolled_course_count }} Courses Enroled</li>
-                                    <li><i class="feather-award"></i>{{ termined_course_count }} Certificate</li>
+                                    <li><i class="feather-book"></i>{{ enrolled_course_count }} Cusos inscritos</li>
+                                    <li><i class="feather-award"></i>{{ termined_course_count }} Cursos Terminados</li>
                                 </ul>
                             </div>
                         </div>
@@ -45,7 +49,7 @@
 
                                     <div class="rbt-default-sidebar-wrapper">
                                         <div class="section-title mb--20">
-                                            <h6 class="rbt-title-style-2" *ngIf="user">Welcome,{{ user.name + ' '+user.surname }}</h6>
+                                            <h6 class="rbt-title-style-2" *ngIf="user">Welcome, {{ user.name + ' '+user.surname }}</h6>
                                         </div>
                                         <nav class="mainmenu-nav">
                                             <ul class="dashboard-mainmenu rbt-default-sidebar-list">
@@ -93,7 +97,7 @@
                                                 <div class="content">
                                                     <h3 class="counter without-icon color-primary"><span class="odometer" data-count="30">{{ enrolled_course_count }}</span>
                                                     </h3>
-                                                    <span class="rbt-title-style-2 d-block">Enrolled Courses</span>
+                                                    <span class="rbt-title-style-2 d-block">Cursos Inscritos</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +114,7 @@
                                                 <div class="content">
                                                     <h3 class="counter without-icon color-secondary"><span class="odometer" data-count="10">{{ active_course_count }}</span>
                                                     </h3>
-                                                    <span class="rbt-title-style-2 d-block">ACTIVE COURSES</span>
+                                                    <span class="rbt-title-style-2 d-block">Cursos Activos</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,7 +132,7 @@
                                                 <div class="content">
                                                     <h3 class="counter without-icon color-violet"><span class="odometer" data-count="7">{{ termined_course_count }}</span>
                                                     </h3>
-                                                    <span class="rbt-title-style-2 d-block">Completed Courses</span>
+                                                    <span class="rbt-title-style-2 d-block">Cursos Terminados</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -143,24 +147,24 @@
                             <div class="content">
 
                                 <div class="section-title">
-                                    <h4 class="rbt-title-style-3">Enrolled Courses</h4>
+                                    <h4 class="rbt-title-style-3">Mis cursos</h4>
                                 </div>
 
                                 <div class="advance-tab-button mb--30">
                                     <ul class="nav nav-tabs tab-button-style-2 justify-content-start" id="myTab-4" role="tablist">
                                         <li role="presentation">
                                             <a href="#" class="tab-button active" id="home-tab-4" data-bs-toggle="tab" data-bs-target="#home-4" role="tab" aria-controls="home-4" aria-selected="true">
-                                                <span class="title">Enrolled Courses</span>
+                                                <span class="title">Cursos</span>
                                             </a>
                                         </li>
                                         <li role="presentation">
                                             <a href="#" class="tab-button" id="profile-tab-4" data-bs-toggle="tab" data-bs-target="#profile-4" role="tab" aria-controls="profile-4" aria-selected="false">
-                                                <span class="title">Active Courses</span>
+                                                <span class="title">Cursos en progreso</span>
                                             </a>
                                         </li>
                                         <li role="presentation">
                                             <a href="#" class="tab-button" id="contact-tab-4" data-bs-toggle="tab" data-bs-target="#contact-4" role="tab" aria-controls="contact-4" aria-selected="false">
-                                                <span class="title">Completed Courses</span>
+                                                <span class="title">Cursos Terminados</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -182,17 +186,17 @@
                                                             <div class="rbt-card-top">
                                                                 <div class="rbt-review">
                                                                     <div class="rating">
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
-                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star" [ngClass]="{'rating': enrolled_course.course.avg_reviews < 1}"></i>
+                                                                        <i class="fas fa-star" [ngClass]="{'rating': enrolled_course.course.avg_reviews < 2}"></i>
+                                                                        <i class="fas fa-star" [ngClass]="{'rating': enrolled_course.course.avg_reviews < 3}"></i>
+                                                                        <i class="fas fa-star" [ngClass]="{'rating': enrolled_course.course.avg_reviews < 4}"></i>
+                                                                        <i class="fas fa-star" [ngClass]="{'rating': enrolled_course.course.avg_reviews < 5}"></i>
                                                                     </div>
-                                                                    <span class="rating-count"> (15 Reviews)</span>
+                                                                    <span class="rating-count"> ({{ enrolled_course.course.count_reviews }} Reviews)</span>
                                                                 </div>
-                                                                <div class="rbt-bookmark-btn">
-                                                                    <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                                                </div>
+                                                   
+                                                        <div class="rbt-bookmark-btn">
+                                                                    </div>
                                                             </div>
                                                             <h4 class="rbt-card-title"><a [href]="'/landing-curso/'+enrolled_course.course.slug">{{ enrolled_course.course.title }}</a>
                                                             </h4>
@@ -558,31 +562,31 @@
                                         <form action="#" class="rbt-profile-row rbt-default-form row row--15">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="firstname">First Name</label>
+                                                    <label for="firstname">Nombre Completo</label>
                                                     <input id="firstname" type="text" [(ngModel)]="name" name="name" value="John">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="lastname">Last Name</label>
+                                                    <label for="lastname">Apellido</label>
                                                     <input id="lastname" type="text"  [(ngModel)]="surname" name="surname" value="Due">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="username">Email</label>
+                                                    <label for="username">Correo Electrónico</label>
                                                     <input id="username" type="text" [(ngModel)]="email" name="email" value="johndue">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="phonenumber">Phone Number</label>
+                                                    <label for="phonenumber">Número de Telefono</label>
                                                     <input id="phonenumber" type="tel" [(ngModel)]="phone" name="phone" value="+1-202-555-0174">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="skill">Skill/Occupation</label>
+                                                    <label for="skill">Carrera que estudias</label>
                                                     <input id="skill" type="text" [(ngModel)]="profession" name="profession" value="Full Stack Developer">
                                                 </div>
                                             </div>
@@ -590,7 +594,7 @@
                                                 <label class="form-label">Sube tu imagen: *</label>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
-                                                    <label class="custom-file-label" for="customFile"></label>
+                                                    <label class="" for="customFile"></label>
                                                 </div>
                                             </div>
 
@@ -602,7 +606,7 @@
                                             </div>
                                             <div class="col-12 mt--20">
                                                 <div class="rbt-form-group">
-                                                    <a class="rbt-btn btn-gradient" href="#" onclick="return false;" (click)="updateUser()">Update Info</a>
+                                                    <a class="rbt-btn btn-gradient" href="#" onclick="return false;" (click)="updateUser()">Actualizar</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -620,13 +624,13 @@
                                             </div> -->
                                             <div class="col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="newpassword">New Password</label>
+                                                    <label for="newpassword">Nueva Contraseña</label>
                                                     <input id="newpassword" type="password" [(ngModel)]="password" name="password" placeholder="New Password">
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="rbt-form-group">
-                                                    <label for="retypenewpassword">Re-type New Password</label>
+                                                    <label for="retypenewpassword">Escribe de nuevo la contraseña</label>
                                                     <input id="retypenewpassword" type="password" [(ngModel)]="new_password" name="new_password" placeholder="Re-type New Password">
                                                 </div>
                                             </div>

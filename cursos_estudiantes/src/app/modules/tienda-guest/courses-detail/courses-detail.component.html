@@ -29,7 +29,7 @@
                         <div class="feature-sin best-seller-badge">
                             <span class="rbt-badge-2">
                                 <span class="image"><img src="assets/images/icons/card-icon-1.png"
-                                        alt="Best Seller Icon"></span> Bestseller
+                                        alt="Best Seller Icon"></span> 
                             </span>
                         </div>
 
@@ -107,20 +107,9 @@
                         <nav class="mainmenu-nav onepagenav">
                             <ul class="mainmenu">
                                 <li class="current">
-                                    <a href="#overview">Overview</a>
+                                    <a href="#">Vista Previa</a>
                                 </li>
-                                <li>
-                                    <a href="#coursecontent">Course Content</a>
-                                </li>
-                                <li>
-                                    <a href="#details">Details</a>
-                                </li>
-                                <li>
-                                    <a href="#intructor">Intructor</a>
-                                </li>
-                                <li>
-                                    <a href="#review">Review</a>
-                                </li>
+                                
                             </ul>
                         </nav>
                     </div>
@@ -137,7 +126,7 @@
                     <div class="course-content rbt-shadow-box coursecontent-wrapper mt--30" id="coursecontent">
                         <div class="rbt-course-feature-inner">
                             <div class="section-title">
-                                <h4 class="rbt-title-style-3">Course Content</h4>
+                                <h4 class="rbt-title-style-3">Unidades del curso</h4>
                             </div>
                             <div class="rbt-accordion-style rbt-accordion-02 accordion">
                                 <div class="accordion" id="accordionExampleb2">
@@ -192,7 +181,7 @@
                             <!-- Start Feture Box  -->
                             <div class="col-lg-6">
                                 <div class="section-title">
-                                    <h4 class="rbt-title-style-3 mb--20">Requirements</h4>
+                                    <h4 class="rbt-title-style-3 mb--20">Requerimientos</h4>
                                 </div>
                                 <ul class="rbt-list-style-1">
                                     <ng-container *ngFor="let requirement of LANDING_COURSE.requirements">
@@ -455,6 +444,7 @@
                                                     </a>
                                                 </h5>
                                                 <div class="rating">
+                                                    
                                                     <a href="#"[ngClass]="{'rating-a': review.rating < 1}"><i class="fa fa-star"></i></a>
                                                     <a href="#"[ngClass]="{'rating-a': review.rating < 2}"><i class="fa fa-star"></i></a>
                                                     <a href="#"[ngClass]="{'rating-a': review.rating < 3}"><i class="fa fa-star"></i></a>
@@ -570,13 +560,14 @@
                         <!-- Start Viedo Wrapper  -->
                         <a class="video-popup-with-text video-popup-wrapper text-center popup-video sidebar-video-hidden mb--15" [href]="LANDING_COURSE.vimeo_id">
                             <div class="video-content">
-                                <img class="w-100 rbt-radius" src="assets/images/others/video-01.jpg" alt="Video Images">
+                                <img class="w-100 rbt-radius" src="assets/images/others/video-01.png" alt="Video Images">
                                 <div class="position-to-top">
                                     <span class="rbt-btn rounded-player-2 with-animation">
-                                        <span class="play-icon"></span>
+                                        <span class="play-icon " href="#" onclick="return false;" (click)="addCart()"></span>
+
                                     </span>
                                 </div>
-                                <span class="play-view-text d-block color-white"><i class="feather-eye"></i> Preview this course</span>
+                                <span class="play-view-text d-block color-white"><i class="feather-eye"></i> Inscribete para acceder a las clases</span>
                             </div>
                         </a>
                         <!-- End Viedo Wrapper  -->
@@ -611,17 +602,12 @@
                                 <ul class="has-show-more-inner-content rbt-course-details-list-wrapper">
                                     <li><span>Start Date</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.time_course }}</span>
                                     </li>
-                                    <li><span>Enrolled</span><span class="rbt-feature-value rbt-badge-5">100</span></li>
-                                    <li><span>Files Download</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.files_count }}</span></li>
-                                    <li><span>Skill Level</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.level }}</span></li>
-                                    <li><span>Language</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.idioma }}</span></li>
-                                    <li><span>Quizzes</span><span class="rbt-feature-value rbt-badge-5">10</span></li>
-                                    <li><span>Certificate</span><span class="rbt-feature-value rbt-badge-5">Yes</span></li>
-                                    <li><span>Pass Percentage</span><span class="rbt-feature-value rbt-badge-5">95%</span></li>
-                                </ul>
-                                <div class="rbt-show-more-btn">Show More</div>
-                            </div>
-
+                                    <li><span>Estudiantes</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.count_students }}</span></li>
+                                    <li><span>Recursos de la clase</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.files_count }}</span></li>
+                                    <li><span>Semestre n°</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.level }}</span></li>
+                                    <li><span>Idioma</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.idioma }}</span></li>
+                                   </ul>
+                                
                             <div class="social-share-wrapper mt--30 text-center">
                                 <div class="rbt-post-share d-flex align-items-center justify-content-center">
                                     <ul class="social-icon social-default transparent-with-border justify-content-center">
@@ -645,9 +631,8 @@
                                 </div>
                                 <hr class="mt--20">
                                 <div class="contact-with-us text-center">
-                                    <p>For details about the course</p>
-                                    <p class="rbt-badge-2 mt--10 justify-content-center w-100"><i class="feather-phone mr--5"></i> Call Us: <a href="#"><strong>+444 555 666 777</strong></a></p>
-                                </div>
+                                    <p>CuceInformatiCamp</p>
+                                     </div>
                             </div>
                         </div>
                     </div>

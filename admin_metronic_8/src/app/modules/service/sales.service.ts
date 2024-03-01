@@ -64,4 +64,22 @@ export class SalesService {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+
+  studentsInMyCourse(): Observable<any>{
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.authservice.token });
+    let URL = URL_SERVICIOS + "/sales-users-incourse";
+    return this.http.get(URL, { headers: headers }).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  myActivity(): Observable<any>{
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.authservice.token });
+    let URL = URL_SERVICIOS + "/my-activity";
+    return this.http.get(URL, { headers: headers }).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
 }

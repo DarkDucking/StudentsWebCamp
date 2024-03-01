@@ -69,6 +69,8 @@ Route::group([
     Route::get('/sales-consulta',[CheckoutController::class, "consultaAvanzada"]);
     Route::get('/sales-mineria',[CheckoutController::class, "categoriaMenosConsultada"]);
     Route::get('/sales-mineria-desc',[CheckoutController::class, "categoriaMasConsultada"]);
+    Route::get('/sales-users-incourse',[CheckoutController::class, "usersInMyCourse"]);
+    Route::get('/my-activity',[CheckoutController::class, "tuActividad"]);
     Route::get('/course-students',[CheckoutController::class, "indexCoursesStudent"]);
     Route::get('/course-clases-sum',[ClaseGController::class, "indexCount"]);
 

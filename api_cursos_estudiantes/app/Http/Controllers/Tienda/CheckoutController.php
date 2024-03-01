@@ -12,6 +12,7 @@ use App\Models\Course\Categorie;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Ecommerce\Sale\SaleCollection;
 
 class CheckoutController extends Controller
@@ -76,6 +77,29 @@ class CheckoutController extends Controller
         return response()->json($result);
     }
 
+    public function usersInMyCourse(){
+        $userId = auth('api')->user()->id;
+
+        $resultados = DB::table('courses_students')
+            ->join('courses', 'courses_students.course_id', '=', 'courses.id')
+            ->where('courses.user_id', $userId)
+            ->select('courses_students.*')
+            ->get();
+
+        return $resultados;
+    }
+
+    public function tuActividad(){
+        $userId = Auth::id();
+
+        $classes = Course::where('user_id', $userId)
+            ->join('course_sections', 'courses.id', '=', 'course_sections.course_id')
+            ->join('course_classes', 'course_sections.id', '=', 'course_classes.course_section_id')
+            ->select('course_classes.*')
+            ->get();
+
+        return $classes;
+    }
 
     /**
      * Show the form for creating a new resource.

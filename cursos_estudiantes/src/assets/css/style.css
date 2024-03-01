@@ -12407,6 +12407,7 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
 
 .nav-category-item {
   position: relative;
+  justify-content: center;
   z-index: 1;
   padding: 25px 20px;
 }
@@ -12454,6 +12455,7 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
 @media only screen and (max-width: 1199px) {
   .single-dropdown-menu-presentation .single-mega-item {
     margin-top: 0 !important;
+    justify-content: center;
   }
 }
 
@@ -12481,6 +12483,7 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
 @media only screen and (max-width: 1199px) {
   .home-plesentation-wrapper .single-mega-item + .single-mega-item .demo-single {
     border-top: 1px solid var(--color-border);
+    justify-content: center;
   }
 }
 
@@ -12508,6 +12511,7 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
 }
 .demo-single .inner .thumbnail {
   overflow: hidden;
+  justify-content: center;
 }
 @media only screen and (max-width: 1199px) {
   .demo-single .inner .thumbnail {
@@ -12798,12 +12802,15 @@ ul.rbt-dropdown-menu.currency-menu li .sub-menu {
 }
 .popup-mobile-menu .mainmenu .single-mega-item:last-child .mega-menu-item li:last-child {
   border-bottom-color: transparent;
+  justify-content: center;
 }
 .popup-mobile-menu .mainmenu .single-mega-item + .single-mega-item {
   margin-top: 15px;
+  justify-content: center;
 }
 .popup-mobile-menu .mainmenu .single-mega-item .rbt-short-title {
   margin-top: 8px;
+  justify-content: center;
 }
 .popup-mobile-menu .mega-top-banner {
   margin: 0;

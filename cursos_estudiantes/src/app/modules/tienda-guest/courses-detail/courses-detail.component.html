@@ -425,7 +425,7 @@
                     <!-- End Edu Review List  -->
                     <div class="about-author-list rbt-shadow-box featured-wrapper mt--30 has-show-more">
                         <div class="section-title">
-                            <h4 class="rbt-title-style-3">Featured review</h4>
+                            <h4 class="rbt-title-style-3">Comentarios de los usuarios </h4>
                         </div>
                         <div class="has-show-more-inner-content rbt-featured-review-list-wrapper">
                             <ng-container *ngFor="let review of LANDING_COURSE.reviews">
@@ -472,15 +472,15 @@
                             
 
                         </div>
-                        <div class="rbt-show-more-btn">Show More</div>
+                        <div class="rbt-show-more-btn">Ver más</div>
                     </div>
                 </div>
                 <div class="related-course mt--60">
                     <div class="row g-5 align-items-end mb--40">
                         <div class="col-lg-8 col-md-8 col-12">
                             <div class="section-title">
-                                <span class="subtitle bg-pink-opacity">Top Course</span>
-                                <h4 class="title">More Course By <strong class="color-primary">{{ LANDING_COURSE.instructor.full_name }}</strong></h4>
+                                <span class="subtitle bg-pink-opacity">Cursos Populares</span>
+                                <h4 class="title">Más cursos de <strong class="color-primary">{{ LANDING_COURSE.instructor.full_name }}</strong></h4>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-12">
@@ -524,8 +524,8 @@
                                         <h4 class="rbt-card-title"><a [attr.href]="'landing-curso/'+COURSE.slug">{{ COURSE.title }}</a>
                                         </h4>
                                         <ul class="rbt-meta">
-                                            <li><i class="feather-book"></i>{{ COURSE.count_class }} Lessons</li>
-                                            <li><i class="feather-users"></i>{{ COURSE.count_students }} Students</li>
+                                            <li><i class="feather-book"></i>{{ COURSE.count_class }} Clases</li>
+                                            <li><i class="feather-users"></i>{{ COURSE.count_students }} Estudiantes</li>
                                             <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
                                         </ul>
                                         <p class="rbt-card-text">{{ COURSE.subtitle }}.</p>
@@ -542,7 +542,7 @@
                                         <div class="rbt-card-bottom">
                                             <div class="rbt-price">
                                                           </div>
-                                            <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart()"><i class="feather-shopping-cart"></i> Add To Cart</a>
+                                            <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart()"><i class="feather-shopping-cart"></i> Añadir lista de deseos</a>
                                         </div>
                                     </div>
                                 </div>
@@ -600,7 +600,7 @@
 
                             <div class="rbt-widget-details has-show-more">
                                 <ul class="has-show-more-inner-content rbt-course-details-list-wrapper">
-                                    <li><span>Start Date</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.time_course }}</span>
+                                    <li><span>Duración</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.time_course }}</span>
                                     </li>
                                     <li><span>Estudiantes</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.count_students }}</span></li>
                                     <li><span>Recursos de la clase</span><span class="rbt-feature-value rbt-badge-5">{{ LANDING_COURSE.files_count }}</span></li>

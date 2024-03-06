@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   categorie_most: any[] = [];
   categoryNames: string[] = [];
   categoryNamesM: string[] = [];
+  studentsInCourse: any [] = [];
 
   totalSalesCount: number = 0;
   totalClassCount: number = 0;
@@ -43,22 +44,37 @@ export class DashboardComponent implements OnInit {
     private salesService: SalesService,
     private cdr: ChangeDetectorRef,
     ) {}
-
+  
+  //Al iniciar
   ngOnInit(): void {
     this.isLoading = this.courseService.isLoading$;
     this.isLoading = this.userService.isLoading$;
     this.user_role_id = this.auth.user.role_id;
     console.log(this.auth.user.role_id);
     this.user$ = this.auth.currentUserSubject.asObservable();
-    this.loadSalesData();
-    this.loadData();
-    this.LoadClass();
-    this.consulta();
-    this.lastCategorie();
-    this.firstCategorie();
-    this.totalClases();
+
+    if(this.user_role_id == 2){
+      this.loadSalesData();
+      this.loadData();
+      this.LoadClass();
+      this.consulta();
+      this.lastCategorie();
+      this.firstCategorie();
+      this.totalClases();
+    }else{
+      this.courseService.listCourse(this.search, this.state).subscribe((resp: any) => {
+        this.COURSES = resp.courses.data;
+      
+        // Funcion de la graficas
+        this.renderCoursesPerCategoryChart();
+        this.renderCoursesByLevelPieChart();
+        this.renderStudentsByDateChart();
+        this.tuActividad();
+      });
+    }
   }
 
+  //Carga datos para graficas
   loadData(): void {
     this.courseService.listCourse(this.search, this.state).subscribe((resp: any) => {
       this.COURSES = resp.courses.data;
@@ -106,7 +122,7 @@ export class DashboardComponent implements OnInit {
   //PieChartCursosNiveles
   renderCoursesByLevelPieChart() {
     const levels: { [key: string]: number } = {};
-    const colors: string[] = ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
+    const colors: string[] = ['rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)','rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 205, 86, 0.2)'];
   
     // Filtrar los cursos con state igual a 2
     const filteredCourses = this.COURSES.filter(course => {
@@ -388,6 +404,127 @@ export class DashboardComponent implements OnInit {
     });
   }
   
+  renderStudentsByDateChart(): void {
+    const studentsByDate: { [key: string]: number } = {};  
+    this.salesService.studentsInMyCourse().subscribe(
+      (response: any) => {
+        console.log('Response from salesService.studentsInMyCourse:', response);
+  
+        const studentData = response; // Ajusta esto según la estructura de tu respuesta
+  
+        if (!studentData || !Array.isArray(studentData)) {
+          console.error('Invalid student data format:', studentData);
+          return;
+        }
+  
+        studentData.forEach((student: any) => {
+          const studentDate = new Date(student.created_at);
+          const monthYearKey = `${studentDate.getMonth() + 1}-${studentDate.getFullYear()}`;
+          studentsByDate[monthYearKey] = (studentsByDate[monthYearKey] || 0) + 1;
+        });
+  
+        // Ordena las etiquetas cronológicamente
+        const sortedLabels = Object.keys(studentsByDate).sort((a, b) => {
+          const [monthA, yearA] = a.split('-').map(Number);
+          const [monthB, yearB] = b.split('-').map(Number);
+  
+          const dateA = new Date(yearA, monthA - 1).getTime(); // Convierte a milisegundos
+          const dateB = new Date(yearB, monthB - 1).getTime();
+  
+          return dateA - dateB;
+        });
+  
+        const data = sortedLabels.map((label) => studentsByDate[label]);
+  
+        const canvas = document.getElementById('usersByDateChart2') as HTMLCanvasElement;
+  
+        const lineChart = new Chart(canvas, {
+          type: 'line',
+          data: {
+            labels: sortedLabels,
+            datasets: [
+              {
+                label: 'Estudiantes añadidos a tus cursos por mes',
+                data: data,
+                backgroundColor: 'light_blue',
+                borderColor: 'blue',
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      },
+      (error) => {
+        console.error('Error fetching student data:', error);
+      }
+    );
+  }
+  
+  tuActividad(): void {
+    this.salesService.studentsInMyCourse().subscribe(
+      (response: any) => {
+        console.log(response);
+  
+        const countByDate: { [key: string]: number } = {};
+  
+        response.forEach((student: any) => {
+          const studentDate = new Date(student.created_at);
+          const monthYearKey = `${studentDate.getMonth() + 1}-${studentDate.getFullYear()}`;
+          countByDate[monthYearKey] = (countByDate[monthYearKey] || 0) + 1;
+        });
+  
+        // Ordena las etiquetas cronológicamente
+        const sortedLabels = Object.keys(countByDate).sort((a, b) => {
+          const [monthA, yearA] = a.split('-').map(Number);
+          const [monthB, yearB] = b.split('-').map(Number);
+  
+          const dateA = new Date(yearA, monthA - 1).getTime(); // Convierte a milisegundos
+          const dateB = new Date(yearB, monthB - 1).getTime();
+  
+          return dateA - dateB;
+        });
+  
+        // Preparar datos para la gráfica
+        const data = sortedLabels.map((label) => countByDate[label]);
+  
+        // Configurar la gráfica
+        const canvas = document.getElementById('tuActividad') as HTMLCanvasElement;
+  
+        const barChart = new Chart(canvas, {
+          type: 'bar',
+          data: {
+            labels: sortedLabels,
+            datasets: [
+              {
+                label: 'Tus clases subidas',
+                data: data,
+                backgroundColor: 'red',
+                borderColor: 'orange',
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
   
   
 }  

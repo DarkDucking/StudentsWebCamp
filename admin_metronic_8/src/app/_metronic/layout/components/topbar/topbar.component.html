@@ -15,7 +15,7 @@
     data-kt-menu-flip="bottom"
   >
   <div *ngIf="user$ | async as user">
-    <img [src]="'http://127.0.0.1:8000/storage/' + user.avatar" alt="metronic" 
+    <img [src]="URL_BACKEND + '/storage/' + user.avatar" alt="metronic" 
     [style.width.px]="50" [style.height.px]="50"/>
   </div>
 

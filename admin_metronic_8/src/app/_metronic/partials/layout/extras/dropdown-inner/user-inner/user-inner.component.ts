@@ -2,6 +2,7 @@ import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { TranslationService } from '../../../../../../modules/i18n';
 import { AuthService, UserType } from '../../../../../../modules/auth';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-inner',
@@ -16,6 +17,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   user$: Observable<any>;
   langs = languages;
   private unsubscribe: Subscription[] = [];
+  URL_BACKEND = environment.URL_BACKEND;
 
   constructor(
     private auth: AuthService,

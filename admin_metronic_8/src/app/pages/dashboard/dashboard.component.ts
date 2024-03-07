@@ -58,9 +58,9 @@ export class DashboardComponent implements OnInit {
       this.loadData();
       this.LoadClass();
       this.consulta();
+      this.totalClases();
       this.lastCategorie();
       this.firstCategorie();
-      this.totalClases();
     }else{
       this.courseService.listCourse(this.search, this.state).subscribe((resp: any) => {
         this.COURSES = resp.courses.data;

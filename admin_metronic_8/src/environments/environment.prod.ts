@@ -156,6 +156,9 @@ export const environment = {
       'thumbnail': './assets/media/demos/demo20.png'
     },
   },
+  URL_BACKEND: 'http://api.cuceinformaticamp.site/',
+  URL_SERVICIOS: 'http://api.cuceinformaticamp.site/api',
+  URL_FROTEND: 'http://admin.cuceinformaticamp.site',
 };
 
 /*

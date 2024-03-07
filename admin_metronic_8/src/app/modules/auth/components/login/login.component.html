@@ -8,8 +8,8 @@
 >
   <!--begin::Heading-->
   <div class="text-center mb-10">
-    <h1 class="text-dark mb-3">Sign In to Metronic</h1>
-    <div class="text-gray-400 fw-bold fs-4">
+    <h1 class="text-dark mb-3">Inicia Sesión en CUCEInformatiCamp</h1>
+    <!-- <div class="text-gray-400 fw-bold fs-4">
       New Here?
       <a
         routerLink="/auth/registration"
@@ -17,7 +17,7 @@
         class="link-primary fw-bolder"
         >{{ "AUTH.GENERAL.SIGNUP_BUTTON" | translate }}</a
       >
-    </div>
+    </div> -->
   </div>
   <!--end::Heading-->
 
@@ -25,8 +25,8 @@
   <ng-container *ngIf="!hasError">
     <div class="mb-10 bg-light-info p-8 rounded">
       <div class="text-info">
-        Use account <strong>{{ defaultAuth.email }}</strong> and password
-        <strong>{{ defaultAuth.password }}</strong> to continue.
+        Usa un correo <strong>{{ defaultAuth.email }}</strong> y contraseña
+        <strong>{{ defaultAuth.password }}</strong> para continuar
       </div>
     </div>
   </ng-container>
@@ -36,7 +36,7 @@
   <ng-container *ngIf="hasError">
     <div class="mb-lg-15 alert alert-danger">
       <div class="alert-text font-weight-bold">
-        The login details are incorrect
+        Correo o contraseña incorrectos
       </div>
     </div>
   </ng-container>
@@ -44,7 +44,7 @@
 
   <!--begin::Form group-->
   <div class="fv-row mb-10">
-    <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+    <label class="form-label fs-6 fw-bolder text-dark">Correo electrónico</label>
     <input
       class="form-control form-control-lg form-control-solid"
       type="email"
@@ -95,15 +95,7 @@
   <div class="fv-row mb-10">
     <div class="d-flex justify-content-between mt-n5">
       <div class="d-flex flex-stack mb-2">
-        <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
-        <a
-          routerLink="/auth/forgot-password"
-          class="link-primary fs-6 fw-bolder"
-          id="kt_login_forgot"
-          [style.margin-left]="'5px'"
-        >
-          Forgot Password ?
-        </a>
+        <label class="form-label fw-bolder text-dark fs-6 mb-0">Contraseña</label>
       </div>
     </div>
 
@@ -155,19 +147,19 @@
     >
       <ng-container *ngIf="isLoading$ | async">
         <span class="indicator-progress" [style.display]="'block'">
-          Please wait...
+          Por favor, espere ...
           <span
             class="spinner-border spinner-border-sm align-middle ms-2"
           ></span>
         </span>
       </ng-container>
       <ng-container *ngIf="!(isLoading$ | async)">
-        <span class="indicator-label">Continue</span>
+        <span class="indicator-label">Inicia sesión</span>
       </ng-container>
     </button>
 
     <!-- begin::Separator  -->
-    <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
+    <div class="text-center text-muted text-uppercase fw-bolder mb-5">ó</div>
     <!-- end::Separator  -->
 
     <a
@@ -185,7 +177,7 @@
         src="./assets/media/svg/brand-logos/google-icon.svg"
       />
 
-      Continue with Google
+      Continua con Google
     </a>
   </div>
   <!--end::Action-->

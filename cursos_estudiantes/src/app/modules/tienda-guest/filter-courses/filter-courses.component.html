@@ -17,13 +17,13 @@
                             <li>
                                 <div class="icon-right"><i class="feather-chevron-right"></i></div>
                             </li>
-                            <li class="rbt-breadcrumb-item active">Todos los cursos</li>
+                            <li class="rbt-breadcrumb-item active">Cursos Disponibles</li>
                         </ul>
                         <!-- End Breadcrumb Area  -->
 
                         <div class=" title-wrapper">
                             <h1 class="title mb--0">Todos nuestros cursos</h1>
-                            <a href="#" class="rbt-badge-2">
+                            <a href="#" class="rbt-badge-1">
                                 <div class="image">🎉</div>
                             </a>
                         </div>
@@ -41,12 +41,12 @@
                         <div class="rbt-sorting-list d-flex flex-wrap align-items-center">
                             <div class="rbt-short-item switch-layout-container">
                                 <ul class="course-switch-layout">
-                                    <li class="course-switch-item"><button class="rbt-grid-view active" [ngClass]="{'active': selected_option == 1}" title="Grid Layout" (click)="addOption(1)"><i class="feather-grid"></i> <span class="text">INACTIVO</span></button></li>
-                                    <li class="course-switch-item"><button class="rbt-list-view" [ngClass]="{'active': selected_option == 2}" title="List Layout" (click)="addOption(2)"><i class="feather-list"></i> <span class="text">ACTIVO</span></button></li>
+                                    <li class="course-switch-item"><button class="rbt-grid-view active" [ngClass]="{'active': selected_option == 1}" title="Grid Layout" (click)="addOption(1)"><i class="feather-grid"></i> <span class="text"></span></button></li>
+                                    <li class="course-switch-item"><button class="rbt-list-view" [ngClass]="{'active': selected_option == 2}" title="List Layout" (click)="addOption(2)"><i class="feather-list"></i> <span class="text">Filtrar</span></button></li>
                                 </ul>
                             </div>
                             <div class="rbt-short-item">
-                                <span class="course-index">Showing 1-9 of 19 results</span>
+                                <span class="course-index"></span>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="rbt-single-widget rbt-widget-categories has-show-more">
                                         <div class="inner">
-                                            <h4 class="rbt-widget-title-2">Categoria</h4>
+                                            <h4 class="rbt-widget-title-2">Categoría</h4>
                                             <ul class="rbt-sidebar-list-wrapper categories-list-check has-show-more-inner-content">
                                                 <ng-container *ngFor="let CATEGORIE of CATEGORIES; let i=index">
                                                     <li class="rbt-check-group">
@@ -97,7 +97,7 @@
                                                 </ng-container>
                                             </ul>
                                         </div>
-                                        <div class="rbt-show-more-btn">Show More</div>
+                                        <div class="rbt-show-more-btn">Ver más</div>
                                     </div>
                                 </div>
                                 <!-- End Widget Area  -->
@@ -106,7 +106,7 @@
                                 <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                     <div class="rbt-single-widget rbt-widget-rating">
                                         <div class="inner">
-                                            <h4 class="rbt-widget-title-2">Ratings</h4>
+                                            <h4 class="rbt-widget-title-2">Calificaciones</h4>
                                             <ul class="rbt-sidebar-list-wrapper rating-list-check">
                                                 <li class="rbt-check-group">
                                                     <input id="cat-radio-1" type="radio" name="rbt-radio" (click)="selectedRating(5)">
@@ -269,32 +269,32 @@
                                                 <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 4}"></i>
                                                 <i class="fas fa-star" [ngClass]="{'ratingT': COURSE.avg_reviews < 5}"></i>
                                             </div>
-                                            <span class="rating-count"> ({{ COURSE.count_reviews }} Reviews)</span>
+                                            <span class="rating-count"> ({{ COURSE.count_reviews }} Reseñas)</span>
                                         </div>
-                                        <div class="rbt-bookmark-btn">
-                                            <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
-                                        </div>
+                                        
                                     </div>
                                     <h4 class="rbt-card-title"><a [routerLink]="['landing-curso/',COURSE.slug]">{{ COURSE.title }}</a>
                                     </h4>
-                                    <ul class="rbt-meta">
-                                        <li><i class="feather-book"></i>{{ COURSE.count_class }} Lessons</li>
-                                        <li><i class="feather-users"></i>{{ COURSE.count_students }} Students</li>
-                                        <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
-                                    </ul>
                                     <p class="rbt-card-text">{{ COURSE.subtitle }}.</p>
+                                   
+                                    <ul class="rbt-meta">
+                                        <li><i class="feather-book"></i>{{ COURSE.count_class }} Clases</li>
+                                        <li><i class="feather-users"></i>{{ COURSE.count_students }} Estudiantes</li>
+                                        <li><i class="feather-play"></i>{{ COURSE.time_course }}</li>
+                                        <li><i class=""></i>Semestre n°{{ COURSE.level }}</li>
+                                    </ul>
                                     <div class="rbt-author-meta mb--20">
                                         <div class="rbt-avater">
-                                            <a href="#">
+                                            <a>
                                                 <img [src]="COURSE.instructor.avatar" alt="Sophia Jaymes">
                                             </a>
                                         </div>
                                         <div class="rbt-author-info">
-                                            By <a href="profile.html">{{ COURSE.instructor.full_name }}</a> In <a href="#">{{ COURSE.instructor.profesion }}</a>
+                                            Por <a>{{ COURSE.instructor.full_name }}</a> de <a>{{ COURSE.instructor.profesion }}</a>
                                         </div>
                                     </div>
                                     <div class="rbt-card-bottom">
-                                        <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart(COURSE)"><i class="feather-shopping-cart"></i> Add To Cart</a>
+                                        <a class="rbt-btn-link left-icon" href="#" onclick="return false;" (click)="addCart(COURSE)"><i class="feather-heart"></i> Añadir a mi lista</a>
                                     </div>
                                 </div>
                             </div>
@@ -307,11 +307,11 @@
                     <div class="col-lg-12 mt--60">
                         <nav>
                             <ul class="rbt-pagination">
-                                <li><a href="#" aria-label="Previous"><i class="feather-chevron-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#" aria-label="Next"><i class="feather-chevron-right"></i></a></li>
+                                <li><a  aria-label="Previous"><i class="feather-chevron-left"></i></a></li>
+                                <li><a >1</a></li>
+                                <li class="active"><a >2</a></li>
+                                <li><a >3</a></li>
+                                <li><a aria-label="Next"><i class="feather-chevron-right"></i></a></li>
                             </ul>
                         </nav>
                     </div>

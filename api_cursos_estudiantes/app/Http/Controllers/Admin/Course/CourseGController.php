@@ -25,7 +25,7 @@ class CourseGController extends Controller
     {
         $userId = auth('api')->user()->id;
         error_log($userId);
-        $type_user = auth('api')->user()->type_user;
+        $type_user = auth('api')->user()->role_id;
         $search = $request->search;
         $state = $request->state;
 
